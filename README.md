@@ -1,31 +1,156 @@
-# CGV_project
+# Computer Graphics and Visualization
 
-## Gravity Simulator
+## Group Project
 
-An interactive C++ / OpenGL gravity playground built with GLFW, GLEW, and GLM.
+### Project Title
+**Interactive Gravity Field Visualizer**
 
-The main simulator is no longer just a moving 3-body scene. It now includes visual helpers so you can understand what the system is doing while it runs:
+This project is an OpenGL-based 3D gravity simulation and visualization system. It demonstrates how multiple celestial bodies influence motion, spatial relationships, and field-like deformation in a dynamic scene. The project is useful in visualization because it turns abstract gravitational behavior into an interactive visual model that is easier to observe, explain, and present.
 
-- an illustrative gravity grid that bends under nearby masses
-- orbit trails for each active body
-- velocity vectors for moving bodies
-- a center-of-mass marker
-- a live HUD in the window title showing simulation state, speed, and selected-body stats
-- selection cycling so you can inspect different bodies while the system evolves
-- reset and time-speed controls
-- preview-based body creation in front of the camera
+## Problem Statement
 
-The grid deformation is meant to explain the scene visually. It is not a strict general-relativity solver.
+Gravitational interaction is usually taught through equations, static diagrams, or pre-rendered videos. These methods do not clearly show how bodies move together in real time or how changes in mass, position, and velocity affect the complete system.
 
-## Project Structure
+Real-world applicability:
 
-- `gravity_sim.cpp`: main simulator with the new visual explanation tools
-- `gravity_sim_3Dgrid.cpp`: older alternate simulator variant
-- `3D_test.cpp`: minimal OpenGL triangle test
-- `Makefile`: Linux build and run targets
-- `OPENGL_TRI.png`: image asset kept with the project
+- helps visualize orbital interaction and motion in an intuitive way
+- supports educational demonstrations in physics and graphics courses
+- improves understanding of dynamic simulation and scientific visualization
+- shows how computer graphics can make invisible phenomena easier to interpret
 
-## Dependencies
+Current limitations in typical learning methods:
+
+- equations are mathematically correct but difficult to visualize
+- static images do not show continuous motion
+- recorded videos are not interactive
+- many simple demos do not explain what is happening inside the scene
+
+## Problem’s Proposed Solution
+
+The proposed solution is to build an interactive 3D gravity visualization system using OpenGL, where users can:
+
+- observe multiple bodies moving under gravitational attraction
+- view trails to understand orbital paths over time
+- inspect velocity vectors to understand direction and speed
+- see a center-of-mass marker for the whole system
+- use a warped grid as a visual explanation of gravitational influence
+- add new bodies interactively and study how the scene changes
+- control simulation speed, pause, and camera movement in real time
+
+This makes the project both a simulation tool and a visualization tool.
+
+## Technologies Used
+
+- **Language:** C++
+- **Graphics API:** OpenGL
+- **Windowing and Input:** GLFW
+- **OpenGL Extensions:** GLEW
+- **Math Library:** GLM
+- **Build Tool:** Make
+- **Platform Target:** Linux desktop environment
+
+## Contribution of Each Project Team Members
+
+Use the actual team names before final submission. A recommended split is:
+
+- **Member 1 – Physics and Simulation Logic**
+  Implement gravitational force calculations, motion updates, collision response, and simulation state control.
+- **Member 2 – Graphics Rendering**
+  Build the OpenGL rendering pipeline, sphere rendering, grid rendering, camera system, and visual effects.
+- **Member 3 – Visualization Features**
+  Add orbit trails, velocity vectors, center-of-mass marker, body highlighting, and scene readability improvements.
+- **Member 4 – Documentation, Testing, and Integration**
+  Prepare the README/report, test controls and build flow, integrate modules, and polish the final demonstration.
+
+## Key Features of the Project
+
+- interactive 3D gravity simulation
+- real-time rendering of multiple bodies
+- orbit trails for motion understanding
+- velocity vectors for direction and speed visualization
+- center-of-mass marker
+- warped gravity grid for intuitive field explanation
+- live HUD through the window title
+- free camera navigation
+- simulation pause, reset, and time-speed control
+- interactive body creation during runtime
+
+## Graphics Concepts Used
+
+- 3D transformations: translation, scaling, and model placement
+- view and projection matrices
+- perspective camera
+- real-time rendering pipeline
+- vertex and fragment shaders
+- lighting-based shading for body visibility
+- dynamic line rendering for trails and vectors
+- buffer objects and vertex array objects
+- interactive camera control
+- scientific visualization through geometric and color-based cues
+
+## Development Timeline (4–6 Weeks)
+
+### Week 1
+
+- finalize project idea and requirements
+- study the gravity simulation model
+- set up OpenGL, GLFW, GLEW, and GLM
+
+### Week 2
+
+- create the basic 3D scene
+- render gravitational bodies
+- set up camera movement and navigation
+
+### Week 3
+
+- implement gravitational attraction and body motion
+- add the main multi-body simulation loop
+- test stability of movement
+
+### Week 4
+
+- add visualization helpers such as trails and velocity vectors
+- add grid rendering and center-of-mass display
+- improve scene readability
+
+### Week 5
+
+- add interactive controls for pause, speed, reset, and body creation
+- improve usability and demo flow
+- remove noisy debug output
+
+### Week 6
+
+- final testing and bug fixing
+- documentation and report preparation
+- final OpenGL demonstration and presentation
+
+## Expected Output
+
+- a working OpenGL-based 3D gravity visualization application
+- real-time simulation of multiple interacting bodies
+- clear visual explanation of motion, speed, and system behavior
+- an interactive demo that can be shown during viva or presentation
+- project documentation with build and usage instructions
+
+## How Different Is Your Project as Compared to Existing
+
+This project is different from many basic gravity demos because it focuses not only on simulation, but also on understanding and explanation.
+
+Key differences:
+
+- many simple demos only show moving objects, while this project adds trails, vectors, and a center-of-mass marker
+- the gravity grid provides a visual interpretation of influence in the scene
+- users can actively create new bodies and observe how the system changes
+- the project is designed for educational visualization, not only animation
+- the implementation is directly OpenGL-based, which strengthens its graphics-learning value
+
+## Complete OpenGL Based Demonstration
+
+The project is implemented as a complete OpenGL desktop application in C++. The main simulator is in `gravity_sim.cpp`.
+
+### Build Requirements
 
 Ubuntu / Debian:
 
@@ -34,9 +159,9 @@ sudo apt update
 sudo apt install g++ make pkg-config libglew-dev libglfw3-dev libglm-dev
 ```
 
-## Build And Run
+### Build and Run
 
-From the repo root:
+From the project folder:
 
 ```bash
 make
@@ -53,54 +178,32 @@ make test
 ./3D_test
 ```
 
-## Main Simulator Controls
+### Main Controls
 
-Camera:
-
-- `W / A / S / D`: move forward, left, back, right
+- `W / A / S / D`: move camera
 - `Space`: move up
 - `Left Shift`: move down
 - `Mouse`: look around
-- `Mouse wheel`: zoom in and out
-- `Left Ctrl`: faster camera movement while held
-
-Simulation:
-
-- `P`: pause or resume
-- `[` or `-`: slow down simulation speed
-- `]` or `=`: speed up simulation
-- `R`: reset the default scene and camera
-- `Q`: quit
-- `H`: print controls again in the terminal
-
-Visual explanation toggles:
-
-- `G`: toggle warped grid
-- `T`: toggle orbit trails
+- `Mouse Wheel`: zoom
+- `P`: pause or resume simulation
+- `[` or `-`: decrease simulation speed
+- `]` or `=`: increase simulation speed
+- `G`: toggle gravity grid
+- `T`: toggle trails
 - `V`: toggle velocity vectors
 - `C`: toggle center-of-mass marker
-- `Tab`: cycle the selected body shown in the HUD
+- `Tab`: cycle selected body
+- `R`: reset the default scene
+- `Q`: quit
+- `Left Click`: create a new preview body
+- `Hold Right Click`: increase preview body mass
+- `Arrow Keys`: move preview body on X/Z
+- `Page Up / Page Down`: move preview body on Y
 
-Creating a new body:
+## Why This Project Is Strong for Visualization
 
-- `Left click`: spawn a preview body in front of the camera
-- Hold `Right click`: increase preview body mass while placing it
-- `Arrow keys`: move the preview body on the X/Z plane
-- `Page Up / Page Down`: move the preview body on the Y axis
-- Release `Left click`: finalize the body
-
-## What Changed In The Enhanced Version
-
-- Removed the old per-frame debug spam from the render loop.
-- Added a cleaner physics step that computes accelerations first and then integrates motion.
-- Added clearer pause and time-speed controls.
-- Added a selected-body HUD through the window title so you can see what body you are inspecting.
-- Added trails, velocity vectors, and a center-of-mass marker to make orbital behavior easier to read.
-- Made the grid follow the system and bend visually under the bodies.
-- Improved preview-body placement so user-created bodies spawn in front of the camera instead of at a fixed origin.
-
-## Notes
-
-- The checked-in `tasks.json` and `launch.json` were written for an older Windows/MSYS2 setup. The supported path in this repo is the `Makefile` flow on Linux.
-- If the compiler reports `GLFW/glfw3.h` or `glm/glm.hpp` missing, install the packages listed above.
-- Build artifacts are ignored through `.gitignore`, so `git status` stays clean after compiling.
+- converts abstract gravitational concepts into an interactive 3D scene
+- demonstrates core computer graphics concepts through a meaningful use case
+- easy to explain during viva because every visual element has a clear purpose
+- combines simulation, rendering, interactivity, and visualization in one project
+- suitable for both academic presentation and portfolio demonstration
