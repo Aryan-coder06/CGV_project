@@ -257,6 +257,8 @@ void Object::RebuildMesh() {
     glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 }
 
+}  // namespace
+
 int main() {
     GLFWwindow* window = StartGLU();
     if (window == nullptr) {
@@ -395,6 +397,8 @@ int main() {
     glfwTerminate();
     return 0;
 }
+
+namespace {
 
 GLFWwindow* StartGLU() {
     if (!glfwInit()) {
