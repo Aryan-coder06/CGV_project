@@ -51,16 +51,16 @@ This makes the project both a simulation tool and a visualization tool.
 
 ## Contribution of Each Project Team Members
 
-- **Kundan – Physics and Simulation Logic**
-  Implement gravitational force calculations, motion updates, collision response, and simulation state control.
-- **Aditi – Graphics Rendering**
+- **Aryan – Physics and Simulation Logic**
+  Implement gravitational force calculations, motion updates, collision response, and overall simulation state control for the project.
+- **Kundan – Graphics Rendering**
   Build the OpenGL rendering pipeline, sphere rendering, grid rendering, camera system, and visual effects.
-- **Uday – Visualization Features**
+- **Aditi – Visualization Features and Documentation**
+  Prepare the README/report, test controls and build flow, integrate modules, and polish the final demonstration.  
+- **Uday – Testing, and Integration**
   Add orbit trails, velocity vectors, center-of-mass marker, body highlighting, and scene readability improvements.
-- **Aditya – Documentation, Testing, and Integration**
-  Prepare the README/report, test controls and build flow, integrate modules, and polish the final demonstration.
-- **Aryan – Project Core Concept, Design, and Overall Coordination**
-  Shape the main visualization idea, guide feature direction, coordinate module integration, and ensure the final simulator clearly explains gravitational behavior through interactive OpenGL-based presentation.
+- **Aditya – Interaction, Controls, and Scene Management**
+  Handle runtime interaction features such as user controls, body placement workflow, scene reset behavior, and overall usability of the final demonstration.
 
 ## Key Features of the Project
 
