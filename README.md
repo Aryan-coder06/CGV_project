@@ -51,16 +51,16 @@ This makes the project both a simulation tool and a visualization tool.
 
 ## Contribution of Each Project Team Members
 
-Use the actual team names before final submission. A recommended split is:
-
-- **Member 1 – Physics and Simulation Logic**
+- **Kundan – Physics and Simulation Logic**
   Implement gravitational force calculations, motion updates, collision response, and simulation state control.
-- **Member 2 – Graphics Rendering**
+- **Aditi – Graphics Rendering**
   Build the OpenGL rendering pipeline, sphere rendering, grid rendering, camera system, and visual effects.
-- **Member 3 – Visualization Features**
+- **Uday – Visualization Features**
   Add orbit trails, velocity vectors, center-of-mass marker, body highlighting, and scene readability improvements.
-- **Member 4 – Documentation, Testing, and Integration**
+- **Aditya – Documentation, Testing, and Integration**
   Prepare the README/report, test controls and build flow, integrate modules, and polish the final demonstration.
+- **Aryan – Project Core Concept, Design, and Overall Coordination**
+  Shape the main visualization idea, guide feature direction, coordinate module integration, and ensure the final simulator clearly explains gravitational behavior through interactive OpenGL-based presentation.
 
 ## Key Features of the Project
 
