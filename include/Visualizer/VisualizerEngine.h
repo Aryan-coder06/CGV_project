@@ -1,48 +1,73 @@
 #pragma once
 #include "LineAlgos.h"
+#include "CircleAlgos.h"
+#include "EllipseAlgos.h"
+#include "FillAlgos.h"
+#include <memory>
 
 // ============================================================
-//  Execution mode — controls whether the calculation panel
-//  is shown in the UI after a button press.
+//  Execution mode — controls whether the calc panel is shown
 // ============================================================
-enum class ExecMode {
-    NONE,       // just initialised / reset
-    STEP_ONE,   // user pressed "Step +1" → show calculations
-    STEP_K,     // user pressed "Step K"  → hide calculations
-    RUN_ALL     // user pressed "Run All" → hide calculations
-};
+enum class ExecMode { NONE, STEP_ONE, STEP_K, RUN_ALL };
+
+// ============================================================
+//  Algorithm index constants
+// ============================================================
+static constexpr int ALGO_DDA              = 0;
+static constexpr int ALGO_BRESENHAM        = 1;
+static constexpr int ALGO_XIAOLIN_WU       = 2;
+static constexpr int ALGO_MIDPOINT_CIRCLE  = 3;
+static constexpr int ALGO_BRESENHAM_CIRCLE = 4;
+static constexpr int ALGO_MIDPOINT_ELLIPSE = 5;
+static constexpr int ALGO_FLOOD_FILL_4       = 6;
+static constexpr int ALGO_FLOOD_FILL_8       = 7;
+static constexpr int ALGO_BOUNDARY_FILL_4    = 8;
+static constexpr int ALGO_BOUNDARY_FILL_8    = 9;
+static constexpr int ALGO_SCANLINE_FILL      = 10;
+static constexpr int ALGO_COUNT              = 11;
 
 // ============================================================
 //  VisualizerEngine
-//  Owns one DDALine instance and renders:
-//    • A Dear ImGui panel (Theory tab + Visualize tab)
-//    • An OpenGL pixel grid with dynamic zoom
+//  Algorithm-agnostic: everything rendered through IAlgorithm*.
 // ============================================================
 class VisualizerEngine {
 private:
-    DDALine ddaAlgorithm;
+    std::unique_ptr<IAlgorithm> currentAlgo;
 
-    // UI input state
+    int selectedAlgo   = ALGO_DDA;  // active algorithm index
+    int prevAlgo       = -1;        // detects combo-box change
+
+    // Line-mode inputs
     int inputX1 = 0,  inputY1 = 0;
     int inputX2 = 10, inputY2 = 8;
     int kSteps  = 3;
 
-    // Which tab is open: 0 = Theory, 1 = Visualize
-    int activeTab = 1;
+    // Circle-mode inputs
+    int inputCX = 0, inputCY = 0, inputRadius = 8;
 
-    // Last execution mode (controls calc panel visibility)
-    ExecMode lastMode = ExecMode::NONE;
+    // Ellipse-mode inputs
+    int inputRX = 10, inputRY = 6;
 
-    // ---- private render helpers ----
+    // Fill-mode inputs  (seed = center of the square boundary)
+    int inputSeedX = 10, inputSeedY = 10, inputHalfS = 8;
+
+    // Scanline-mode inputs  (regular polygon)
+    int inputPolyCX = 10, inputPolyCY = 10, inputPolySize = 7, inputPolySides = 5;
+
+    // UI state
+    int      activeTab = 1;           // 0=Theory, 1=Visualize
+    ExecMode lastMode  = ExecMode::NONE;
+
+    // ---- private helpers ----
+    std::unique_ptr<IAlgorithm> createAlgorithm(int idx);
+
     void renderTheoryTab();
     void renderVisualizeTab();
     void renderCalcPanel(const AlgoState& state);
-    void renderGridGL(int windowWidth, int windowHeight);
 
 public:
     VisualizerEngine();
 
-    // Called every frame from main.cpp
     void renderUI();
     void renderGrid(int windowWidth, int windowHeight);
 };

@@ -1,66 +1,117 @@
 #pragma once
 #include "IAlgorithm.h"
+#include <cmath>
 
 // ============================================================
-//  DDALine — Digital Differential Analyzer line algorithm
-//
-//  Inherits IAlgorithm and tracks full per-step calculations
-//  so that the UI can show the exact math when the user clicks
-//  "Step +1", but hides them for "Step K" and "Run All".
+//  DDALine
 // ============================================================
 class DDALine : public IAlgorithm {
 private:
-    // Endpoint storage (kept for reset())
     int   x1, y1, x2, y2;
-
-    // Running floating-point position
     float currentX, currentY;
-
-    // Computed once in init()
     float xIncrement, yIncrement;
     int   totalSteps, currentStep;
-
-    // All pixels plotted so far (grows each step)
     std::vector<Pixel> path;
-
-    // Most-recent step's state snapshot
     AlgoState lastState;
-
-    // Internal helpers
     void calculateIncrements();
-    void pushPixel(float cx, float cy);   // rounds & appends to path
-
 public:
     DDALine();
-
-    // ----- IAlgorithm overrides -----
-    void init(int startX, int startY, int endX, int endY) override;
-
-    // step() — advances 1 step AND populates lastState.calcLines
-    void step() override;
-
-    // stepK() — advances k steps silently (no calc lines stored)
-    void stepK(int k) override;
-
-    // runToCompletion() — runs all remaining steps silently
+    void init(int x1,int y1,int x2,int y2) override;
+    void step()            override;
+    void stepK(int k)      override;
     void runToCompletion() override;
+    void reset()           override;
+    bool                     isFinished()           const override;
+    std::vector<Pixel>       getHighlightedPixels() const override;
+    AlgoState                getCurrentState()      const override;
+    std::vector<std::string> getInitInfo()          const override;
+    std::vector<std::string> getCurrentVars()       const override;
+    std::string              getTheory()            const override;
+    std::string              getName()              const override;
+};
 
-    bool                 isFinished()           const override;
-    std::vector<Pixel>   getHighlightedPixels()  const override;
-    AlgoState            getCurrentState()        const override;
-    std::string          getTheory()              const override;
-    std::string          getName()                const override;
-    void                 reset()                  override;
+// ============================================================
+//  BresenhamLine
+// ============================================================
+class BresenhamLine : public IAlgorithm {
+private:
+    int x1,y1,x2,y2, x,y, dx,dy, sx,sy, p;
+    bool steep;
+    int  totalSteps, currentStep;
+    std::vector<Pixel> path;
+    AlgoState lastState;
+public:
+    BresenhamLine();
+    void init(int x1,int y1,int x2,int y2) override;
+    void step()            override;
+    void stepK(int k)      override;
+    void runToCompletion() override;
+    void reset()           override;
+    bool                     isFinished()           const override;
+    std::vector<Pixel>       getHighlightedPixels() const override;
+    AlgoState                getCurrentState()      const override;
+    std::vector<std::string> getInitInfo()          const override;
+    std::vector<std::string> getCurrentVars()       const override;
+    std::string              getTheory()            const override;
+    std::string              getName()              const override;
+    int  getP()    const { return p; }
+    int  getDx()   const { return dx; }
+    int  getDy()   const { return dy; }
+    bool isSteep() const { return steep; }
+};
 
-    // ----- Fine-grained getters (used by VisualizerEngine) -----
-    float getCurrentX()    const { return currentX; }
-    float getCurrentY()    const { return currentY; }
-    float getXInc()        const { return xIncrement; }
-    float getYInc()        const { return yIncrement; }
-    int   getSteps()       const { return totalSteps; }
-    int   getCurrentStepNum() const { return currentStep; }
-    int   getX1() const { return x1; }
-    int   getY1() const { return y1; }
-    int   getX2() const { return x2; }
-    int   getY2() const { return y2; }
+// ============================================================
+//  XiaolinWuLine — anti-aliased line via fractional intensities
+//  Plots 2 pixels per step (upper + lower neighbour) with
+//  complementary intensities derived from frac(y).
+// ============================================================
+class XiaolinWuLine : public IAlgorithm {
+private:
+    // Original inputs (stored for reset / display)
+    int ox0, oy0, ox1, oy1;
+
+    // Processed co-ordinates (after steep-swap and direction-swap)
+    float fpx0, fpy0, fpx1, fpy1;
+
+    // Algorithm invariants
+    bool  steep;
+    float gradient;
+    int   xpxl1, xpxl2;       // x range for main loop
+    float yend1,  xgap1;      // first endpoint fractional data
+    float yend2,  xgap2;      // last  endpoint fractional data
+
+    // Running state
+    float intery;              // interpolated y (advances by gradient each step)
+    int   currentX;
+    int   currentStep, totalSteps;
+
+    std::vector<Pixel> path;
+    AlgoState lastState;
+
+    // ---------- helpers ----------
+    static float wu_frac (float x) { return x - std::floor(x); }
+    static float wu_rfrac(float x) { return 1.0f - wu_frac(x); }
+    static int   wu_ipart(float x) { return (int)std::floor(x); }
+    static int   wu_round(float x) { return wu_ipart(x + 0.5f); }
+
+    // Plot one pixel, un-swapping co-ordinates if line was steep
+    void plotPixel(int x, int y, float intensity);
+
+    // Raw (silent) single-step — used by stepK / runToCompletion
+    void doStep();
+
+public:
+    XiaolinWuLine();
+    void init(int x0,int y0,int x1,int y1) override;
+    void step()            override;   // advances + records calculation
+    void stepK(int k)      override;   // silent
+    void runToCompletion() override;   // silent
+    void reset()           override;
+    bool                     isFinished()           const override;
+    std::vector<Pixel>       getHighlightedPixels() const override;
+    AlgoState                getCurrentState()      const override;
+    std::vector<std::string> getInitInfo()          const override;
+    std::vector<std::string> getCurrentVars()       const override;
+    std::string              getTheory()            const override;
+    std::string              getName()              const override;
 };

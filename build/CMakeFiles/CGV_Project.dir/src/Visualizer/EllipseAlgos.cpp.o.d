@@ -1,8 +1,7 @@
-CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o: \
- /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/VisualizerEngine.cpp \
+CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o: \
+ /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/EllipseAlgos.cpp \
  /usr/include/stdc-predef.h \
- /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/../../include/Visualizer/VisualizerEngine.h \
- /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/../../include/Visualizer/LineAlgos.h \
+ /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/../../include/Visualizer/EllipseAlgos.h \
  /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/../../include/Visualizer/IAlgorithm.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -142,37 +141,19 @@ CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o: \
  /usr/include/c++/13/tr1/modified_bessel_func.tcc \
  /usr/include/c++/13/tr1/poly_hermite.tcc \
  /usr/include/c++/13/tr1/poly_laguerre.tcc \
- /usr/include/c++/13/tr1/riemann_zeta.tcc \
- /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/../../include/Visualizer/CircleAlgos.h \
- /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/../../include/Visualizer/EllipseAlgos.h \
- /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/../../include/Visualizer/FillAlgos.h \
- /usr/include/c++/13/queue /usr/include/c++/13/deque \
- /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
- /usr/include/c++/13/bits/stl_heap.h /usr/include/c++/13/bits/stl_queue.h \
- /usr/include/c++/13/set /usr/include/c++/13/bits/stl_tree.h \
- /usr/include/c++/13/ext/aligned_buffer.h \
- /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/stl_set.h \
- /usr/include/c++/13/bits/stl_multiset.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/map \
- /usr/include/c++/13/bits/stl_map.h \
- /usr/include/c++/13/bits/stl_multimap.h /usr/include/c++/13/algorithm \
+ /usr/include/c++/13/tr1/riemann_zeta.tcc /usr/include/c++/13/algorithm \
  /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
+ /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
  /usr/include/c++/13/bits/stl_tempbuf.h \
  /usr/include/c++/13/pstl/glue_algorithm_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/memory \
- /usr/include/c++/13/bits/stl_raw_storage_iter.h \
- /usr/include/c++/13/bits/align.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /usr/include/c++/13/bits/unique_ptr.h \
- /usr/include/c++/13/bits/shared_ptr.h \
- /usr/include/c++/13/bits/shared_ptr_base.h /usr/include/c++/13/typeinfo \
- /usr/include/c++/13/bits/allocated_ptr.h \
- /usr/include/c++/13/ext/atomicity.h \
+ /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/sstream \
+ /usr/include/c++/13/istream /usr/include/c++/13/ios \
+ /usr/include/c++/13/exception /usr/include/c++/13/bits/exception_ptr.h \
+ /usr/include/c++/13/bits/cxxabi_init_exception.h \
+ /usr/include/c++/13/typeinfo /usr/include/c++/13/bits/nested_exception.h \
+ /usr/include/c++/13/bits/ios_base.h /usr/include/c++/13/ext/atomicity.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
  /usr/include/pthread.h /usr/include/sched.h \
@@ -188,23 +169,6 @@ CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h \
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
- /usr/include/c++/13/ext/concurrence.h /usr/include/c++/13/exception \
- /usr/include/c++/13/bits/exception_ptr.h \
- /usr/include/c++/13/bits/cxxabi_init_exception.h \
- /usr/include/c++/13/bits/nested_exception.h \
- /usr/include/c++/13/bits/shared_ptr_atomic.h \
- /usr/include/c++/13/bits/atomic_base.h \
- /usr/include/c++/13/bits/atomic_lockfree_defines.h \
- /usr/include/c++/13/backward/auto_ptr.h \
- /usr/include/c++/13/pstl/glue_memory_defs.h \
- /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/third_party/imgui/imgui.h \
- /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/third_party/imgui/imconfig.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h /usr/include/string.h \
- /usr/include/strings.h /usr/include/assert.h /usr/include/GLFW/glfw3.h \
- /usr/include/GL/gl.h /usr/include/GL/glext.h \
- /usr/include/KHR/khrplatform.h /usr/include/c++/13/sstream \
- /usr/include/c++/13/istream /usr/include/c++/13/ios \
- /usr/include/c++/13/bits/ios_base.h \
  /usr/include/c++/13/bits/locale_classes.h \
  /usr/include/c++/13/bits/locale_classes.tcc \
  /usr/include/c++/13/system_error \
@@ -221,4 +185,12 @@ CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o: \
  /usr/include/c++/13/bits/basic_ios.tcc /usr/include/c++/13/ostream \
  /usr/include/c++/13/bits/ostream.tcc \
  /usr/include/c++/13/bits/istream.tcc \
- /usr/include/c++/13/bits/sstream.tcc
+ /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iomanip \
+ /usr/include/c++/13/locale \
+ /usr/include/c++/13/bits/locale_facets_nonio.h /usr/include/c++/13/ctime \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/c++/13/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/13/bits/locale_conv.h \
+ /usr/include/c++/13/bits/quoted_string.h

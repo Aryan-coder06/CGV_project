@@ -153,10 +153,24 @@ CMakeFiles/CGV_Project.dir/src/PaintApp/PaintTools.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CGV_Project.dir/src/PaintApp/PaintTools.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/PaintApp/PaintTools.cpp" -o CMakeFiles/CGV_Project.dir/src/PaintApp/PaintTools.cpp.s
 
+CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
+CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/CircleAlgos.cpp
+CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o -MF CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o.d -o CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/CircleAlgos.cpp"
+
+CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/CircleAlgos.cpp" > CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.i
+
+CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/CircleAlgos.cpp" -o CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.s
+
 CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/ClipAlgos.cpp
 CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o -MF CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o.d -o CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/ClipAlgos.cpp"
 
 CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.i: cmake_force
@@ -167,10 +181,24 @@ CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/ClipAlgos.cpp" -o CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.s
 
+CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
+CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/EllipseAlgos.cpp
+CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o -MF CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o.d -o CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/EllipseAlgos.cpp"
+
+CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/EllipseAlgos.cpp" > CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.i
+
+CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/EllipseAlgos.cpp" -o CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.s
+
 CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/FillAlgos.cpp
 CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o -MF CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o.d -o CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/FillAlgos.cpp"
 
 CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.i: cmake_force
@@ -184,7 +212,7 @@ CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.s: cmake_force
 CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/LineAlgos.cpp
 CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o -MF CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o.d -o CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/LineAlgos.cpp"
 
 CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.i: cmake_force
@@ -198,7 +226,7 @@ CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.s: cmake_force
 CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/VisualizerEngine.cpp
 CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o -MF CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o.d -o CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/Visualizer/VisualizerEngine.cpp"
 
 CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.i: cmake_force
@@ -212,7 +240,7 @@ CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.s: cmake_force
 CMakeFiles/CGV_Project.dir/src/main.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/src/main.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/main.cpp
 CMakeFiles/CGV_Project.dir/src/main.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/CGV_Project.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/CGV_Project.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/src/main.cpp.o -MF CMakeFiles/CGV_Project.dir/src/main.cpp.o.d -o CMakeFiles/CGV_Project.dir/src/main.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/src/main.cpp"
 
 CMakeFiles/CGV_Project.dir/src/main.cpp.i: cmake_force
@@ -226,7 +254,7 @@ CMakeFiles/CGV_Project.dir/src/main.cpp.s: cmake_force
 CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/third_party/imgui/backends/imgui_impl_glfw.cpp
 CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o -MF CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o.d -o CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/third_party/imgui/backends/imgui_impl_glfw.cpp"
 
 CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.i: cmake_force
@@ -240,7 +268,7 @@ CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.s: cma
 CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/third_party/imgui/backends/imgui_impl_opengl3.cpp
 CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o -MF CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/third_party/imgui/backends/imgui_impl_opengl3.cpp"
 
 CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.i: cmake_force
@@ -254,7 +282,7 @@ CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.s: 
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/third_party/imgui/imgui.cpp
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.o -MF CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.o.d -o CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/third_party/imgui/imgui.cpp"
 
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.i: cmake_force
@@ -268,7 +296,7 @@ CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.s: cmake_force
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/third_party/imgui/imgui_demo.cpp
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.o -MF CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.o.d -o CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/third_party/imgui/imgui_demo.cpp"
 
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.i: cmake_force
@@ -282,7 +310,7 @@ CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.s: cmake_force
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/third_party/imgui/imgui_draw.cpp
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.o -MF CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.o.d -o CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/third_party/imgui/imgui_draw.cpp"
 
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.i: cmake_force
@@ -296,7 +324,7 @@ CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.s: cmake_force
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/third_party/imgui/imgui_tables.cpp
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.o -MF CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.o.d -o CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/third_party/imgui/imgui_tables.cpp"
 
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.i: cmake_force
@@ -310,7 +338,7 @@ CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.s: cmake_force
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.o: CMakeFiles/CGV_Project.dir/flags.make
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.o: /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/third_party/imgui/imgui_widgets.cpp
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.o: CMakeFiles/CGV_Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.o -MF CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.o.d -o CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.o -c "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/third_party/imgui/imgui_widgets.cpp"
 
 CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.i: cmake_force
@@ -329,7 +357,9 @@ CGV_Project_OBJECTS = \
 "CMakeFiles/CGV_Project.dir/src/GraphApp/Pathfinding.cpp.o" \
 "CMakeFiles/CGV_Project.dir/src/PaintApp/Canvas.cpp.o" \
 "CMakeFiles/CGV_Project.dir/src/PaintApp/PaintTools.cpp.o" \
+"CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o" \
 "CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o" \
+"CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o" \
 "CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o" \
 "CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o" \
 "CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o" \
@@ -351,7 +381,9 @@ CGV_Project: CMakeFiles/CGV_Project.dir/src/GraphApp/GraphGrid.cpp.o
 CGV_Project: CMakeFiles/CGV_Project.dir/src/GraphApp/Pathfinding.cpp.o
 CGV_Project: CMakeFiles/CGV_Project.dir/src/PaintApp/Canvas.cpp.o
 CGV_Project: CMakeFiles/CGV_Project.dir/src/PaintApp/PaintTools.cpp.o
+CGV_Project: CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o
 CGV_Project: CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o
+CGV_Project: CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o
 CGV_Project: CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o
 CGV_Project: CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o
 CGV_Project: CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o
@@ -365,7 +397,7 @@ CGV_Project: CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.o
 CGV_Project: CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.o
 CGV_Project: CMakeFiles/CGV_Project.dir/build.make
 CGV_Project: CMakeFiles/CGV_Project.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable CGV_Project"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX executable CGV_Project"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CGV_Project.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

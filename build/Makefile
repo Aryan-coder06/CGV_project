@@ -273,6 +273,30 @@ src/PaintApp/PaintTools.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/PaintApp/PaintTools.cpp.s
 .PHONY : src/PaintApp/PaintTools.cpp.s
 
+src/Visualizer/CircleAlgos.o: src/Visualizer/CircleAlgos.cpp.o
+.PHONY : src/Visualizer/CircleAlgos.o
+
+# target to build an object file
+src/Visualizer/CircleAlgos.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o
+.PHONY : src/Visualizer/CircleAlgos.cpp.o
+
+src/Visualizer/CircleAlgos.i: src/Visualizer/CircleAlgos.cpp.i
+.PHONY : src/Visualizer/CircleAlgos.i
+
+# target to preprocess a source file
+src/Visualizer/CircleAlgos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.i
+.PHONY : src/Visualizer/CircleAlgos.cpp.i
+
+src/Visualizer/CircleAlgos.s: src/Visualizer/CircleAlgos.cpp.s
+.PHONY : src/Visualizer/CircleAlgos.s
+
+# target to generate assembly for a file
+src/Visualizer/CircleAlgos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.s
+.PHONY : src/Visualizer/CircleAlgos.cpp.s
+
 src/Visualizer/ClipAlgos.o: src/Visualizer/ClipAlgos.cpp.o
 .PHONY : src/Visualizer/ClipAlgos.o
 
@@ -296,6 +320,30 @@ src/Visualizer/ClipAlgos.s: src/Visualizer/ClipAlgos.cpp.s
 src/Visualizer/ClipAlgos.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.s
 .PHONY : src/Visualizer/ClipAlgos.cpp.s
+
+src/Visualizer/EllipseAlgos.o: src/Visualizer/EllipseAlgos.cpp.o
+.PHONY : src/Visualizer/EllipseAlgos.o
+
+# target to build an object file
+src/Visualizer/EllipseAlgos.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o
+.PHONY : src/Visualizer/EllipseAlgos.cpp.o
+
+src/Visualizer/EllipseAlgos.i: src/Visualizer/EllipseAlgos.cpp.i
+.PHONY : src/Visualizer/EllipseAlgos.i
+
+# target to preprocess a source file
+src/Visualizer/EllipseAlgos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.i
+.PHONY : src/Visualizer/EllipseAlgos.cpp.i
+
+src/Visualizer/EllipseAlgos.s: src/Visualizer/EllipseAlgos.cpp.s
+.PHONY : src/Visualizer/EllipseAlgos.s
+
+# target to generate assembly for a file
+src/Visualizer/EllipseAlgos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.s
+.PHONY : src/Visualizer/EllipseAlgos.cpp.s
 
 src/Visualizer/FillAlgos.o: src/Visualizer/FillAlgos.cpp.o
 .PHONY : src/Visualizer/FillAlgos.o
@@ -588,9 +636,15 @@ help:
 	@echo "... src/PaintApp/PaintTools.o"
 	@echo "... src/PaintApp/PaintTools.i"
 	@echo "... src/PaintApp/PaintTools.s"
+	@echo "... src/Visualizer/CircleAlgos.o"
+	@echo "... src/Visualizer/CircleAlgos.i"
+	@echo "... src/Visualizer/CircleAlgos.s"
 	@echo "... src/Visualizer/ClipAlgos.o"
 	@echo "... src/Visualizer/ClipAlgos.i"
 	@echo "... src/Visualizer/ClipAlgos.s"
+	@echo "... src/Visualizer/EllipseAlgos.o"
+	@echo "... src/Visualizer/EllipseAlgos.i"
+	@echo "... src/Visualizer/EllipseAlgos.s"
 	@echo "... src/Visualizer/FillAlgos.o"
 	@echo "... src/Visualizer/FillAlgos.i"
 	@echo "... src/Visualizer/FillAlgos.s"
