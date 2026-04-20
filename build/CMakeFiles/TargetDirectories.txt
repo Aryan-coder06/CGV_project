@@ -1,0 +1,3 @@
+/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles/CGV_Project.dir
+/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles/rebuild_cache.dir
