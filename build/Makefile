@@ -393,6 +393,54 @@ src/Visualizer/LineAlgos.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.s
 .PHONY : src/Visualizer/LineAlgos.cpp.s
 
+src/Visualizer/SHAlgos.o: src/Visualizer/SHAlgos.cpp.o
+.PHONY : src/Visualizer/SHAlgos.o
+
+# target to build an object file
+src/Visualizer/SHAlgos.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/SHAlgos.cpp.o
+.PHONY : src/Visualizer/SHAlgos.cpp.o
+
+src/Visualizer/SHAlgos.i: src/Visualizer/SHAlgos.cpp.i
+.PHONY : src/Visualizer/SHAlgos.i
+
+# target to preprocess a source file
+src/Visualizer/SHAlgos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/SHAlgos.cpp.i
+.PHONY : src/Visualizer/SHAlgos.cpp.i
+
+src/Visualizer/SHAlgos.s: src/Visualizer/SHAlgos.cpp.s
+.PHONY : src/Visualizer/SHAlgos.s
+
+# target to generate assembly for a file
+src/Visualizer/SHAlgos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/SHAlgos.cpp.s
+.PHONY : src/Visualizer/SHAlgos.cpp.s
+
+src/Visualizer/TransformAlgos.o: src/Visualizer/TransformAlgos.cpp.o
+.PHONY : src/Visualizer/TransformAlgos.o
+
+# target to build an object file
+src/Visualizer/TransformAlgos.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/TransformAlgos.cpp.o
+.PHONY : src/Visualizer/TransformAlgos.cpp.o
+
+src/Visualizer/TransformAlgos.i: src/Visualizer/TransformAlgos.cpp.i
+.PHONY : src/Visualizer/TransformAlgos.i
+
+# target to preprocess a source file
+src/Visualizer/TransformAlgos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/TransformAlgos.cpp.i
+.PHONY : src/Visualizer/TransformAlgos.cpp.i
+
+src/Visualizer/TransformAlgos.s: src/Visualizer/TransformAlgos.cpp.s
+.PHONY : src/Visualizer/TransformAlgos.s
+
+# target to generate assembly for a file
+src/Visualizer/TransformAlgos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/TransformAlgos.cpp.s
+.PHONY : src/Visualizer/TransformAlgos.cpp.s
+
 src/Visualizer/VisualizerEngine.o: src/Visualizer/VisualizerEngine.cpp.o
 .PHONY : src/Visualizer/VisualizerEngine.o
 
@@ -416,6 +464,30 @@ src/Visualizer/VisualizerEngine.s: src/Visualizer/VisualizerEngine.cpp.s
 src/Visualizer/VisualizerEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.s
 .PHONY : src/Visualizer/VisualizerEngine.cpp.s
+
+src/Visualizer/WindowViewportAlgo.o: src/Visualizer/WindowViewportAlgo.cpp.o
+.PHONY : src/Visualizer/WindowViewportAlgo.o
+
+# target to build an object file
+src/Visualizer/WindowViewportAlgo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/WindowViewportAlgo.cpp.o
+.PHONY : src/Visualizer/WindowViewportAlgo.cpp.o
+
+src/Visualizer/WindowViewportAlgo.i: src/Visualizer/WindowViewportAlgo.cpp.i
+.PHONY : src/Visualizer/WindowViewportAlgo.i
+
+# target to preprocess a source file
+src/Visualizer/WindowViewportAlgo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/WindowViewportAlgo.cpp.i
+.PHONY : src/Visualizer/WindowViewportAlgo.cpp.i
+
+src/Visualizer/WindowViewportAlgo.s: src/Visualizer/WindowViewportAlgo.cpp.s
+.PHONY : src/Visualizer/WindowViewportAlgo.s
+
+# target to generate assembly for a file
+src/Visualizer/WindowViewportAlgo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/WindowViewportAlgo.cpp.s
+.PHONY : src/Visualizer/WindowViewportAlgo.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -651,9 +723,18 @@ help:
 	@echo "... src/Visualizer/LineAlgos.o"
 	@echo "... src/Visualizer/LineAlgos.i"
 	@echo "... src/Visualizer/LineAlgos.s"
+	@echo "... src/Visualizer/SHAlgos.o"
+	@echo "... src/Visualizer/SHAlgos.i"
+	@echo "... src/Visualizer/SHAlgos.s"
+	@echo "... src/Visualizer/TransformAlgos.o"
+	@echo "... src/Visualizer/TransformAlgos.i"
+	@echo "... src/Visualizer/TransformAlgos.s"
 	@echo "... src/Visualizer/VisualizerEngine.o"
 	@echo "... src/Visualizer/VisualizerEngine.i"
 	@echo "... src/Visualizer/VisualizerEngine.s"
+	@echo "... src/Visualizer/WindowViewportAlgo.o"
+	@echo "... src/Visualizer/WindowViewportAlgo.i"
+	@echo "... src/Visualizer/WindowViewportAlgo.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

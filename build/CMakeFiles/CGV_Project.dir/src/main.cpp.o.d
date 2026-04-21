@@ -144,6 +144,7 @@ CMakeFiles/CGV_Project.dir/src/main.cpp.o: \
  /usr/include/c++/13/tr1/poly_hermite.tcc \
  /usr/include/c++/13/tr1/poly_laguerre.tcc \
  /usr/include/c++/13/tr1/riemann_zeta.tcc \
+ /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/../include/Visualizer/ClipAlgos.h \
  /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/../include/Visualizer/EllipseAlgos.h \
  /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/../include/Visualizer/FillAlgos.h \
  /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algo.h \
@@ -164,6 +165,8 @@ CMakeFiles/CGV_Project.dir/src/main.cpp.o: \
  /usr/include/c++/13/set /usr/include/c++/13/bits/stl_set.h \
  /usr/include/c++/13/bits/stl_multiset.h \
  /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/../include/Visualizer/LineAlgos.h \
+ /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/../include/Visualizer/TransformAlgos.h \
+ /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/../include/Visualizer/WindowViewportAlgo.h \
  /usr/include/c++/13/memory \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
  /usr/include/c++/13/bits/align.h \

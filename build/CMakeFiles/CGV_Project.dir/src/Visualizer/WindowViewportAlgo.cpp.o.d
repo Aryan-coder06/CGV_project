@@ -1,7 +1,7 @@
-CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o: \
- /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/ClipAlgos.cpp \
+CMakeFiles/CGV_Project.dir/src/Visualizer/WindowViewportAlgo.cpp.o: \
+ /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/WindowViewportAlgo.cpp \
  /usr/include/stdc-predef.h \
- /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/../../include/Visualizer/ClipAlgos.h \
+ /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/../../include/Visualizer/WindowViewportAlgo.h \
  /mnt/c/Users/parth/Desktop/D\ Drive/Sem\ 4/CGV/CGV_Project/src/Visualizer/../../include/Visualizer/IAlgorithm.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \

@@ -1,9 +1,9 @@
 #pragma once
 #include "IAlgorithm.h"
+#include <algorithm>
+#include <map>
 #include <queue>
 #include <set>
-#include <map>
-#include <algorithm>
 
 // ============================================================
 //  FloodFill (4-way and 8-way)
@@ -14,60 +14,59 @@
 // ============================================================
 class FloodFill : public IAlgorithm {
 protected:
-    int seedX, seedY;
-    int halfS;                  // dynamic square boundary half-side
-    int currentStep, totalSteps;
+  int seedX, seedY;
+  int halfS;
+  int currentStep, totalSteps;
 
-    // Internal state
-    std::queue<Pixel>                  frontier;
-    std::set<std::pair<int,int>>       filledRaw;
+  std::queue<Pixel> frontier;
+  std::set<std::pair<int, int>> filledRaw;
 
-    std::vector<Pixel> path;    // filled(green) pixels
-    AlgoState          lastState;
+  std::vector<Pixel> path;
+  AlgoState lastState;
 
-    bool is8Way;
+  bool is8Way;
 
-    // Dynamic boundary based on (seedX, seedY, halfS)
-    bool isBoundary(int x, int y) const;
-    bool isValid   (int x, int y) const;
+  // Dynamic boundary based on (seedX, seedY, halfS)
+  bool isBoundary(int x, int y) const;
+  bool isValid(int x, int y) const;
 
-    void buildObstacles();
-    std::vector<Pixel> obstacles;
+  void buildObstacles();
+  std::vector<Pixel> obstacles;
 
-    void computeTotalSteps();
+  void computeTotalSteps();
 
 public:
-    FloodFill(bool eightWay);
+  FloodFill(bool eightWay);
 
-    // x1=centerX  y1=centerY  x2=halfS  y2=unused
-    void init(int x1, int y1, int x2, int y2) override;
-    void step()            override;
-    void stepK(int k)      override;
-    void runToCompletion() override;
-    void reset()           override;
+  // x1=centerX  y1=centerY  x2=halfS  y2=unused
+  void init(int x1, int y1, int x2, int y2) override;
+  void step() override;
+  void stepK(int k) override;
+  void runToCompletion() override;
+  void reset() override;
 
-    bool                     isFinished()           const override;
-    std::vector<Pixel>       getHighlightedPixels() const override;
-    AlgoState                getCurrentState()      const override;
-    std::vector<std::string> getInitInfo()          const override;
-    std::vector<std::string> getCurrentVars()       const override;
-    std::string              getTheory()            const override;
-    std::string              getName()              const override;
+  bool isFinished() const override;
+  std::vector<Pixel> getHighlightedPixels() const override;
+  AlgoState getCurrentState() const override;
+  std::vector<std::string> getInitInfo() const override;
+  std::vector<std::string> getCurrentVars() const override;
+  std::string getTheory() const override;
+  std::string getName() const override;
 
-    bool isFillMode() const override { return true; }
-    int  getHalfS()   const          { return halfS; }
+  bool isFillMode() const override { return true; }
+  int getHalfS() const { return halfS; }
 };
 
 class FloodFill4 : public FloodFill {
 public:
-    FloodFill4() : FloodFill(false) {}
-    std::string getName() const override { return "Flood Fill (4-Way)"; }
+  FloodFill4() : FloodFill(false) {}
+  std::string getName() const override { return "Flood Fill (4-Way)"; }
 };
 
 class FloodFill8 : public FloodFill {
 public:
-    FloodFill8() : FloodFill(true) {}
-    std::string getName() const override { return "Flood Fill (8-Way)"; }
+  FloodFill8() : FloodFill(true) {}
+  std::string getName() const override { return "Flood Fill (8-Way)"; }
 };
 
 // ============================================================
@@ -80,57 +79,55 @@ public:
 // ============================================================
 class BoundaryFill : public IAlgorithm {
 protected:
-    int seedX, seedY;
-    int halfS;                  // dynamic square boundary half-side
-    int currentStep, totalSteps;
+  int seedX, seedY;
+  int halfS;
+  int currentStep, totalSteps;
 
-    // BFS frontier queue and tracking sets
-    std::queue<Pixel>            frontier;
-    std::set<std::pair<int,int>> enqueued;   // prevents double-enqueue
-    std::set<std::pair<int,int>> filled;     // already filled pixels
+  std::queue<Pixel> frontier;
+  std::set<std::pair<int, int>> enqueued;
+  std::set<std::pair<int, int>> filled;
 
-    std::vector<Pixel> path;       // filled pixels
-    std::vector<Pixel> obstacles;  // boundary pixels rendered grey
-    AlgoState          lastState;
+  std::vector<Pixel> path;
+  std::vector<Pixel> obstacles;
+  AlgoState lastState;
 
-    bool is8Way;
+  bool is8Way;
 
-    bool isBoundary(int x, int y) const;
-    void buildObstacles();
-    void computeTotalSteps();
+  bool isBoundary(int x, int y) const;
+  void buildObstacles();
+  void computeTotalSteps();
 
 public:
-    BoundaryFill(bool eightWay);
+  BoundaryFill(bool eightWay);
 
-    // x1=centerX  y1=centerY  x2=halfS  y2=unused
-    void init(int x1, int y1, int x2, int y2) override;
-    void step()            override;
-    void stepK(int k)      override;
-    void runToCompletion() override;
-    void reset()           override;
+  void init(int x1, int y1, int x2, int y2) override;
+  void step() override;
+  void stepK(int k) override;
+  void runToCompletion() override;
+  void reset() override;
 
-    bool                     isFinished()           const override;
-    std::vector<Pixel>       getHighlightedPixels() const override;
-    AlgoState                getCurrentState()      const override;
-    std::vector<std::string> getInitInfo()          const override;
-    std::vector<std::string> getCurrentVars()       const override;
-    std::string              getTheory()            const override;
-    std::string              getName()              const override;
+  bool isFinished() const override;
+  std::vector<Pixel> getHighlightedPixels() const override;
+  AlgoState getCurrentState() const override;
+  std::vector<std::string> getInitInfo() const override;
+  std::vector<std::string> getCurrentVars() const override;
+  std::string getTheory() const override;
+  std::string getName() const override;
 
-    bool isFillMode() const override { return true; }
-    int  getHalfS()   const          { return halfS; }
+  bool isFillMode() const override { return true; }
+  int getHalfS() const { return halfS; }
 };
 
 class BoundaryFill4 : public BoundaryFill {
 public:
-    BoundaryFill4() : BoundaryFill(false) {}
-    std::string getName() const override { return "Boundary Fill (4-Way)"; }
+  BoundaryFill4() : BoundaryFill(false) {}
+  std::string getName() const override { return "Boundary Fill (4-Way)"; }
 };
 
 class BoundaryFill8 : public BoundaryFill {
 public:
-    BoundaryFill8() : BoundaryFill(true) {}
-    std::string getName() const override { return "Boundary Fill (8-Way)"; }
+  BoundaryFill8() : BoundaryFill(true) {}
+  std::string getName() const override { return "Boundary Fill (8-Way)"; }
 };
 
 // ============================================================
@@ -143,49 +140,50 @@ public:
 // ============================================================
 class ScanlineFill : public IAlgorithm {
 private:
-    struct SGEdge {
-        int   yMax;
-        float x;          // x-intercept at current scanline
-        float invSlope;   // dx/dy
-    };
+  struct SGEdge {
+    int yMax;
+    float x;
+    float invSlope;
+  };
 
-    int cx, cy, polySize, numSides;
+  int cx, cy, polySize, numSides;
 
-    std::vector<std::pair<float,float>>   vertices;
-    std::map<int, std::vector<SGEdge>>    edgeTable;   // ET
-    std::vector<SGEdge>                   activeEdges; // AET
+  std::vector<std::pair<float, float>> vertices;
+  std::map<int, std::vector<SGEdge>> edgeTable;
+  std::vector<SGEdge> activeEdges;
 
-    int  currentY, yMinPoly, yMaxPoly;
-    int  currentStep, totalSteps;
-    bool done;
+  int currentY, yMinPoly, yMaxPoly;
+  int currentStep, totalSteps;
+  bool done;
 
-    std::vector<Pixel> path;
-    AlgoState          lastState;
+  std::vector<Pixel> path;
+  AlgoState lastState;
 
-    void generatePolygon();
-    void buildEdgeTable();
-    void doOneStep();          // process one scanline Y
+  void generatePolygon();
+  void buildEdgeTable();
+  void doOneStep(); // process one scanline Y
 
 public:
-    ScanlineFill();
+  ScanlineFill();
 
-    // x1=cx  y1=cy  x2=polySize  y2=numSides (3-10)
-    void init(int x1, int y1, int x2, int y2) override;
-    void step()            override;
-    void stepK(int k)      override;
-    void runToCompletion() override;
-    void reset()           override;
+  // x1=cx  y1=cy  x2=polySize  y2=numSides (3-10)
+  void init(int x1, int y1, int x2, int y2) override;
+  void step() override;
+  void stepK(int k) override;
+  void runToCompletion() override;
+  void reset() override;
 
-    bool                     isFinished()           const override;
-    std::vector<Pixel>       getHighlightedPixels() const override;
-    AlgoState                getCurrentState()      const override;
-    std::vector<std::string> getInitInfo()          const override;
-    std::vector<std::string> getCurrentVars()       const override;
-    std::string              getTheory()            const override;
-    std::string              getName()              const override;
+  bool isFinished() const override;
+  std::vector<Pixel> getHighlightedPixels() const override;
+  AlgoState getCurrentState() const override;
+  std::vector<std::string> getInitInfo() const override;
+  std::vector<std::string> getCurrentVars() const override;
+  std::string getTheory() const override;
+  std::string getName() const override;
 
-    bool isScanlineMode() const override { return true; }
+  bool isScanlineMode() const override { return true; }
 
-    // Engine uses this to draw the polygon outline in renderGrid
-    const std::vector<std::pair<float,float>>& getVertices() const { return vertices; }
+  const std::vector<std::pair<float, float>> &getVertices() const {
+    return vertices;
+  }
 };
