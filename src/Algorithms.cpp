@@ -131,7 +131,7 @@ void Algorithms::DrawLineWu(Canvas& canvas, int x0, int y0, int x1, int y1, cons
 // ---------------------------------------------------------
 // Midpoint Circle Algorithm
 // ---------------------------------------------------------
-void Algorithms::DrawCircleMidpoint(Canvas& canvas, int xc, int yc, int radius, const Color& color) {
+void Algorithms::DrawCircleMidpoint(Canvas& canvas, int xc, int yc, int radius, const Color& color, bool isFilled, const Color& fillColor) {
     if (radius <= 0) return;
     
     int x = 0;
@@ -141,6 +141,16 @@ void Algorithms::DrawCircleMidpoint(Canvas& canvas, int xc, int yc, int radius, 
 
     // Inner lambda to plot 8 symmetrical points
     auto plot8 = [&](int cx, int cy, int px, int py) {
+        if (isFilled && fillColor.a > 0) {
+            for (int ix = cx - px; ix <= cx + px; ++ix) {
+                canvas.SetPixel(ix, cy + py, fillColor);
+                canvas.SetPixel(ix, cy - py, fillColor);
+            }
+            for (int ix = cx - py; ix <= cx + py; ++ix) {
+                canvas.SetPixel(ix, cy + px, fillColor);
+                canvas.SetPixel(ix, cy - px, fillColor);
+            }
+        }
         canvas.SetPixel(cx + px, cy + py, color);
         canvas.SetPixel(cx - px, cy + py, color);
         canvas.SetPixel(cx + px, cy - py, color);
@@ -168,9 +178,107 @@ void Algorithms::DrawCircleMidpoint(Canvas& canvas, int xc, int yc, int radius, 
 }
 
 // ---------------------------------------------------------
+// Ellipse Drawing Algorithm (Midpoint)
+// ---------------------------------------------------------
+void Algorithms::DrawEllipse(Canvas& canvas, int xc, int yc, int rx, int ry, const Color& color, bool isFilled, const Color& fillColor) {
+    if (rx <= 0 || ry <= 0) return;
+
+    float dx, dy, d1, d2, x, y;
+    x = 0;
+    y = ry;
+
+    // Initial decision parameter for region 1
+    d1 = (ry * ry) - (rx * rx * ry) + (0.25f * rx * rx);
+    dx = 2 * ry * ry * x;
+    dy = 2 * rx * rx * y;
+
+    auto plot4 = [&](int cx, int cy, int px, int py) {
+        if (isFilled && fillColor.a > 0) {
+            for (int ix = cx - px; ix <= cx + px; ++ix) {
+                canvas.SetPixel(ix, cy + py, fillColor);
+                canvas.SetPixel(ix, cy - py, fillColor);
+            }
+        }
+        canvas.SetPixel(cx + px, cy + py, color);
+        canvas.SetPixel(cx - px, cy + py, color);
+        canvas.SetPixel(cx + px, cy - py, color);
+        canvas.SetPixel(cx - px, cy - py, color);
+    };
+
+    // For region 1
+    while (dx < dy) {
+        plot4(xc, yc, x, y);
+        if (d1 < 0) {
+            x++;
+            dx = dx + (2 * ry * ry);
+            d1 = d1 + dx + (ry * ry);
+        } else {
+            x++;
+            y--;
+            dx = dx + (2 * ry * ry);
+            dy = dy - (2 * rx * rx);
+            d1 = d1 + dx - dy + (ry * ry);
+        }
+    }
+
+    // Decision parameter for region 2
+    d2 = ((ry * ry) * ((x + 0.5f) * (x + 0.5f))) + ((rx * rx) * ((y - 1) * (y - 1))) - (rx * rx * ry * ry);
+
+    // For region 2
+    while (y >= 0) {
+        plot4(xc, yc, x, y);
+        if (d2 > 0) {
+            y--;
+            dy = dy - (2 * rx * rx);
+            d2 = d2 + (rx * rx) - dy;
+        } else {
+            y--;
+            x++;
+            dx = dx + (2 * ry * ry);
+            dy = dy - (2 * rx * rx);
+            d2 = d2 + dx - dy + (rx * rx);
+        }
+    }
+}
+
+// ---------------------------------------------------------
+// Square Drawing (defined by center or bounding box)
+// Let's implement it as a rectangle/square bounding box from (x0, y0) to (x1, y1)
+// ---------------------------------------------------------
+void Algorithms::DrawSquare(Canvas& canvas, int x0, int y0, int x1, int y1, const Color& color, bool isFilled, const Color& fillColor) {
+    // Determine the side length for a square if we want it strictly square,
+    // or just draw a rectangle as requested by "Square" in common paint parlance.
+    // Given the prompt asks for "Square", I'll make it a square by taking the max delta.
+    
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int side = std::max(std::abs(dx), std::abs(dy));
+    
+    int realX1 = x0 + (dx >= 0 ? side : -side);
+    int realY1 = y0 + (dy >= 0 ? side : -side);
+
+    if (isFilled && fillColor.a > 0) {
+        int minX = std::min(x0, realX1);
+        int maxX = std::max(x0, realX1);
+        int minY = std::min(y0, realY1);
+        int maxY = std::max(y0, realY1);
+        for (int y = minY; y <= maxY; ++y) {
+            for (int x = minX; x <= maxX; ++x) {
+                canvas.SetPixel(x, y, fillColor);
+            }
+        }
+    }
+
+    Algorithms::DrawLineBresenham(canvas, x0, y0, realX1, y0, color);
+    Algorithms::DrawLineBresenham(canvas, realX1, y0, realX1, realY1, color);
+    Algorithms::DrawLineBresenham(canvas, realX1, realY1, x0, realY1, color);
+    Algorithms::DrawLineBresenham(canvas, x0, realY1, x0, y0, color);
+}
+
+// ---------------------------------------------------------
 // Basic Flood Fill Algorithm
 // ---------------------------------------------------------
-void Algorithms::FloodFill(Canvas& canvas, int startX, int startY, const Color& newColor) {
+void Algorithms::FloodFill(Canvas& canvas, int startX, int startY, const Color& newColor, std::vector<std::pair<int, int>>* outPoints) {
     // Check out of bounds
     if (startX < 0 || startX >= canvas.GetWidth() || startY < 0 || startY >= canvas.GetHeight()) return;
 
@@ -191,6 +299,7 @@ void Algorithms::FloodFill(Canvas& canvas, int startX, int startY, const Color& 
 
         if (canvas.GetPixel(x, y).Pack() == targetColor.Pack()) {
             canvas.SetPixel(x, y, newColor);
+            if (outPoints) outPoints->push_back({x, y});
             
             // Add neighboring pixels
             q.push({x + 1, y});
@@ -198,5 +307,254 @@ void Algorithms::FloodFill(Canvas& canvas, int startX, int startY, const Color& 
             q.push({x, y + 1});
             q.push({x, y - 1});
         }
+    }
+}
+
+int Algorithms::FindShapeAt(Canvas& canvas, int x, int y) {
+    auto& shapes = canvas.GetShapes();
+    // Search backwards to select the topmost shape
+    for (int i = static_cast<int>(shapes.size()) - 1; i >= 0; --i) {
+        const auto& s = shapes[i];
+        if (s.type == ShapeType::LINE) {
+            // Check distance to line segment
+            float dx = static_cast<float>(s.x1 - s.x0);
+            float dy = static_cast<float>(s.y1 - s.y0);
+            float l2 = dx*dx + dy*dy;
+            if (l2 == 0) continue;
+            float t = ((x - s.x0) * dx + (y - s.y0) * dy) / l2;
+            t = std::max(0.0f, std::min(1.0f, t));
+            float dist = std::sqrt(std::pow(x - (s.x0 + t * dx), 2) + std::pow(y - (s.y0 + t * dy), 2));
+            if (dist < 8.0f) return i;
+        } else if (s.type == ShapeType::CIRCLE) {
+            float radius = std::sqrt(std::pow(s.x1 - s.x0, 2) + std::pow(s.y1 - s.y0, 2));
+            float dist = std::sqrt(std::pow(x - s.x0, 2) + std::pow(y - s.y0, 2));
+            if (dist <= radius + 5.0f) return i; // Area check
+        } else if (s.type == ShapeType::SQUARE) {
+            int sdx = s.x1 - s.x0;
+            int sdy = s.y1 - s.y0;
+            int side = std::max(std::abs(sdx), std::abs(sdy));
+            int rx1 = s.x0 + (sdx >= 0 ? side : -side);
+            int ry1 = s.y0 + (sdy >= 0 ? side : -side);
+            int minX = std::min(s.x0, rx1);
+            int maxX = std::max(s.x0, rx1);
+            int minY = std::min(s.y0, ry1);
+            int maxY = std::max(s.y0, ry1);
+            if (x >= minX - 5 && x <= maxX + 5 && y >= minY - 5 && y <= maxY + 5) {
+                return i; // Area check
+            }
+        } else if (s.type == ShapeType::ELLIPSE) {
+            int rx = std::abs(s.x1 - s.x0);
+            int ry = std::abs(s.y1 - s.y0);
+            if (rx == 0 || ry == 0) continue;
+            // Ellipse area check: (x-xc)^2/rx^2 + (y-yc)^2/ry^2 <= 1
+            float val = std::pow(x - s.x0, 2) / std::pow(rx, 2) + std::pow(y - s.y0, 2) / std::pow(ry, 2);
+            if (val <= 1.1f) return i; // Allow slight margin
+        } else if (s.type == ShapeType::PENCIL || s.type == ShapeType::BRUSH) {
+            if (s.points.empty()) continue;
+            for (size_t j = 0; j < s.points.size() - 1; ++j) {
+                float px0 = static_cast<float>(s.points[j].first);
+                float py0 = static_cast<float>(s.points[j].second);
+                float px1 = static_cast<float>(s.points[j+1].first);
+                float py1 = static_cast<float>(s.points[j+1].second);
+                float dx = px1 - px0;
+                float dy = py1 - py0;
+                float l2 = dx*dx + dy*dy;
+                if (l2 == 0) {
+                    float dist = std::sqrt(std::pow(x - px0, 2) + std::pow(y - py0, 2));
+                    if (dist < 8.0f) return i;
+                    continue;
+                }
+                float t = ((x - px0) * dx + (y - py0) * dy) / l2;
+                t = std::max(0.0f, std::min(1.0f, t));
+                float dist = std::sqrt(std::pow(x - (px0 + t * dx), 2) + std::pow(y - (py0 + t * dy), 2));
+                if (dist < 8.0f) return i;
+            }
+        }
+    }
+    return -1;
+}
+
+// ---------------------------------------------------------
+// SDF Rendering Implementation
+// ---------------------------------------------------------
+void Algorithms::SetPixelAntiAliased(Canvas& canvas, int x, int y, const Color& color, float alpha) {
+    if (x < 0 || x >= canvas.GetWidth() || y < 0 || y >= canvas.GetHeight() || alpha <= 0.0f) return;
+    if (alpha >= 1.0f) {
+        canvas.SetPixel(x, y, color);
+        return;
+    }
+    Color bgColor = canvas.GetPixel(x, y);
+    uint8_t r = static_cast<uint8_t>((color.r * alpha) + (bgColor.r * (1.0f - alpha)));
+    uint8_t g = static_cast<uint8_t>((color.g * alpha) + (bgColor.g * (1.0f - alpha)));
+    uint8_t b = static_cast<uint8_t>((color.b * alpha) + (bgColor.b * (1.0f - alpha)));
+    canvas.SetPixel(x, y, Color(r, g, b, 255));
+}
+
+float Algorithms::GetAlphaSDF(float dist, float thickness, AAType aaType) {
+    float halfT = thickness / 2.0f;
+    if (dist > halfT + 1.0f) return 0.0f;
+
+    switch (aaType) {
+        case AAType::NONE:
+            return dist <= halfT ? 1.0f : 0.0f;
+        case AAType::EDGE_LINEAR:
+            if (dist <= halfT - 0.5f) return 1.0f;
+            if (dist >= halfT + 0.5f) return 0.0f;
+            return 0.5f - (dist - halfT);
+        case AAType::CONICAL:
+            if (dist >= halfT) return 0.0f;
+            return 1.0f - (dist / halfT);
+        case AAType::GAUSSIAN:
+            if (dist >= halfT) return 0.0f;
+            float sigma = halfT / 3.0f;
+            if (sigma == 0.0f) return 1.0f;
+            return std::exp(-(dist * dist) / (2.0f * sigma * sigma));
+    }
+    return 1.0f;
+}
+
+void Algorithms::DrawLineSDF(Canvas& canvas, int x0, int y0, int x1, int y1, const Color& color, float thickness, AAType aaType) {
+    int pad = static_cast<int>(thickness / 2.0f) + 2;
+    int minX = std::min(x0, x1) - pad;
+    int maxX = std::max(x0, x1) + pad;
+    int minY = std::min(y0, y1) - pad;
+    int maxY = std::max(y0, y1) + pad;
+
+    float dx = x1 - x0;
+    float dy = y1 - y0;
+    float l2 = dx * dx + dy * dy;
+
+    for (int y = minY; y <= maxY; ++y) {
+        for (int x = minX; x <= maxX; ++x) {
+            float dist;
+            if (l2 == 0.0f) {
+                dist = std::sqrt((x - x0) * (x - x0) + (y - y0) * (y - y0));
+            } else {
+                float t = std::max(0.0f, std::min(1.0f, ((x - x0) * dx + (y - y0) * dy) / l2));
+                float projX = x0 + t * dx;
+                float projY = y0 + t * dy;
+                dist = std::sqrt((x - projX) * (x - projX) + (y - projY) * (y - projY));
+            }
+            float alpha = GetAlphaSDF(dist, thickness, aaType);
+            if (alpha > 0.0f) SetPixelAntiAliased(canvas, x, y, color, alpha);
+        }
+    }
+}
+
+void Algorithms::DrawCircleSDF(Canvas& canvas, int xc, int yc, int radius, const Color& color, bool isFilled, const Color& fillColor, float thickness, AAType aaType) {
+    int pad = static_cast<int>(thickness / 2.0f) + 2;
+    int minX = xc - radius - pad;
+    int maxX = xc + radius + pad;
+    int minY = yc - radius - pad;
+    int maxY = yc + radius + pad;
+
+    for (int y = minY; y <= maxY; ++y) {
+        for (int x = minX; x <= maxX; ++x) {
+            float dCenter = std::sqrt((x - xc) * (x - xc) + (y - yc) * (y - yc));
+            float distToEdge = std::abs(dCenter - radius);
+            float alpha = GetAlphaSDF(distToEdge, thickness, aaType);
+            
+            if (alpha > 0.0f) {
+                if (isFilled && dCenter < radius) SetPixelAntiAliased(canvas, x, y, fillColor, 1.0f);
+                SetPixelAntiAliased(canvas, x, y, color, alpha);
+            } else if (isFilled && dCenter < radius) {
+                SetPixelAntiAliased(canvas, x, y, fillColor, 1.0f);
+            }
+        }
+    }
+}
+
+void Algorithms::DrawEllipseSDF(Canvas& canvas, int xc, int yc, int rx, int ry, const Color& color, bool isFilled, const Color& fillColor, float thickness, AAType aaType) {
+    if (rx == 0 || ry == 0) return;
+    int pad = static_cast<int>(thickness / 2.0f) + 2;
+    int minX = xc - rx - pad;
+    int maxX = xc + rx + pad;
+    int minY = yc - ry - pad;
+    int maxY = yc + ry + pad;
+
+    for (int y = minY; y <= maxY; ++y) {
+        for (int x = minX; x <= maxX; ++x) {
+            float dx = x - xc;
+            float dy = y - yc;
+            float theta = std::atan2(dy * rx, dx * ry);
+            float ex = rx * std::cos(theta);
+            float ey = ry * std::sin(theta);
+            
+            float distCenterToEdge = std::sqrt(ex*ex + ey*ey);
+            float distCenterToPoint = std::sqrt(dx*dx + dy*dy);
+            float dist = std::abs(distCenterToPoint - distCenterToEdge);
+            float alpha = GetAlphaSDF(dist, thickness, aaType);
+            bool isInside = distCenterToPoint < distCenterToEdge;
+            
+            if (alpha > 0.0f) {
+                if (isFilled && isInside) SetPixelAntiAliased(canvas, x, y, fillColor, 1.0f);
+                SetPixelAntiAliased(canvas, x, y, color, alpha);
+            } else if (isFilled && isInside) {
+                SetPixelAntiAliased(canvas, x, y, fillColor, 1.0f);
+            }
+        }
+    }
+}
+
+void Algorithms::DrawSquareSDF(Canvas& canvas, int x0, int y0, int x1, int y1, const Color& color, bool isFilled, const Color& fillColor, float thickness, AAType aaType) {
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int side = std::max(std::abs(dx), std::abs(dy));
+    int realX1 = x0 + (dx >= 0 ? side : -side);
+    int realY1 = y0 + (dy >= 0 ? side : -side);
+    
+    int rMinX = std::min(x0, realX1);
+    int rMaxX = std::max(x0, realX1);
+    int rMinY = std::min(y0, realY1);
+    int rMaxY = std::max(y0, realY1);
+
+    int pad = static_cast<int>(thickness / 2.0f) + 2;
+    int minX = rMinX - pad;
+    int maxX = rMaxX + pad;
+    int minY = rMinY - pad;
+    int maxY = rMaxY + pad;
+
+    for (int y = minY; y <= maxY; ++y) {
+        for (int x = minX; x <= maxX; ++x) {
+            float dX = std::max(0.0f, std::max((float)(rMinX - x), (float)(x - rMaxX)));
+            float dY = std::max(0.0f, std::max((float)(rMinY - y), (float)(y - rMaxY)));
+            float dist;
+            if (x >= rMinX && x <= rMaxX && y >= rMinY && y <= rMaxY) {
+                dist = std::min({ (float)(x - rMinX), (float)(rMaxX - x), (float)(y - rMinY), (float)(rMaxY - y) });
+                float alpha = GetAlphaSDF(dist, thickness, aaType);
+                if (alpha > 0.0f) {
+                    if (isFilled) SetPixelAntiAliased(canvas, x, y, fillColor, 1.0f);
+                    SetPixelAntiAliased(canvas, x, y, color, alpha);
+                } else if (isFilled) {
+                    SetPixelAntiAliased(canvas, x, y, fillColor, 1.0f);
+                }
+            } else {
+                dist = std::sqrt(dX * dX + dY * dY);
+                float alpha = GetAlphaSDF(dist, thickness, aaType);
+                if (alpha > 0.0f) SetPixelAntiAliased(canvas, x, y, color, alpha);
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------
+// Dashed Bounding Box for selections
+// ---------------------------------------------------------
+void Algorithms::DrawDashedBox(Canvas& canvas, int x0, int y0, int x1, int y1, const Color& color, int dashLength) {
+    // Top Edge
+    for (int x = x0; x <= x1; ++x) {
+        if ((x / dashLength) % 2 == 0) canvas.SetPixel(x, y0, color);
+    }
+    // Bottom Edge
+    for (int x = x0; x <= x1; ++x) {
+        if ((x / dashLength) % 2 == 0) canvas.SetPixel(x, y1, color);
+    }
+    // Left Edge
+    for (int y = y0; y <= y1; ++y) {
+        if ((y / dashLength) % 2 == 0) canvas.SetPixel(x0, y, color);
+    }
+    // Right Edge
+    for (int y = y0; y <= y1; ++y) {
+        if ((y / dashLength) % 2 == 0) canvas.SetPixel(x1, y, color);
     }
 }
