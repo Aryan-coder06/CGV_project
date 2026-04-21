@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/include -I/home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/include/DSA -I/home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/imgui -I/home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/imgui/backends -I/home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/glfw/include -I/home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/glad/include
+CXX_INCLUDES = -I/home/udaynoor-singh/Desktop/CGV/include -I/home/udaynoor-singh/Desktop/CGV/include/DSA -I/home/udaynoor-singh/Desktop/CGV/third_party/imgui -I/home/udaynoor-singh/Desktop/CGV/third_party/imgui/backends -I/home/udaynoor-singh/Desktop/CGV/third_party/glfw/include -I/home/udaynoor-singh/Desktop/CGV/third_party/glad/include
 
 CXX_FLAGS = -std=gnu++17
 

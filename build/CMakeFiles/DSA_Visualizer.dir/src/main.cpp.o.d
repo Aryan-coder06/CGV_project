@@ -1,8 +1,7 @@
 CMakeFiles/DSA_Visualizer.dir/src/main.cpp.o: \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/src/main.cpp \
- /usr/include/stdc-predef.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/src/../include/Visualizer/VisualizerEngine.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/src/../include/Visualizer/IAlgorithm.h \
+ /home/udaynoor-singh/Desktop/CGV/src/main.cpp /usr/include/stdc-predef.h \
+ /home/udaynoor-singh/Desktop/CGV/src/../include/Visualizer/VisualizerEngine.h \
+ /home/udaynoor-singh/Desktop/CGV/src/../include/Visualizer/IAlgorithm.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -120,7 +119,7 @@ CMakeFiles/DSA_Visualizer.dir/src/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/src/../include/Visualizer/../DSA/SortAlgos.h \
+ /home/udaynoor-singh/Desktop/CGV/src/../include/Visualizer/../DSA/SortAlgos.h \
  /usr/include/c++/13/random /usr/include/c++/13/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -154,8 +153,8 @@ CMakeFiles/DSA_Visualizer.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/stl_numeric.h \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/src/../include/Visualizer/../DSA/SearchAlgos.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/src/../include/Visualizer/../DSA/GraphAlgos.h \
+ /home/udaynoor-singh/Desktop/CGV/src/../include/Visualizer/../DSA/SearchAlgos.h \
+ /home/udaynoor-singh/Desktop/CGV/src/../include/Visualizer/../DSA/GraphAlgos.h \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/stl_tempbuf.h \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
@@ -189,12 +188,12 @@ CMakeFiles/DSA_Visualizer.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/imgui/imgui.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/imgui/imconfig.h \
+ /home/udaynoor-singh/Desktop/CGV/third_party/imgui/imgui.h \
+ /home/udaynoor-singh/Desktop/CGV/third_party/imgui/imconfig.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h /usr/include/string.h \
  /usr/include/strings.h /usr/include/assert.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/imgui/backends/imgui_impl_glfw.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/imgui/backends/imgui_impl_opengl3.h \
+ /home/udaynoor-singh/Desktop/CGV/third_party/imgui/backends/imgui_impl_glfw.h \
+ /home/udaynoor-singh/Desktop/CGV/third_party/imgui/backends/imgui_impl_opengl3.h \
  /usr/include/GLFW/glfw3.h /usr/include/GL/gl.h /usr/include/GL/glext.h \
  /usr/include/KHR/khrplatform.h /usr/include/c++/13/iostream \
  /usr/include/c++/13/ostream /usr/include/c++/13/ios \

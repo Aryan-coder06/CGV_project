@@ -1,8 +1,8 @@
 CMakeFiles/DSA_Visualizer.dir/src/DSA/GraphAlgos.cpp.o: \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/src/DSA/GraphAlgos.cpp \
+ /home/udaynoor-singh/Desktop/CGV/src/DSA/GraphAlgos.cpp \
  /usr/include/stdc-predef.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/src/DSA/../../include/DSA/GraphAlgos.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/src/DSA/../../include/DSA/../Visualizer/IAlgorithm.h \
+ /home/udaynoor-singh/Desktop/CGV/src/DSA/../../include/DSA/GraphAlgos.h \
+ /home/udaynoor-singh/Desktop/CGV/src/DSA/../../include/DSA/../Visualizer/IAlgorithm.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \

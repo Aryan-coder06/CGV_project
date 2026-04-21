@@ -1,4 +1,4 @@
-# Install script for directory: /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa
+# Install script for directory: /home/udaynoor-singh/Desktop/CGV
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/udaynoor-singh/Desktop/CGV/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

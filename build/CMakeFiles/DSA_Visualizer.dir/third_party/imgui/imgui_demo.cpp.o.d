@@ -1,8 +1,8 @@
 CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_demo.cpp.o: \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/imgui/imgui_demo.cpp \
+ /home/udaynoor-singh/Desktop/CGV/third_party/imgui/imgui_demo.cpp \
  /usr/include/stdc-predef.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/imgui/imgui.h \
- /home/udaynoor-singh/Downloads/CGV_project-khatri-ki-kripa/third_party/imgui/imconfig.h \
+ /home/udaynoor-singh/Desktop/CGV/third_party/imgui/imgui.h \
+ /home/udaynoor-singh/Desktop/CGV/third_party/imgui/imconfig.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h /usr/include/string.h \
