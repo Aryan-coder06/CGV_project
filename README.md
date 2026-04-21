@@ -217,6 +217,50 @@ cmake .. -G "Visual Studio 17 2022" -A x64
 
 ---
 
+## Three.js 3D Pixel-Paint Demo (Integrated)
+
+A Three.js-based 3D grid paint visualizer is now integrated at:
+
+`web/threejs-3d-paint/`
+
+### Run it locally
+
+```bash
+cd web/threejs-3d-paint
+python3 -m http.server 8080
+```
+
+Then open:
+
+`http://localhost:8080`
+
+This demo helps visualize pixel/block coloring with raycasting in a 3D grid and can be used as a reference for future 3D CGV features.
+
+---
+
+## CGV Web App (Desktop-to-Web Conversion)
+
+A new web app version of the current CGV flow is available at:
+
+`web/cgv-webapp/`
+
+It includes:
+- Home page with 3 module choices
+- Algorithm Visualizer UI (Theory + Visualize)
+- Live DDA step controls
+- 3D grid visualization in the visualize viewport (Three.js/WebGL)
+
+### Run the web app
+
+```bash
+cd web/cgv-webapp
+python3 -m http.server 8090
+```
+
+Open: `http://localhost:8090`
+
+---
+
 ## How to Connect All Three Sections
 
 > See [`SECTION2_IMPLEMENTATION_PLAN.md`](./SECTION2_IMPLEMENTATION_PLAN.md) for a detailed integration guide for Section 2.

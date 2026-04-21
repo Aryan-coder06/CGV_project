@@ -1,0 +1,4 @@
+  cd "/home/aryan-s/Documents/SEM 4/CGV/Project/CGV_project"
+  cmake -S . -B build-local
+  cmake --build build-local -j4
+  ./build-local/CGV_Project

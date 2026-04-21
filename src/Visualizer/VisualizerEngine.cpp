@@ -53,18 +53,26 @@ VisualizerEngine::VisualizerEngine() {
 //  renderUI() — full ImGui panel, called every frame
 // ================================================================
 void VisualizerEngine::renderUI() {
+    ImVec2 display = ImGui::GetIO().DisplaySize;
+    uiPanelWidth = std::clamp(display.x * 0.42f, 560.0f, 760.0f);
+
     ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
-    ImGui::SetNextWindowSize(ImVec2(400, 720), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(uiPanelWidth, display.y), ImGuiCond_Always);
 
     ImGuiWindowFlags flags =
         ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
 
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(18, 16));
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(14, 10));
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(12, 10));
     ImGui::Begin("##VisualizerPanel", nullptr, flags);
+    ImGui::SetWindowFontScale(1.18f);
 
     // ---- Header ----
     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.4f, 0.9f, 1.0f, 1.0f));
     ImGui::TextUnformatted("SECTION 2 — ALGORITHM VISUALIZER");
     ImGui::PopStyleColor();
+    ImGui::TextDisabled("Large readable mode enabled");
     ImGui::Spacing();
 
     // ---- Algorithm dropdown ----
@@ -106,7 +114,9 @@ void VisualizerEngine::renderUI() {
         ImGui::EndTabBar();
     }
 
+    ImGui::SetWindowFontScale(1.0f);
     ImGui::End();
+    ImGui::PopStyleVar(3);
 }
 
 // ================================================================
@@ -166,7 +176,7 @@ void VisualizerEngine::renderVisualizeTab() {
     //  Fixed height so boxes 2 & 3 are always visible below it.
     // ------------------------------------------------------------------
     ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.10f, 0.11f, 0.16f, 1.0f));
-    ImGui::BeginChild("##UpperBox", ImVec2(0, 270), true,
+    ImGui::BeginChild("##UpperBox", ImVec2(0, 390), true,
                       ImGuiWindowFlags_HorizontalScrollbar);
     ImGui::PopStyleColor();
 
@@ -186,10 +196,10 @@ void VisualizerEngine::renderVisualizeTab() {
     ImGui::Separator();
 
     if (isScanline) {
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre X",  &inputPolyCX);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre Y",  &inputPolyCY);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Poly Size", &inputPolySize);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Sides (3-10)", &inputPolySides);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Centre X",  &inputPolyCX);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Centre Y",  &inputPolyCY);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Poly Size", &inputPolySize);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Sides (3-10)", &inputPolySides);
         if (inputPolySize  < 2)  inputPolySize  = 2;
         if (inputPolySides < 3)  inputPolySides = 3;
         if (inputPolySides > 10) inputPolySides = 10;
@@ -197,16 +207,16 @@ void VisualizerEngine::renderVisualizeTab() {
         ImGui::Text("  Regular %d-gon, radius %d", inputPolySides, inputPolySize);
         ImGui::PopStyleColor();
     } else if (isEllipse) {
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre X",   &inputCX);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre Y",   &inputCY);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Semi-a (X)", &inputRX);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Semi-b (Y)", &inputRY);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Centre X",   &inputCX);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Centre Y",   &inputCY);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Semi-a (X)", &inputRX);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Semi-b (Y)", &inputRY);
         if (inputRX < 1) inputRX = 1;
         if (inputRY < 1) inputRY = 1;
     } else if (isFill) {
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Seed X (cx)",  &inputSeedX);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Seed Y (cy)",  &inputSeedY);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Half-side S",  &inputHalfS);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Seed X (cx)",  &inputSeedX);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Seed Y (cy)",  &inputSeedY);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Half-side S",  &inputHalfS);
         if (inputHalfS < 2) inputHalfS = 2;
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.6f, 0.9f, 1.0f, 0.85f));
         ImGui::Text("  Boundary: [%d..%d] x [%d..%d]",
@@ -214,15 +224,15 @@ void VisualizerEngine::renderVisualizeTab() {
                     inputSeedY - inputHalfS, inputSeedY + inputHalfS);
         ImGui::PopStyleColor();
     } else if (isCircle) {
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre X", &inputCX);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre Y", &inputCY);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Radius",   &inputRadius);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Centre X", &inputCX);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Centre Y", &inputCY);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Radius",   &inputRadius);
         if (inputRadius < 1) inputRadius = 1;
     } else {
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Start X", &inputX1);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Start Y", &inputY1);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("End X",   &inputX2);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("End Y",   &inputY2);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Start X", &inputX1);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("Start Y", &inputY1);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("End X",   &inputX2);
+        ImGui::SetNextItemWidth(240); ImGui::InputInt("End Y",   &inputY2);
     }
 
     ImGui::Spacing();
@@ -271,7 +281,7 @@ void VisualizerEngine::renderVisualizeTab() {
 
     // Step K (blue)
     ImGui::Spacing();
-    ImGui::SetNextItemWidth(75);
+    ImGui::SetNextItemWidth(140);
     ImGui::InputInt("K##steps", &kSteps);
     if (kSteps < 1) kSteps = 1;
     ImGui::SameLine();
@@ -319,7 +329,7 @@ void VisualizerEngine::renderVisualizeTab() {
     state = currentAlgo->getCurrentState();  // refresh
 
     ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.08f, 0.10f, 0.15f, 1.0f));
-    ImGui::BeginChild("##StateBox", ImVec2(0, 155), true);
+    ImGui::BeginChild("##StateBox", ImVec2(0, 230), true);
     ImGui::PopStyleColor();
 
     // Progress bar
@@ -359,7 +369,7 @@ void VisualizerEngine::renderVisualizeTab() {
     }
 
     ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.08f, 0.10f, 0.15f, 1.0f));
-    // No BeginChild — content renders directly so nothing is clipped or scrollable
+    ImGui::BeginChild("##CalcBox", ImVec2(0, 0), true);
 
     if (lastMode == ExecMode::STEP_ONE && state.hasCalculation && !state.calcLines.empty()) {
         // ---- Full calculation ----
@@ -412,7 +422,8 @@ void VisualizerEngine::renderVisualizeTab() {
         ImGui::PopStyleColor();
     }
 
-    ImGui::PopStyleColor();  // ChildBg (unused now, but keeps push/pop balanced)
+    ImGui::EndChild();
+    ImGui::PopStyleColor();
 }
 
 // ================================================================
@@ -430,7 +441,7 @@ void VisualizerEngine::renderCalcPanel(const AlgoState& /*state*/) {
 //  renderGrid() — OpenGL pixel grid, called after ImGui render
 // ================================================================
 void VisualizerEngine::renderGrid(int windowWidth, int windowHeight) {
-    const int panelW  = 400;
+    const int panelW  = (int)std::round(uiPanelWidth);
     int gridAreaW = windowWidth - panelW;
     int gridAreaH = windowHeight;
     if (gridAreaW <= 0 || gridAreaH <= 0 || activeTab != 1) return;
@@ -680,4 +691,3 @@ void VisualizerEngine::renderGrid(int windowWidth, int windowHeight) {
 
     glViewport(0, 0, windowWidth, windowHeight);
 }
-

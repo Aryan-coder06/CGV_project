@@ -65,5 +65,5 @@ elseif(APPLE)
 
 else()
     # --- Linux ---
-    target_link_libraries(CGV_Project glfw GL m dl pthread)
+    target_link_libraries(CGV_Project glfw GLEW GL m dl pthread)
 endif()

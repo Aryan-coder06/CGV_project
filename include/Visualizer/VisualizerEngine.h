@@ -57,6 +57,7 @@ private:
     // UI state
     int      activeTab = 1;           // 0=Theory, 1=Visualize
     ExecMode lastMode  = ExecMode::NONE;
+    float    uiPanelWidth = 460.0f;   // runtime-computed for responsive layout
 
     // ---- private helpers ----
     std::unique_ptr<IAlgorithm> createAlgorithm(int idx);
