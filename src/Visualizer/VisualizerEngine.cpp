@@ -54,12 +54,13 @@ VisualizerEngine::VisualizerEngine() {
 // ================================================================
 void VisualizerEngine::renderUI() {
     ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
-    ImGui::SetNextWindowSize(ImVec2(400, 720), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(640, ImGui::GetIO().DisplaySize.y), ImGuiCond_Always);
 
     ImGuiWindowFlags flags =
         ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse;
 
     ImGui::Begin("##VisualizerPanel", nullptr, flags);
+    ImGui::SetWindowFontScale(1.08f);
 
     // ---- Header ----
     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.4f, 0.9f, 1.0f, 1.0f));
@@ -166,7 +167,7 @@ void VisualizerEngine::renderVisualizeTab() {
     //  Fixed height so boxes 2 & 3 are always visible below it.
     // ------------------------------------------------------------------
     ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.10f, 0.11f, 0.16f, 1.0f));
-    ImGui::BeginChild("##UpperBox", ImVec2(0, 270), true,
+    ImGui::BeginChild("##UpperBox", ImVec2(0, 380), true,
                       ImGuiWindowFlags_HorizontalScrollbar);
     ImGui::PopStyleColor();
 
@@ -186,10 +187,10 @@ void VisualizerEngine::renderVisualizeTab() {
     ImGui::Separator();
 
     if (isScanline) {
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre X",  &inputPolyCX);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre Y",  &inputPolyCY);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Poly Size", &inputPolySize);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Sides (3-10)", &inputPolySides);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Centre X",  &inputPolyCX);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Centre Y",  &inputPolyCY);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Poly Size", &inputPolySize);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Sides (3-10)", &inputPolySides);
         if (inputPolySize  < 2)  inputPolySize  = 2;
         if (inputPolySides < 3)  inputPolySides = 3;
         if (inputPolySides > 10) inputPolySides = 10;
@@ -197,16 +198,16 @@ void VisualizerEngine::renderVisualizeTab() {
         ImGui::Text("  Regular %d-gon, radius %d", inputPolySides, inputPolySize);
         ImGui::PopStyleColor();
     } else if (isEllipse) {
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre X",   &inputCX);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre Y",   &inputCY);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Semi-a (X)", &inputRX);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Semi-b (Y)", &inputRY);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Centre X",   &inputCX);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Centre Y",   &inputCY);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Semi-a (X)", &inputRX);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Semi-b (Y)", &inputRY);
         if (inputRX < 1) inputRX = 1;
         if (inputRY < 1) inputRY = 1;
     } else if (isFill) {
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Seed X (cx)",  &inputSeedX);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Seed Y (cy)",  &inputSeedY);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Half-side S",  &inputHalfS);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Seed X (cx)",  &inputSeedX);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Seed Y (cy)",  &inputSeedY);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Half-side S",  &inputHalfS);
         if (inputHalfS < 2) inputHalfS = 2;
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.6f, 0.9f, 1.0f, 0.85f));
         ImGui::Text("  Boundary: [%d..%d] x [%d..%d]",
@@ -214,15 +215,15 @@ void VisualizerEngine::renderVisualizeTab() {
                     inputSeedY - inputHalfS, inputSeedY + inputHalfS);
         ImGui::PopStyleColor();
     } else if (isCircle) {
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre X", &inputCX);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Centre Y", &inputCY);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Radius",   &inputRadius);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Centre X", &inputCX);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Centre Y", &inputCY);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Radius",   &inputRadius);
         if (inputRadius < 1) inputRadius = 1;
     } else {
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Start X", &inputX1);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("Start Y", &inputY1);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("End X",   &inputX2);
-        ImGui::SetNextItemWidth(100); ImGui::InputInt("End Y",   &inputY2);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Start X", &inputX1);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("Start Y", &inputY1);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("End X",   &inputX2);
+        ImGui::SetNextItemWidth(180); ImGui::InputInt("End Y",   &inputY2);
     }
 
     ImGui::Spacing();
@@ -271,7 +272,7 @@ void VisualizerEngine::renderVisualizeTab() {
 
     // Step K (blue)
     ImGui::Spacing();
-    ImGui::SetNextItemWidth(75);
+    ImGui::SetNextItemWidth(130);
     ImGui::InputInt("K##steps", &kSteps);
     if (kSteps < 1) kSteps = 1;
     ImGui::SameLine();
@@ -319,7 +320,7 @@ void VisualizerEngine::renderVisualizeTab() {
     state = currentAlgo->getCurrentState();  // refresh
 
     ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.08f, 0.10f, 0.15f, 1.0f));
-    ImGui::BeginChild("##StateBox", ImVec2(0, 155), true);
+    ImGui::BeginChild("##StateBox", ImVec2(0, 220), true);
     ImGui::PopStyleColor();
 
     // Progress bar
@@ -430,7 +431,7 @@ void VisualizerEngine::renderCalcPanel(const AlgoState& /*state*/) {
 //  renderGrid() — OpenGL pixel grid, called after ImGui render
 // ================================================================
 void VisualizerEngine::renderGrid(int windowWidth, int windowHeight) {
-    const int panelW  = 400;
+    const int panelW  = 640;
     int gridAreaW = windowWidth - panelW;
     int gridAreaH = windowHeight;
     if (gridAreaW <= 0 || gridAreaH <= 0 || activeTab != 1) return;
@@ -680,4 +681,3 @@ void VisualizerEngine::renderGrid(int windowWidth, int windowHeight) {
 
     glViewport(0, 0, windowWidth, windowHeight);
 }
-
