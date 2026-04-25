@@ -3,6 +3,10 @@ project(CGV_Project)
 
 set(CMAKE_CXX_STANDARD 17)
 
+if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif()
+
 set(IMGUI_SOURCES
     third_party/imgui/imgui.cpp
     third_party/imgui/imgui_demo.cpp

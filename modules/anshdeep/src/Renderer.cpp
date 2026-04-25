@@ -30,7 +30,9 @@ const char* fragmentShaderSource = R"glsl(
     }
 )glsl";
 
-Renderer::Renderer() : shaderProgram(0), VBO(0), VAO(0), EBO(0), texture(0) {
+Renderer::Renderer()
+    : shaderProgram(0), VBO(0), VAO(0), EBO(0), texture(0),
+      textureWidth(0), textureHeight(0) {
 }
 
 Renderer::~Renderer() {
@@ -141,11 +143,17 @@ void Renderer::Render(const Canvas& canvas) {
     int height = canvas.GetHeight();
     
     glBindTexture(GL_TEXTURE_2D, texture);
-    
-    // Upload the CPU buffer to OpenGL
-    // We upload it as GL_RGBA because our Color packs internal as ABGR/RGBA depending on little-endian bitshifts.
-    // The packed uint32_t from `Color::Pack()` is basically RGBA on most systems where bit 0 is R.
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, canvas.GetBuffer().data());
+
+    // Avoid reallocating the GPU texture every frame; only resize when dimensions change.
+    if (textureWidth != width || textureHeight != height) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0,
+                     GL_RGBA, GL_UNSIGNED_BYTE, canvas.GetBuffer().data());
+        textureWidth = width;
+        textureHeight = height;
+    } else {
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height,
+                        GL_RGBA, GL_UNSIGNED_BYTE, canvas.GetBuffer().data());
+    }
 
     glUseProgram(shaderProgram);
     glBindVertexArray(VAO);

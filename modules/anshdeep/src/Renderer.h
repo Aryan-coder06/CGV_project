@@ -17,6 +17,8 @@ private:
     unsigned int shaderProgram;
     unsigned int VBO, VAO, EBO;
     unsigned int texture;
+    int textureWidth;
+    int textureHeight;
 
     void compileShaders();
     void setupBuffers();
