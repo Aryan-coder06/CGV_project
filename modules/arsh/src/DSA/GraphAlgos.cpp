@@ -461,3 +461,133 @@ std::string DFS::getComplexity() const {
     return "Time: O(V+E)  |  Space: O(V)";
 }
 
+void Dijkstra::init() {
+    steps.clear();
+    currentStepIdx = 0;
+    buildGraph();
+    computeNodePositions();
+
+    std::vector<bool> visited(numNodes, false);
+    std::vector<int> dist(numNodes, 1e9); // 1e9 represents Infinity
+    
+    // Priority queue: pair<distance, node>
+    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> pq;
+    std::vector<std::pair<int,int>> traversedEdges;
+
+    GraphStep initial;
+    initial.visited.resize(numNodes, false);
+    initial.description = "Dijkstra starting from node " + std::to_string(startNode);
+    initial.pseudocode_line = 0;
+    steps.push_back(initial);
+
+    dist[startNode] = 0;
+    pq.push({0, startNode});
+
+    GraphStep startStep;
+    startStep.visited = visited;
+    startStep.current_node = startNode;
+    {
+        auto tmp = pq;
+        while (!tmp.empty()) { startStep.queue_or_stack.push_back(tmp.top().second); tmp.pop(); }
+    }
+    startStep.traversed_edges = traversedEdges;
+    startStep.description = "Set dist[" + std::to_string(startNode) + "] = 0, push to PQ";
+    startStep.pseudocode_line = 1;
+    steps.push_back(startStep);
+
+    while (!pq.empty()) {
+        int d = pq.top().first;
+        int node = pq.top().second;
+        pq.pop();
+
+        if (visited[node]) continue;
+        visited[node] = true;
+
+        GraphStep proc;
+        proc.visited = visited;
+        proc.current_node = node;
+        {
+            auto tmp = pq;
+            while (!tmp.empty()) { proc.queue_or_stack.push_back(tmp.top().second); tmp.pop(); }
+        }
+        proc.traversed_edges = traversedEdges;
+        proc.description = "Pop node " + std::to_string(node) + " (dist: " + std::to_string(d) + ")";
+        proc.pseudocode_line = 3;
+        steps.push_back(proc);
+
+        for (int neighbor : adj[node]) {
+            int weight = 1; // Unweighted graph defaults to weight 1
+            if (!visited[neighbor] && dist[node] + weight < dist[neighbor]) {
+                dist[neighbor] = dist[node] + weight;
+                pq.push({dist[neighbor], neighbor});
+                traversedEdges.push_back({node, neighbor});
+
+                GraphStep nb;
+                nb.visited = visited;
+                nb.current_node = node;
+                nb.edge_from = node;
+                nb.edge_to = neighbor;
+                {
+                    auto tmp = pq;
+                    while (!tmp.empty()) { nb.queue_or_stack.push_back(tmp.top().second); tmp.pop(); }
+                }
+                nb.traversed_edges = traversedEdges;
+                nb.description = "Relax edge to " + std::to_string(neighbor) + ", new dist=" + std::to_string(dist[neighbor]);
+                nb.pseudocode_line = 7;
+                steps.push_back(nb);
+            }
+        }
+    }
+
+    GraphStep fin;
+    fin.visited = visited;
+    fin.traversed_edges = traversedEdges;
+    fin.description = "Dijkstra's algorithm complete! Shortest paths found.";
+    fin.pseudocode_line = -1;
+    steps.push_back(fin);
+}
+
+std::string Dijkstra::getName() const { return "Dijkstra's Algorithm"; }
+
+std::string Dijkstra::getTheory() const {
+    return
+        "DIJKSTRA'S ALGORITHM\n"
+        "====================\n\n"
+        "WHAT IS IT?\n"
+        "  An algorithm for finding the shortest paths between nodes\n"
+        "  in a graph. It uses a PRIORITY QUEUE to greedily select\n"
+        "  the closest unvisited node.\n\n"
+        "HOW IT WORKS:\n"
+        "  1. Assign tentative distances to all nodes (infinity).\n"
+        "  2. Set the start node's distance to 0.\n"
+        "  3. While unvisited nodes exist:\n"
+        "     a. Select the unvisited node with the smallest distance.\n"
+        "     b. For each neighbor, calculate the tentative distance.\n"
+        "     c. If the new distance is smaller, update it.\n"
+        "     d. Mark the current node as visited.\n\n"
+        "PROPERTIES:\n"
+        "  - Guarantees shortest path in graphs with non-negative weights.\n"
+        "  - Fails if there are negative edge weights.\n\n"
+        "COMPLEXITY:\n"
+        "  Time:  O((V + E) log V) with a min-priority queue.\n"
+        "  Space: O(V) for distances and queue.\n";
+}
+
+std::vector<std::string> Dijkstra::getPseudoCode() const {
+    return {
+        "Dijkstra(start):",
+        "  dist[start] = 0, pq.push(start)",
+        "  while pq is not empty:",
+        "    node = pq.pop()",
+        "    if visited[node] continue",
+        "    visited[node] = true",
+        "    for neighbor in adj[node]:",
+        "      if dist[node] + weight < dist[neighbor]:",
+        "        dist[neighbor] = dist[node] + weight",
+        "        pq.push(neighbor)"
+    };
+}
+
+std::string Dijkstra::getComplexity() const {
+    return "Time: O((V+E)logV)  |  Space: O(V)";
+}

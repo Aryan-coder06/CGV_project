@@ -63,3 +63,11 @@ public:
     std::string getComplexity() const override;
 };
 
+class Dijkstra : public GraphAlgoBase {
+public:
+    void init() override;
+    std::string getTheory() const override;
+    std::string getName() const override;
+    std::vector<std::string> getPseudoCode() const override;
+    std::string getComplexity() const override;
+};

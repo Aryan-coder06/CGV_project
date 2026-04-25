@@ -103,8 +103,10 @@ int main() {
         ImGui::SetWindowFontScale(1.0f);
         ImGui::Separator();
         ImGui::Spacing();
+        
+        // CHANGED: Removed Arsh and Khatri's names from the description
         ImGui::TextWrapped(
-            "Launch Khatri's CGV module or Arsh's DSA module without changing "
+            "Launch the CGV module or the DSA module without changing "
             "their original internal UI and algorithm flow.");
         ImGui::Spacing();
 
@@ -113,19 +115,22 @@ int main() {
         if (ImGui::Button("1) Open Paint App", buttonSize)) {
             launchBinary("Paint_Module", status);
         }
-        ImGui::TextDisabled("Anshdeep branch paint module.");
+        // CHANGED: Removed Anshdeep's name
+        ImGui::TextDisabled("Interactive paint application module.");
         ImGui::Spacing();
 
         if (ImGui::Button("2) Open CGV Algorithm Visualizer", buttonSize)) {
             launchBinary("CGV_Module", status);
         }
-        ImGui::TextDisabled("Khatri branch visualizer.");
+        // CHANGED: Removed Khatri's name
+        ImGui::TextDisabled("Computer Graphics algorithm visualizer.");
         ImGui::Spacing();
 
         if (ImGui::Button("3) Open DSA Algorithm Visualizer", buttonSize)) {
             launchBinary("DSA_Visualizer", status);
         }
-        ImGui::TextDisabled("Arsh branch visualizer with original UI and algorithms.");
+        // CHANGED: Removed Arsh's name
+        ImGui::TextDisabled("DSA algorithm visualizer with original UI and algorithms.");
         ImGui::Spacing();
 
         ImGui::Separator();

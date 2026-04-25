@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project"
+CMAKE_SOURCE_DIR = /home/aditya-sirsalkar/Desktop/CGV_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build"
+CMAKE_BINARY_DIR = /home/aditya-sirsalkar/Desktop/CGV_project/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/aditya-sirsalkar/Desktop/CGV_project/build/CMakeFiles /home/aditya-sirsalkar/Desktop/CGV_project/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/parth/Desktop/D Drive/Sem 4/CGV/CGV_Project/build/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/aditya-sirsalkar/Desktop/CGV_project/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,24 +117,327 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named CGV_Project
+# Target rules for targets named CGV_Module
 
 # Build rule for target.
-CGV_Project: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CGV_Project
-.PHONY : CGV_Project
+CGV_Module: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CGV_Module
+.PHONY : CGV_Module
 
 # fast build rule for target.
-CGV_Project/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/build
-.PHONY : CGV_Project/fast
+CGV_Module/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/build
+.PHONY : CGV_Module/fast
+
+#=============================================================================
+# Target rules for targets named DSA_Visualizer
+
+# Build rule for target.
+DSA_Visualizer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 DSA_Visualizer
+.PHONY : DSA_Visualizer
+
+# fast build rule for target.
+DSA_Visualizer/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/build
+.PHONY : DSA_Visualizer/fast
+
+#=============================================================================
+# Target rules for targets named Paint_Module
+
+# Build rule for target.
+Paint_Module: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Paint_Module
+.PHONY : Paint_Module
+
+# fast build rule for target.
+Paint_Module/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/build
+.PHONY : Paint_Module/fast
+
+#=============================================================================
+# Target rules for targets named final_visualize
+
+# Build rule for target.
+final_visualize: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 final_visualize
+.PHONY : final_visualize
+
+# fast build rule for target.
+final_visualize/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/build
+.PHONY : final_visualize/fast
+
+modules/anshdeep/src/Algorithms.o: modules/anshdeep/src/Algorithms.cpp.o
+.PHONY : modules/anshdeep/src/Algorithms.o
+
+# target to build an object file
+modules/anshdeep/src/Algorithms.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/Algorithms.cpp.o
+.PHONY : modules/anshdeep/src/Algorithms.cpp.o
+
+modules/anshdeep/src/Algorithms.i: modules/anshdeep/src/Algorithms.cpp.i
+.PHONY : modules/anshdeep/src/Algorithms.i
+
+# target to preprocess a source file
+modules/anshdeep/src/Algorithms.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/Algorithms.cpp.i
+.PHONY : modules/anshdeep/src/Algorithms.cpp.i
+
+modules/anshdeep/src/Algorithms.s: modules/anshdeep/src/Algorithms.cpp.s
+.PHONY : modules/anshdeep/src/Algorithms.s
+
+# target to generate assembly for a file
+modules/anshdeep/src/Algorithms.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/Algorithms.cpp.s
+.PHONY : modules/anshdeep/src/Algorithms.cpp.s
+
+modules/anshdeep/src/Canvas.o: modules/anshdeep/src/Canvas.cpp.o
+.PHONY : modules/anshdeep/src/Canvas.o
+
+# target to build an object file
+modules/anshdeep/src/Canvas.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/Canvas.cpp.o
+.PHONY : modules/anshdeep/src/Canvas.cpp.o
+
+modules/anshdeep/src/Canvas.i: modules/anshdeep/src/Canvas.cpp.i
+.PHONY : modules/anshdeep/src/Canvas.i
+
+# target to preprocess a source file
+modules/anshdeep/src/Canvas.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/Canvas.cpp.i
+.PHONY : modules/anshdeep/src/Canvas.cpp.i
+
+modules/anshdeep/src/Canvas.s: modules/anshdeep/src/Canvas.cpp.s
+.PHONY : modules/anshdeep/src/Canvas.s
+
+# target to generate assembly for a file
+modules/anshdeep/src/Canvas.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/Canvas.cpp.s
+.PHONY : modules/anshdeep/src/Canvas.cpp.s
+
+modules/anshdeep/src/Renderer.o: modules/anshdeep/src/Renderer.cpp.o
+.PHONY : modules/anshdeep/src/Renderer.o
+
+# target to build an object file
+modules/anshdeep/src/Renderer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/Renderer.cpp.o
+.PHONY : modules/anshdeep/src/Renderer.cpp.o
+
+modules/anshdeep/src/Renderer.i: modules/anshdeep/src/Renderer.cpp.i
+.PHONY : modules/anshdeep/src/Renderer.i
+
+# target to preprocess a source file
+modules/anshdeep/src/Renderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/Renderer.cpp.i
+.PHONY : modules/anshdeep/src/Renderer.cpp.i
+
+modules/anshdeep/src/Renderer.s: modules/anshdeep/src/Renderer.cpp.s
+.PHONY : modules/anshdeep/src/Renderer.s
+
+# target to generate assembly for a file
+modules/anshdeep/src/Renderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/Renderer.cpp.s
+.PHONY : modules/anshdeep/src/Renderer.cpp.s
+
+modules/anshdeep/src/main.o: modules/anshdeep/src/main.cpp.o
+.PHONY : modules/anshdeep/src/main.o
+
+# target to build an object file
+modules/anshdeep/src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/main.cpp.o
+.PHONY : modules/anshdeep/src/main.cpp.o
+
+modules/anshdeep/src/main.i: modules/anshdeep/src/main.cpp.i
+.PHONY : modules/anshdeep/src/main.i
+
+# target to preprocess a source file
+modules/anshdeep/src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/main.cpp.i
+.PHONY : modules/anshdeep/src/main.cpp.i
+
+modules/anshdeep/src/main.s: modules/anshdeep/src/main.cpp.s
+.PHONY : modules/anshdeep/src/main.s
+
+# target to generate assembly for a file
+modules/anshdeep/src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/modules/anshdeep/src/main.cpp.s
+.PHONY : modules/anshdeep/src/main.cpp.s
+
+modules/arsh/src/DSA/GraphAlgos.o: modules/arsh/src/DSA/GraphAlgos.cpp.o
+.PHONY : modules/arsh/src/DSA/GraphAlgos.o
+
+# target to build an object file
+modules/arsh/src/DSA/GraphAlgos.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/DSA/GraphAlgos.cpp.o
+.PHONY : modules/arsh/src/DSA/GraphAlgos.cpp.o
+
+modules/arsh/src/DSA/GraphAlgos.i: modules/arsh/src/DSA/GraphAlgos.cpp.i
+.PHONY : modules/arsh/src/DSA/GraphAlgos.i
+
+# target to preprocess a source file
+modules/arsh/src/DSA/GraphAlgos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/DSA/GraphAlgos.cpp.i
+.PHONY : modules/arsh/src/DSA/GraphAlgos.cpp.i
+
+modules/arsh/src/DSA/GraphAlgos.s: modules/arsh/src/DSA/GraphAlgos.cpp.s
+.PHONY : modules/arsh/src/DSA/GraphAlgos.s
+
+# target to generate assembly for a file
+modules/arsh/src/DSA/GraphAlgos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/DSA/GraphAlgos.cpp.s
+.PHONY : modules/arsh/src/DSA/GraphAlgos.cpp.s
+
+modules/arsh/src/DSA/SearchAlgos.o: modules/arsh/src/DSA/SearchAlgos.cpp.o
+.PHONY : modules/arsh/src/DSA/SearchAlgos.o
+
+# target to build an object file
+modules/arsh/src/DSA/SearchAlgos.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/DSA/SearchAlgos.cpp.o
+.PHONY : modules/arsh/src/DSA/SearchAlgos.cpp.o
+
+modules/arsh/src/DSA/SearchAlgos.i: modules/arsh/src/DSA/SearchAlgos.cpp.i
+.PHONY : modules/arsh/src/DSA/SearchAlgos.i
+
+# target to preprocess a source file
+modules/arsh/src/DSA/SearchAlgos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/DSA/SearchAlgos.cpp.i
+.PHONY : modules/arsh/src/DSA/SearchAlgos.cpp.i
+
+modules/arsh/src/DSA/SearchAlgos.s: modules/arsh/src/DSA/SearchAlgos.cpp.s
+.PHONY : modules/arsh/src/DSA/SearchAlgos.s
+
+# target to generate assembly for a file
+modules/arsh/src/DSA/SearchAlgos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/DSA/SearchAlgos.cpp.s
+.PHONY : modules/arsh/src/DSA/SearchAlgos.cpp.s
+
+modules/arsh/src/DSA/SortAlgos.o: modules/arsh/src/DSA/SortAlgos.cpp.o
+.PHONY : modules/arsh/src/DSA/SortAlgos.o
+
+# target to build an object file
+modules/arsh/src/DSA/SortAlgos.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/DSA/SortAlgos.cpp.o
+.PHONY : modules/arsh/src/DSA/SortAlgos.cpp.o
+
+modules/arsh/src/DSA/SortAlgos.i: modules/arsh/src/DSA/SortAlgos.cpp.i
+.PHONY : modules/arsh/src/DSA/SortAlgos.i
+
+# target to preprocess a source file
+modules/arsh/src/DSA/SortAlgos.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/DSA/SortAlgos.cpp.i
+.PHONY : modules/arsh/src/DSA/SortAlgos.cpp.i
+
+modules/arsh/src/DSA/SortAlgos.s: modules/arsh/src/DSA/SortAlgos.cpp.s
+.PHONY : modules/arsh/src/DSA/SortAlgos.s
+
+# target to generate assembly for a file
+modules/arsh/src/DSA/SortAlgos.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/DSA/SortAlgos.cpp.s
+.PHONY : modules/arsh/src/DSA/SortAlgos.cpp.s
+
+modules/arsh/src/Visualizer/VisualizerEngine.o: modules/arsh/src/Visualizer/VisualizerEngine.cpp.o
+.PHONY : modules/arsh/src/Visualizer/VisualizerEngine.o
+
+# target to build an object file
+modules/arsh/src/Visualizer/VisualizerEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/Visualizer/VisualizerEngine.cpp.o
+.PHONY : modules/arsh/src/Visualizer/VisualizerEngine.cpp.o
+
+modules/arsh/src/Visualizer/VisualizerEngine.i: modules/arsh/src/Visualizer/VisualizerEngine.cpp.i
+.PHONY : modules/arsh/src/Visualizer/VisualizerEngine.i
+
+# target to preprocess a source file
+modules/arsh/src/Visualizer/VisualizerEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/Visualizer/VisualizerEngine.cpp.i
+.PHONY : modules/arsh/src/Visualizer/VisualizerEngine.cpp.i
+
+modules/arsh/src/Visualizer/VisualizerEngine.s: modules/arsh/src/Visualizer/VisualizerEngine.cpp.s
+.PHONY : modules/arsh/src/Visualizer/VisualizerEngine.s
+
+# target to generate assembly for a file
+modules/arsh/src/Visualizer/VisualizerEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/Visualizer/VisualizerEngine.cpp.s
+.PHONY : modules/arsh/src/Visualizer/VisualizerEngine.cpp.s
+
+modules/arsh/src/main.o: modules/arsh/src/main.cpp.o
+.PHONY : modules/arsh/src/main.o
+
+# target to build an object file
+modules/arsh/src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/main.cpp.o
+.PHONY : modules/arsh/src/main.cpp.o
+
+modules/arsh/src/main.i: modules/arsh/src/main.cpp.i
+.PHONY : modules/arsh/src/main.i
+
+# target to preprocess a source file
+modules/arsh/src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/main.cpp.i
+.PHONY : modules/arsh/src/main.cpp.i
+
+modules/arsh/src/main.s: modules/arsh/src/main.cpp.s
+.PHONY : modules/arsh/src/main.s
+
+# target to generate assembly for a file
+modules/arsh/src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/modules/arsh/src/main.cpp.s
+.PHONY : modules/arsh/src/main.cpp.s
+
+src/Algorithms.o: src/Algorithms.cpp.o
+.PHONY : src/Algorithms.o
+
+# target to build an object file
+src/Algorithms.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Algorithms.cpp.o
+.PHONY : src/Algorithms.cpp.o
+
+src/Algorithms.i: src/Algorithms.cpp.i
+.PHONY : src/Algorithms.i
+
+# target to preprocess a source file
+src/Algorithms.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Algorithms.cpp.i
+.PHONY : src/Algorithms.cpp.i
+
+src/Algorithms.s: src/Algorithms.cpp.s
+.PHONY : src/Algorithms.s
+
+# target to generate assembly for a file
+src/Algorithms.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Algorithms.cpp.s
+.PHONY : src/Algorithms.cpp.s
+
+src/Canvas.o: src/Canvas.cpp.o
+.PHONY : src/Canvas.o
+
+# target to build an object file
+src/Canvas.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Canvas.cpp.o
+.PHONY : src/Canvas.cpp.o
+
+src/Canvas.i: src/Canvas.cpp.i
+.PHONY : src/Canvas.i
+
+# target to preprocess a source file
+src/Canvas.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Canvas.cpp.i
+.PHONY : src/Canvas.cpp.i
+
+src/Canvas.s: src/Canvas.cpp.s
+.PHONY : src/Canvas.s
+
+# target to generate assembly for a file
+src/Canvas.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Canvas.cpp.s
+.PHONY : src/Canvas.cpp.s
 
 src/Core/Shader.o: src/Core/Shader.cpp.o
 .PHONY : src/Core/Shader.o
 
 # target to build an object file
 src/Core/Shader.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Core/Shader.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Core/Shader.cpp.o
 .PHONY : src/Core/Shader.cpp.o
 
 src/Core/Shader.i: src/Core/Shader.cpp.i
@@ -142,7 +445,7 @@ src/Core/Shader.i: src/Core/Shader.cpp.i
 
 # target to preprocess a source file
 src/Core/Shader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Core/Shader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Core/Shader.cpp.i
 .PHONY : src/Core/Shader.cpp.i
 
 src/Core/Shader.s: src/Core/Shader.cpp.s
@@ -150,7 +453,7 @@ src/Core/Shader.s: src/Core/Shader.cpp.s
 
 # target to generate assembly for a file
 src/Core/Shader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Core/Shader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Core/Shader.cpp.s
 .PHONY : src/Core/Shader.cpp.s
 
 src/Core/Window.o: src/Core/Window.cpp.o
@@ -158,7 +461,7 @@ src/Core/Window.o: src/Core/Window.cpp.o
 
 # target to build an object file
 src/Core/Window.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Core/Window.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Core/Window.cpp.o
 .PHONY : src/Core/Window.cpp.o
 
 src/Core/Window.i: src/Core/Window.cpp.i
@@ -166,7 +469,7 @@ src/Core/Window.i: src/Core/Window.cpp.i
 
 # target to preprocess a source file
 src/Core/Window.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Core/Window.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Core/Window.cpp.i
 .PHONY : src/Core/Window.cpp.i
 
 src/Core/Window.s: src/Core/Window.cpp.s
@@ -174,7 +477,7 @@ src/Core/Window.s: src/Core/Window.cpp.s
 
 # target to generate assembly for a file
 src/Core/Window.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Core/Window.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Core/Window.cpp.s
 .PHONY : src/Core/Window.cpp.s
 
 src/GraphApp/GraphGrid.o: src/GraphApp/GraphGrid.cpp.o
@@ -182,7 +485,7 @@ src/GraphApp/GraphGrid.o: src/GraphApp/GraphGrid.cpp.o
 
 # target to build an object file
 src/GraphApp/GraphGrid.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/GraphApp/GraphGrid.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/GraphApp/GraphGrid.cpp.o
 .PHONY : src/GraphApp/GraphGrid.cpp.o
 
 src/GraphApp/GraphGrid.i: src/GraphApp/GraphGrid.cpp.i
@@ -190,7 +493,7 @@ src/GraphApp/GraphGrid.i: src/GraphApp/GraphGrid.cpp.i
 
 # target to preprocess a source file
 src/GraphApp/GraphGrid.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/GraphApp/GraphGrid.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/GraphApp/GraphGrid.cpp.i
 .PHONY : src/GraphApp/GraphGrid.cpp.i
 
 src/GraphApp/GraphGrid.s: src/GraphApp/GraphGrid.cpp.s
@@ -198,7 +501,7 @@ src/GraphApp/GraphGrid.s: src/GraphApp/GraphGrid.cpp.s
 
 # target to generate assembly for a file
 src/GraphApp/GraphGrid.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/GraphApp/GraphGrid.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/GraphApp/GraphGrid.cpp.s
 .PHONY : src/GraphApp/GraphGrid.cpp.s
 
 src/GraphApp/Pathfinding.o: src/GraphApp/Pathfinding.cpp.o
@@ -206,7 +509,7 @@ src/GraphApp/Pathfinding.o: src/GraphApp/Pathfinding.cpp.o
 
 # target to build an object file
 src/GraphApp/Pathfinding.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/GraphApp/Pathfinding.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/GraphApp/Pathfinding.cpp.o
 .PHONY : src/GraphApp/Pathfinding.cpp.o
 
 src/GraphApp/Pathfinding.i: src/GraphApp/Pathfinding.cpp.i
@@ -214,7 +517,7 @@ src/GraphApp/Pathfinding.i: src/GraphApp/Pathfinding.cpp.i
 
 # target to preprocess a source file
 src/GraphApp/Pathfinding.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/GraphApp/Pathfinding.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/GraphApp/Pathfinding.cpp.i
 .PHONY : src/GraphApp/Pathfinding.cpp.i
 
 src/GraphApp/Pathfinding.s: src/GraphApp/Pathfinding.cpp.s
@@ -222,15 +525,39 @@ src/GraphApp/Pathfinding.s: src/GraphApp/Pathfinding.cpp.s
 
 # target to generate assembly for a file
 src/GraphApp/Pathfinding.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/GraphApp/Pathfinding.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/GraphApp/Pathfinding.cpp.s
 .PHONY : src/GraphApp/Pathfinding.cpp.s
+
+src/LauncherMain.o: src/LauncherMain.cpp.o
+.PHONY : src/LauncherMain.o
+
+# target to build an object file
+src/LauncherMain.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/src/LauncherMain.cpp.o
+.PHONY : src/LauncherMain.cpp.o
+
+src/LauncherMain.i: src/LauncherMain.cpp.i
+.PHONY : src/LauncherMain.i
+
+# target to preprocess a source file
+src/LauncherMain.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/src/LauncherMain.cpp.i
+.PHONY : src/LauncherMain.cpp.i
+
+src/LauncherMain.s: src/LauncherMain.cpp.s
+.PHONY : src/LauncherMain.s
+
+# target to generate assembly for a file
+src/LauncherMain.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/src/LauncherMain.cpp.s
+.PHONY : src/LauncherMain.cpp.s
 
 src/PaintApp/Canvas.o: src/PaintApp/Canvas.cpp.o
 .PHONY : src/PaintApp/Canvas.o
 
 # target to build an object file
 src/PaintApp/Canvas.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/PaintApp/Canvas.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/PaintApp/Canvas.cpp.o
 .PHONY : src/PaintApp/Canvas.cpp.o
 
 src/PaintApp/Canvas.i: src/PaintApp/Canvas.cpp.i
@@ -238,7 +565,7 @@ src/PaintApp/Canvas.i: src/PaintApp/Canvas.cpp.i
 
 # target to preprocess a source file
 src/PaintApp/Canvas.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/PaintApp/Canvas.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/PaintApp/Canvas.cpp.i
 .PHONY : src/PaintApp/Canvas.cpp.i
 
 src/PaintApp/Canvas.s: src/PaintApp/Canvas.cpp.s
@@ -246,7 +573,7 @@ src/PaintApp/Canvas.s: src/PaintApp/Canvas.cpp.s
 
 # target to generate assembly for a file
 src/PaintApp/Canvas.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/PaintApp/Canvas.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/PaintApp/Canvas.cpp.s
 .PHONY : src/PaintApp/Canvas.cpp.s
 
 src/PaintApp/PaintTools.o: src/PaintApp/PaintTools.cpp.o
@@ -254,7 +581,7 @@ src/PaintApp/PaintTools.o: src/PaintApp/PaintTools.cpp.o
 
 # target to build an object file
 src/PaintApp/PaintTools.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/PaintApp/PaintTools.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/PaintApp/PaintTools.cpp.o
 .PHONY : src/PaintApp/PaintTools.cpp.o
 
 src/PaintApp/PaintTools.i: src/PaintApp/PaintTools.cpp.i
@@ -262,7 +589,7 @@ src/PaintApp/PaintTools.i: src/PaintApp/PaintTools.cpp.i
 
 # target to preprocess a source file
 src/PaintApp/PaintTools.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/PaintApp/PaintTools.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/PaintApp/PaintTools.cpp.i
 .PHONY : src/PaintApp/PaintTools.cpp.i
 
 src/PaintApp/PaintTools.s: src/PaintApp/PaintTools.cpp.s
@@ -270,15 +597,39 @@ src/PaintApp/PaintTools.s: src/PaintApp/PaintTools.cpp.s
 
 # target to generate assembly for a file
 src/PaintApp/PaintTools.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/PaintApp/PaintTools.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/PaintApp/PaintTools.cpp.s
 .PHONY : src/PaintApp/PaintTools.cpp.s
+
+src/Renderer.o: src/Renderer.cpp.o
+.PHONY : src/Renderer.o
+
+# target to build an object file
+src/Renderer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Renderer.cpp.o
+.PHONY : src/Renderer.cpp.o
+
+src/Renderer.i: src/Renderer.cpp.i
+.PHONY : src/Renderer.i
+
+# target to preprocess a source file
+src/Renderer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Renderer.cpp.i
+.PHONY : src/Renderer.cpp.i
+
+src/Renderer.s: src/Renderer.cpp.s
+.PHONY : src/Renderer.s
+
+# target to generate assembly for a file
+src/Renderer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Renderer.cpp.s
+.PHONY : src/Renderer.cpp.s
 
 src/Visualizer/CircleAlgos.o: src/Visualizer/CircleAlgos.cpp.o
 .PHONY : src/Visualizer/CircleAlgos.o
 
 # target to build an object file
 src/Visualizer/CircleAlgos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/CircleAlgos.cpp.o
 .PHONY : src/Visualizer/CircleAlgos.cpp.o
 
 src/Visualizer/CircleAlgos.i: src/Visualizer/CircleAlgos.cpp.i
@@ -286,7 +637,7 @@ src/Visualizer/CircleAlgos.i: src/Visualizer/CircleAlgos.cpp.i
 
 # target to preprocess a source file
 src/Visualizer/CircleAlgos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/CircleAlgos.cpp.i
 .PHONY : src/Visualizer/CircleAlgos.cpp.i
 
 src/Visualizer/CircleAlgos.s: src/Visualizer/CircleAlgos.cpp.s
@@ -294,7 +645,7 @@ src/Visualizer/CircleAlgos.s: src/Visualizer/CircleAlgos.cpp.s
 
 # target to generate assembly for a file
 src/Visualizer/CircleAlgos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/CircleAlgos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/CircleAlgos.cpp.s
 .PHONY : src/Visualizer/CircleAlgos.cpp.s
 
 src/Visualizer/ClipAlgos.o: src/Visualizer/ClipAlgos.cpp.o
@@ -302,7 +653,7 @@ src/Visualizer/ClipAlgos.o: src/Visualizer/ClipAlgos.cpp.o
 
 # target to build an object file
 src/Visualizer/ClipAlgos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/ClipAlgos.cpp.o
 .PHONY : src/Visualizer/ClipAlgos.cpp.o
 
 src/Visualizer/ClipAlgos.i: src/Visualizer/ClipAlgos.cpp.i
@@ -310,7 +661,7 @@ src/Visualizer/ClipAlgos.i: src/Visualizer/ClipAlgos.cpp.i
 
 # target to preprocess a source file
 src/Visualizer/ClipAlgos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/ClipAlgos.cpp.i
 .PHONY : src/Visualizer/ClipAlgos.cpp.i
 
 src/Visualizer/ClipAlgos.s: src/Visualizer/ClipAlgos.cpp.s
@@ -318,7 +669,7 @@ src/Visualizer/ClipAlgos.s: src/Visualizer/ClipAlgos.cpp.s
 
 # target to generate assembly for a file
 src/Visualizer/ClipAlgos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/ClipAlgos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/ClipAlgos.cpp.s
 .PHONY : src/Visualizer/ClipAlgos.cpp.s
 
 src/Visualizer/EllipseAlgos.o: src/Visualizer/EllipseAlgos.cpp.o
@@ -326,7 +677,7 @@ src/Visualizer/EllipseAlgos.o: src/Visualizer/EllipseAlgos.cpp.o
 
 # target to build an object file
 src/Visualizer/EllipseAlgos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/EllipseAlgos.cpp.o
 .PHONY : src/Visualizer/EllipseAlgos.cpp.o
 
 src/Visualizer/EllipseAlgos.i: src/Visualizer/EllipseAlgos.cpp.i
@@ -334,7 +685,7 @@ src/Visualizer/EllipseAlgos.i: src/Visualizer/EllipseAlgos.cpp.i
 
 # target to preprocess a source file
 src/Visualizer/EllipseAlgos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/EllipseAlgos.cpp.i
 .PHONY : src/Visualizer/EllipseAlgos.cpp.i
 
 src/Visualizer/EllipseAlgos.s: src/Visualizer/EllipseAlgos.cpp.s
@@ -342,7 +693,7 @@ src/Visualizer/EllipseAlgos.s: src/Visualizer/EllipseAlgos.cpp.s
 
 # target to generate assembly for a file
 src/Visualizer/EllipseAlgos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/EllipseAlgos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/EllipseAlgos.cpp.s
 .PHONY : src/Visualizer/EllipseAlgos.cpp.s
 
 src/Visualizer/FillAlgos.o: src/Visualizer/FillAlgos.cpp.o
@@ -350,7 +701,7 @@ src/Visualizer/FillAlgos.o: src/Visualizer/FillAlgos.cpp.o
 
 # target to build an object file
 src/Visualizer/FillAlgos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/FillAlgos.cpp.o
 .PHONY : src/Visualizer/FillAlgos.cpp.o
 
 src/Visualizer/FillAlgos.i: src/Visualizer/FillAlgos.cpp.i
@@ -358,7 +709,7 @@ src/Visualizer/FillAlgos.i: src/Visualizer/FillAlgos.cpp.i
 
 # target to preprocess a source file
 src/Visualizer/FillAlgos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/FillAlgos.cpp.i
 .PHONY : src/Visualizer/FillAlgos.cpp.i
 
 src/Visualizer/FillAlgos.s: src/Visualizer/FillAlgos.cpp.s
@@ -366,7 +717,7 @@ src/Visualizer/FillAlgos.s: src/Visualizer/FillAlgos.cpp.s
 
 # target to generate assembly for a file
 src/Visualizer/FillAlgos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/FillAlgos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/FillAlgos.cpp.s
 .PHONY : src/Visualizer/FillAlgos.cpp.s
 
 src/Visualizer/LineAlgos.o: src/Visualizer/LineAlgos.cpp.o
@@ -374,7 +725,7 @@ src/Visualizer/LineAlgos.o: src/Visualizer/LineAlgos.cpp.o
 
 # target to build an object file
 src/Visualizer/LineAlgos.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/LineAlgos.cpp.o
 .PHONY : src/Visualizer/LineAlgos.cpp.o
 
 src/Visualizer/LineAlgos.i: src/Visualizer/LineAlgos.cpp.i
@@ -382,7 +733,7 @@ src/Visualizer/LineAlgos.i: src/Visualizer/LineAlgos.cpp.i
 
 # target to preprocess a source file
 src/Visualizer/LineAlgos.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/LineAlgos.cpp.i
 .PHONY : src/Visualizer/LineAlgos.cpp.i
 
 src/Visualizer/LineAlgos.s: src/Visualizer/LineAlgos.cpp.s
@@ -390,7 +741,7 @@ src/Visualizer/LineAlgos.s: src/Visualizer/LineAlgos.cpp.s
 
 # target to generate assembly for a file
 src/Visualizer/LineAlgos.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/LineAlgos.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/LineAlgos.cpp.s
 .PHONY : src/Visualizer/LineAlgos.cpp.s
 
 src/Visualizer/VisualizerEngine.o: src/Visualizer/VisualizerEngine.cpp.o
@@ -398,7 +749,7 @@ src/Visualizer/VisualizerEngine.o: src/Visualizer/VisualizerEngine.cpp.o
 
 # target to build an object file
 src/Visualizer/VisualizerEngine.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/VisualizerEngine.cpp.o
 .PHONY : src/Visualizer/VisualizerEngine.cpp.o
 
 src/Visualizer/VisualizerEngine.i: src/Visualizer/VisualizerEngine.cpp.i
@@ -406,7 +757,7 @@ src/Visualizer/VisualizerEngine.i: src/Visualizer/VisualizerEngine.cpp.i
 
 # target to preprocess a source file
 src/Visualizer/VisualizerEngine.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/VisualizerEngine.cpp.i
 .PHONY : src/Visualizer/VisualizerEngine.cpp.i
 
 src/Visualizer/VisualizerEngine.s: src/Visualizer/VisualizerEngine.cpp.s
@@ -414,7 +765,7 @@ src/Visualizer/VisualizerEngine.s: src/Visualizer/VisualizerEngine.cpp.s
 
 # target to generate assembly for a file
 src/Visualizer/VisualizerEngine.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/Visualizer/VisualizerEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/Visualizer/VisualizerEngine.cpp.s
 .PHONY : src/Visualizer/VisualizerEngine.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -422,7 +773,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -430,7 +781,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -438,7 +789,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 third_party/imgui/backends/imgui_impl_glfw.o: third_party/imgui/backends/imgui_impl_glfw.cpp.o
@@ -446,7 +797,10 @@ third_party/imgui/backends/imgui_impl_glfw.o: third_party/imgui/backends/imgui_i
 
 # target to build an object file
 third_party/imgui/backends/imgui_impl_glfw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o
 .PHONY : third_party/imgui/backends/imgui_impl_glfw.cpp.o
 
 third_party/imgui/backends/imgui_impl_glfw.i: third_party/imgui/backends/imgui_impl_glfw.cpp.i
@@ -454,7 +808,10 @@ third_party/imgui/backends/imgui_impl_glfw.i: third_party/imgui/backends/imgui_i
 
 # target to preprocess a source file
 third_party/imgui/backends/imgui_impl_glfw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.i
 .PHONY : third_party/imgui/backends/imgui_impl_glfw.cpp.i
 
 third_party/imgui/backends/imgui_impl_glfw.s: third_party/imgui/backends/imgui_impl_glfw.cpp.s
@@ -462,7 +819,10 @@ third_party/imgui/backends/imgui_impl_glfw.s: third_party/imgui/backends/imgui_i
 
 # target to generate assembly for a file
 third_party/imgui/backends/imgui_impl_glfw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.s
 .PHONY : third_party/imgui/backends/imgui_impl_glfw.cpp.s
 
 third_party/imgui/backends/imgui_impl_opengl3.o: third_party/imgui/backends/imgui_impl_opengl3.cpp.o
@@ -470,7 +830,10 @@ third_party/imgui/backends/imgui_impl_opengl3.o: third_party/imgui/backends/imgu
 
 # target to build an object file
 third_party/imgui/backends/imgui_impl_opengl3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o
 .PHONY : third_party/imgui/backends/imgui_impl_opengl3.cpp.o
 
 third_party/imgui/backends/imgui_impl_opengl3.i: third_party/imgui/backends/imgui_impl_opengl3.cpp.i
@@ -478,7 +841,10 @@ third_party/imgui/backends/imgui_impl_opengl3.i: third_party/imgui/backends/imgu
 
 # target to preprocess a source file
 third_party/imgui/backends/imgui_impl_opengl3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.i
 .PHONY : third_party/imgui/backends/imgui_impl_opengl3.cpp.i
 
 third_party/imgui/backends/imgui_impl_opengl3.s: third_party/imgui/backends/imgui_impl_opengl3.cpp.s
@@ -486,7 +852,10 @@ third_party/imgui/backends/imgui_impl_opengl3.s: third_party/imgui/backends/imgu
 
 # target to generate assembly for a file
 third_party/imgui/backends/imgui_impl_opengl3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.s
 .PHONY : third_party/imgui/backends/imgui_impl_opengl3.cpp.s
 
 third_party/imgui/imgui.o: third_party/imgui/imgui.cpp.o
@@ -494,7 +863,10 @@ third_party/imgui/imgui.o: third_party/imgui/imgui.cpp.o
 
 # target to build an object file
 third_party/imgui/imgui.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui.cpp.o
 .PHONY : third_party/imgui/imgui.cpp.o
 
 third_party/imgui/imgui.i: third_party/imgui/imgui.cpp.i
@@ -502,7 +874,10 @@ third_party/imgui/imgui.i: third_party/imgui/imgui.cpp.i
 
 # target to preprocess a source file
 third_party/imgui/imgui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui.cpp.i
 .PHONY : third_party/imgui/imgui.cpp.i
 
 third_party/imgui/imgui.s: third_party/imgui/imgui.cpp.s
@@ -510,7 +885,10 @@ third_party/imgui/imgui.s: third_party/imgui/imgui.cpp.s
 
 # target to generate assembly for a file
 third_party/imgui/imgui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui.cpp.s
 .PHONY : third_party/imgui/imgui.cpp.s
 
 third_party/imgui/imgui_demo.o: third_party/imgui/imgui_demo.cpp.o
@@ -518,7 +896,10 @@ third_party/imgui/imgui_demo.o: third_party/imgui/imgui_demo.cpp.o
 
 # target to build an object file
 third_party/imgui/imgui_demo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_demo.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_demo.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_demo.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_demo.cpp.o
 .PHONY : third_party/imgui/imgui_demo.cpp.o
 
 third_party/imgui/imgui_demo.i: third_party/imgui/imgui_demo.cpp.i
@@ -526,7 +907,10 @@ third_party/imgui/imgui_demo.i: third_party/imgui/imgui_demo.cpp.i
 
 # target to preprocess a source file
 third_party/imgui/imgui_demo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_demo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_demo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_demo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_demo.cpp.i
 .PHONY : third_party/imgui/imgui_demo.cpp.i
 
 third_party/imgui/imgui_demo.s: third_party/imgui/imgui_demo.cpp.s
@@ -534,7 +918,10 @@ third_party/imgui/imgui_demo.s: third_party/imgui/imgui_demo.cpp.s
 
 # target to generate assembly for a file
 third_party/imgui/imgui_demo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_demo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_demo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_demo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_demo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_demo.cpp.s
 .PHONY : third_party/imgui/imgui_demo.cpp.s
 
 third_party/imgui/imgui_draw.o: third_party/imgui/imgui_draw.cpp.o
@@ -542,7 +929,10 @@ third_party/imgui/imgui_draw.o: third_party/imgui/imgui_draw.cpp.o
 
 # target to build an object file
 third_party/imgui/imgui_draw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_draw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_draw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_draw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_draw.cpp.o
 .PHONY : third_party/imgui/imgui_draw.cpp.o
 
 third_party/imgui/imgui_draw.i: third_party/imgui/imgui_draw.cpp.i
@@ -550,7 +940,10 @@ third_party/imgui/imgui_draw.i: third_party/imgui/imgui_draw.cpp.i
 
 # target to preprocess a source file
 third_party/imgui/imgui_draw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_draw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_draw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_draw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_draw.cpp.i
 .PHONY : third_party/imgui/imgui_draw.cpp.i
 
 third_party/imgui/imgui_draw.s: third_party/imgui/imgui_draw.cpp.s
@@ -558,7 +951,10 @@ third_party/imgui/imgui_draw.s: third_party/imgui/imgui_draw.cpp.s
 
 # target to generate assembly for a file
 third_party/imgui/imgui_draw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_draw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_draw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_draw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_draw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_draw.cpp.s
 .PHONY : third_party/imgui/imgui_draw.cpp.s
 
 third_party/imgui/imgui_tables.o: third_party/imgui/imgui_tables.cpp.o
@@ -566,7 +962,10 @@ third_party/imgui/imgui_tables.o: third_party/imgui/imgui_tables.cpp.o
 
 # target to build an object file
 third_party/imgui/imgui_tables.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_tables.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_tables.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_tables.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_tables.cpp.o
 .PHONY : third_party/imgui/imgui_tables.cpp.o
 
 third_party/imgui/imgui_tables.i: third_party/imgui/imgui_tables.cpp.i
@@ -574,7 +973,10 @@ third_party/imgui/imgui_tables.i: third_party/imgui/imgui_tables.cpp.i
 
 # target to preprocess a source file
 third_party/imgui/imgui_tables.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_tables.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_tables.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_tables.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_tables.cpp.i
 .PHONY : third_party/imgui/imgui_tables.cpp.i
 
 third_party/imgui/imgui_tables.s: third_party/imgui/imgui_tables.cpp.s
@@ -582,7 +984,10 @@ third_party/imgui/imgui_tables.s: third_party/imgui/imgui_tables.cpp.s
 
 # target to generate assembly for a file
 third_party/imgui/imgui_tables.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_tables.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_tables.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_tables.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_tables.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_tables.cpp.s
 .PHONY : third_party/imgui/imgui_tables.cpp.s
 
 third_party/imgui/imgui_widgets.o: third_party/imgui/imgui_widgets.cpp.o
@@ -590,7 +995,10 @@ third_party/imgui/imgui_widgets.o: third_party/imgui/imgui_widgets.cpp.o
 
 # target to build an object file
 third_party/imgui/imgui_widgets.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_widgets.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_widgets.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_widgets.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_widgets.cpp.o
 .PHONY : third_party/imgui/imgui_widgets.cpp.o
 
 third_party/imgui/imgui_widgets.i: third_party/imgui/imgui_widgets.cpp.i
@@ -598,7 +1006,10 @@ third_party/imgui/imgui_widgets.i: third_party/imgui/imgui_widgets.cpp.i
 
 # target to preprocess a source file
 third_party/imgui/imgui_widgets.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_widgets.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_widgets.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_widgets.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_widgets.cpp.i
 .PHONY : third_party/imgui/imgui_widgets.cpp.i
 
 third_party/imgui/imgui_widgets.s: third_party/imgui/imgui_widgets.cpp.s
@@ -606,7 +1017,10 @@ third_party/imgui/imgui_widgets.s: third_party/imgui/imgui_widgets.cpp.s
 
 # target to generate assembly for a file
 third_party/imgui/imgui_widgets.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Project.dir/build.make CMakeFiles/CGV_Project.dir/third_party/imgui/imgui_widgets.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CGV_Module.dir/build.make CMakeFiles/CGV_Module.dir/third_party/imgui/imgui_widgets.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DSA_Visualizer.dir/build.make CMakeFiles/DSA_Visualizer.dir/third_party/imgui/imgui_widgets.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Paint_Module.dir/build.make CMakeFiles/Paint_Module.dir/third_party/imgui/imgui_widgets.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/final_visualize.dir/build.make CMakeFiles/final_visualize.dir/third_party/imgui/imgui_widgets.cpp.s
 .PHONY : third_party/imgui/imgui_widgets.cpp.s
 
 # Help Target
@@ -617,7 +1031,43 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... CGV_Project"
+	@echo "... CGV_Module"
+	@echo "... DSA_Visualizer"
+	@echo "... Paint_Module"
+	@echo "... final_visualize"
+	@echo "... modules/anshdeep/src/Algorithms.o"
+	@echo "... modules/anshdeep/src/Algorithms.i"
+	@echo "... modules/anshdeep/src/Algorithms.s"
+	@echo "... modules/anshdeep/src/Canvas.o"
+	@echo "... modules/anshdeep/src/Canvas.i"
+	@echo "... modules/anshdeep/src/Canvas.s"
+	@echo "... modules/anshdeep/src/Renderer.o"
+	@echo "... modules/anshdeep/src/Renderer.i"
+	@echo "... modules/anshdeep/src/Renderer.s"
+	@echo "... modules/anshdeep/src/main.o"
+	@echo "... modules/anshdeep/src/main.i"
+	@echo "... modules/anshdeep/src/main.s"
+	@echo "... modules/arsh/src/DSA/GraphAlgos.o"
+	@echo "... modules/arsh/src/DSA/GraphAlgos.i"
+	@echo "... modules/arsh/src/DSA/GraphAlgos.s"
+	@echo "... modules/arsh/src/DSA/SearchAlgos.o"
+	@echo "... modules/arsh/src/DSA/SearchAlgos.i"
+	@echo "... modules/arsh/src/DSA/SearchAlgos.s"
+	@echo "... modules/arsh/src/DSA/SortAlgos.o"
+	@echo "... modules/arsh/src/DSA/SortAlgos.i"
+	@echo "... modules/arsh/src/DSA/SortAlgos.s"
+	@echo "... modules/arsh/src/Visualizer/VisualizerEngine.o"
+	@echo "... modules/arsh/src/Visualizer/VisualizerEngine.i"
+	@echo "... modules/arsh/src/Visualizer/VisualizerEngine.s"
+	@echo "... modules/arsh/src/main.o"
+	@echo "... modules/arsh/src/main.i"
+	@echo "... modules/arsh/src/main.s"
+	@echo "... src/Algorithms.o"
+	@echo "... src/Algorithms.i"
+	@echo "... src/Algorithms.s"
+	@echo "... src/Canvas.o"
+	@echo "... src/Canvas.i"
+	@echo "... src/Canvas.s"
 	@echo "... src/Core/Shader.o"
 	@echo "... src/Core/Shader.i"
 	@echo "... src/Core/Shader.s"
@@ -630,12 +1080,18 @@ help:
 	@echo "... src/GraphApp/Pathfinding.o"
 	@echo "... src/GraphApp/Pathfinding.i"
 	@echo "... src/GraphApp/Pathfinding.s"
+	@echo "... src/LauncherMain.o"
+	@echo "... src/LauncherMain.i"
+	@echo "... src/LauncherMain.s"
 	@echo "... src/PaintApp/Canvas.o"
 	@echo "... src/PaintApp/Canvas.i"
 	@echo "... src/PaintApp/Canvas.s"
 	@echo "... src/PaintApp/PaintTools.o"
 	@echo "... src/PaintApp/PaintTools.i"
 	@echo "... src/PaintApp/PaintTools.s"
+	@echo "... src/Renderer.o"
+	@echo "... src/Renderer.i"
+	@echo "... src/Renderer.s"
 	@echo "... src/Visualizer/CircleAlgos.o"
 	@echo "... src/Visualizer/CircleAlgos.i"
 	@echo "... src/Visualizer/CircleAlgos.s"
