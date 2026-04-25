@@ -11,41 +11,35 @@
 // ============================================================
 class MidpointCircle : public IAlgorithm {
 private:
-    // Stored inputs (for reset / display)
-    int cx, cy, r;
+  int cx, cy, r;
 
-    // Running state (first-octant scan)
-    int x_, y_, p_;         // current x, current y, decision param
-    int currentStep, totalSteps;
+  int x_, y_, p_;
+  int currentStep, totalSteps;
 
-    std::vector<Pixel> path;
-    AlgoState lastState;
+  std::vector<Pixel> path;
+  AlgoState lastState;
 
-    // Plot all 8 symmetric points (handles cx/cy offset).
-    // Returns a one-line string listing the 8 pixels (for calc panel).
-    std::string plotOctants(int x, int y);
+  std::string plotOctants(int x, int y);
 
-    // Precompute totalSteps by dry-running the loop (no pixels stored).
-    void computeTotalSteps();
+  void computeTotalSteps();
 
 public:
-    MidpointCircle();
+  MidpointCircle();
 
-    // Use x1=cx, y1=cy, x2=r (y2 is ignored)
-    void init(int x1, int y1, int x2, int y2) override;
-    void step()            override;   // records full calculation
-    void stepK(int k)      override;   // silent
-    void runToCompletion() override;   // silent
-    void reset()           override;
+  void init(int x1, int y1, int x2, int y2) override;
+  void step() override;
+  void stepK(int k) override;
+  void runToCompletion() override;
+  void reset() override;
 
-    bool                     isFinished()           const override;
-    std::vector<Pixel>       getHighlightedPixels() const override;
-    AlgoState                getCurrentState()      const override;
-    std::vector<std::string> getInitInfo()          const override;
-    std::vector<std::string> getCurrentVars()       const override;
-    std::string              getTheory()            const override;
-    std::string              getName()              const override;
-    bool                     isCircleMode()         const override { return true; }
+  bool isFinished() const override;
+  std::vector<Pixel> getHighlightedPixels() const override;
+  AlgoState getCurrentState() const override;
+  std::vector<std::string> getInitInfo() const override;
+  std::vector<std::string> getCurrentVars() const override;
+  std::string getTheory() const override;
+  std::string getName() const override;
+  bool isCircleMode() const override { return true; }
 };
 
 // ============================================================
@@ -57,37 +51,35 @@ public:
 // ============================================================
 class BresenhamCircle : public IAlgorithm {
 private:
-    int cx, cy, r;
+  int cx, cy, r;
 
-    // Running state
-    int x_, y_, d_;           // current x, current y, decision param
-    int currentStep, totalSteps;
+  // Running state
+  int x_, y_, d_;
+  int currentStep, totalSteps;
 
-    std::vector<Pixel> path;
-    AlgoState lastState;
+  std::vector<Pixel> path;
+  AlgoState lastState;
 
-    // Plot all 8 symmetric pixels (dedup) and return one-line summary
-    std::string plotOctants(int x, int y);
+  std::string plotOctants(int x, int y);
 
-    // Dry-run to count steps
-    void computeTotalSteps();
+  void computeTotalSteps();
 
 public:
-    BresenhamCircle();
+  BresenhamCircle();
 
-    // Use x1=cx, y1=cy, x2=r (y2 ignored)
-    void init(int x1, int y1, int x2, int y2) override;
-    void step()            override;
-    void stepK(int k)      override;
-    void runToCompletion() override;
-    void reset()           override;
+  // Use x1=cx, y1=cy, x2=r (y2 ignored)
+  void init(int x1, int y1, int x2, int y2) override;
+  void step() override;
+  void stepK(int k) override;
+  void runToCompletion() override;
+  void reset() override;
 
-    bool                     isFinished()           const override;
-    std::vector<Pixel>       getHighlightedPixels() const override;
-    AlgoState                getCurrentState()      const override;
-    std::vector<std::string> getInitInfo()          const override;
-    std::vector<std::string> getCurrentVars()       const override;
-    std::string              getTheory()            const override;
-    std::string              getName()              const override;
-    bool                     isCircleMode()         const override { return true; }
+  bool isFinished() const override;
+  std::vector<Pixel> getHighlightedPixels() const override;
+  AlgoState getCurrentState() const override;
+  std::vector<std::string> getInitInfo() const override;
+  std::vector<std::string> getCurrentVars() const override;
+  std::string getTheory() const override;
+  std::string getName() const override;
+  bool isCircleMode() const override { return true; }
 };

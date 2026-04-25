@@ -36,7 +36,10 @@ set(CGV_MODULE_SOURCES
     src/Visualizer/EllipseAlgos.cpp
     src/Visualizer/FillAlgos.cpp
     src/Visualizer/LineAlgos.cpp
+    src/Visualizer/SHAlgos.cpp
+    src/Visualizer/TransformAlgos.cpp
     src/Visualizer/VisualizerEngine.cpp
+    src/Visualizer/WindowViewportAlgo.cpp
 )
 
 set(ARSH_MODULE_SOURCES
