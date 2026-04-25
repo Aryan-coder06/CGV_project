@@ -1,0 +1,26 @@
+# Build artifacts
+build/
+bin/
+obj/
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Dear ImGui local config
+imgui.ini
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.clangd/
+.cache/
+
+# OS specific
+.DS_Store
+Thumbs.db

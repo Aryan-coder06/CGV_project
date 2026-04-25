@@ -1,6 +1,0 @@
-/home/aditya-sirsalkar/Desktop/CGV_project/build/CMakeFiles/CGV_Module.dir
-/home/aditya-sirsalkar/Desktop/CGV_project/build/CMakeFiles/DSA_Visualizer.dir
-/home/aditya-sirsalkar/Desktop/CGV_project/build/CMakeFiles/Paint_Module.dir
-/home/aditya-sirsalkar/Desktop/CGV_project/build/CMakeFiles/final_visualize.dir
-/home/aditya-sirsalkar/Desktop/CGV_project/build/CMakeFiles/edit_cache.dir
-/home/aditya-sirsalkar/Desktop/CGV_project/build/CMakeFiles/rebuild_cache.dir

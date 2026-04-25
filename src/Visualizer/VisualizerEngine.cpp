@@ -83,6 +83,11 @@ void VisualizerEngine::renderUI() {
   ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.4f, 0.9f, 1.0f, 1.0f));
   ImGui::TextUnformatted("SECTION 2 — ALGORITHM VISUALIZER");
   ImGui::PopStyleColor();
+
+  ImGui::SameLine(ImGui::GetWindowWidth() - 220);
+  ImGui::SetNextItemWidth(120);
+  ImGui::SliderFloat("Font Scale", &ImGui::GetIO().FontGlobalScale, 0.5f, 3.0f, "%.1f");
+
   ImGui::Spacing();
 
   // ---- Algorithm dropdown ----

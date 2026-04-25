@@ -80,6 +80,19 @@ int main() {
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
+        ImGuiIO& io = ImGui::GetIO();
+        if (io.KeyCtrl && (ImGui::IsKeyPressed(ImGuiKey_Equal) || ImGui::IsKeyPressed(ImGuiKey_KeypadAdd))) {
+            io.FontGlobalScale += 0.1f;
+            if (io.FontGlobalScale > 3.0f) io.FontGlobalScale = 3.0f;
+        }
+        if (io.KeyCtrl && (ImGui::IsKeyPressed(ImGuiKey_Minus) || ImGui::IsKeyPressed(ImGuiKey_KeypadSubtract))) {
+            io.FontGlobalScale -= 0.1f;
+            if (io.FontGlobalScale < 0.5f) io.FontGlobalScale = 0.5f;
+        }
+        if (io.KeyCtrl && (ImGui::IsKeyPressed(ImGuiKey_0) || ImGui::IsKeyPressed(ImGuiKey_Keypad0))) {
+            io.FontGlobalScale = 1.0f;
+        }
+
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -101,6 +114,11 @@ int main() {
         ImGui::SetWindowFontScale(1.15f);
         ImGui::TextUnformatted("FINAL VISUALIZER");
         ImGui::SetWindowFontScale(1.0f);
+        ImGui::SameLine(ImGui::GetWindowWidth() - 200);
+        ImGui::PushItemWidth(100);
+        ImGui::SliderFloat("Scale", &io.FontGlobalScale, 0.5f, 3.0f, "%.1f");
+        ImGui::PopItemWidth();
+        
         ImGui::Separator();
         ImGui::Spacing();
         

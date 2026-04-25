@@ -8,6 +8,7 @@
 #include <vector>
 #include <cmath>
 #include <memory>
+#include <algorithm>
 
 #include "Canvas.h"
 #include "Algorithms.h"
@@ -290,6 +291,19 @@ int main() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        // Handle Font Scaling via Keyboard Shortcuts
+        if (io.KeyCtrl) {
+            if (ImGui::IsKeyPressed(ImGuiKey_Equal) || ImGui::IsKeyPressed(ImGuiKey_KeypadAdd)) {
+                io.FontGlobalScale = std::min(io.FontGlobalScale + 0.1f, 3.0f);
+            }
+            if (ImGui::IsKeyPressed(ImGuiKey_Minus) || ImGui::IsKeyPressed(ImGuiKey_KeypadSubtract)) {
+                io.FontGlobalScale = std::max(io.FontGlobalScale - 0.1f, 0.5f);
+            }
+            if (ImGui::IsKeyPressed(ImGuiKey_0) || ImGui::IsKeyPressed(ImGuiKey_Keypad0)) {
+                io.FontGlobalScale = 1.0f;
+            }
+        }
+
         // ----------------------------------------------------------
         // MS-Paint Style Floating Toolbar natively docked to Top
         // ----------------------------------------------------------
@@ -333,7 +347,9 @@ int main() {
         ToolButton("Fill", Tool::FILL_BUCKET);
         
         ImGui::Spacing();
-        ImGui::PushItemWidth(220);
+        ImGui::PushItemWidth(200);
+        ImGui::SliderFloat("Font Scale", &io.FontGlobalScale, 0.5f, 3.0f, "%.1f");
+        ImGui::SameLine();
         ImGui::SliderFloat("Thickness", &currentThickness, 1.0f, 50.0f, "%.1f");
         ImGui::SameLine();
         ImGui::Combo("AA Profile", &currentAATypeInt, aaItems, IM_ARRAYSIZE(aaItems));

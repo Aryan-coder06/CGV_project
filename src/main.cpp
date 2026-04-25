@@ -4,6 +4,7 @@
 #include "imgui_impl_opengl3.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <algorithm>
 
 int main() {
     // ================================================================
@@ -77,6 +78,19 @@ int main() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+
+        // Handle Font Scaling via Keyboard Shortcuts
+        if (io.KeyCtrl) {
+            if (ImGui::IsKeyPressed(ImGuiKey_Equal) || ImGui::IsKeyPressed(ImGuiKey_KeypadAdd)) {
+                io.FontGlobalScale = std::min(io.FontGlobalScale + 0.1f, 3.0f);
+            }
+            if (ImGui::IsKeyPressed(ImGuiKey_Minus) || ImGui::IsKeyPressed(ImGuiKey_KeypadSubtract)) {
+                io.FontGlobalScale = std::max(io.FontGlobalScale - 0.1f, 0.5f);
+            }
+            if (ImGui::IsKeyPressed(ImGuiKey_0) || ImGui::IsKeyPressed(ImGuiKey_Keypad0)) {
+                io.FontGlobalScale = 1.0f;
+            }
+        }
 
         // Draw the ImGui algorithm panel
         visualizer.renderUI();
