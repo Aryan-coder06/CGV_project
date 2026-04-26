@@ -4,6 +4,7 @@
 #include <cmath>
 #include <sstream>
 #include <algorithm>
+#include <functional>
 
 GraphAlgoBase::GraphAlgoBase() {
     buildGraph();
@@ -11,6 +12,7 @@ GraphAlgoBase::GraphAlgoBase() {
 }
 
 void GraphAlgoBase::buildGraph() {
+    adj.clear();
     adj.resize(numNodes);
     edgeList.clear();
 
@@ -590,4 +592,256 @@ std::vector<std::string> Dijkstra::getPseudoCode() const {
 
 std::string Dijkstra::getComplexity() const {
     return "Time: O((V+E)logV)  |  Space: O(V)";
+}
+void BellmanFord::init() {
+    steps.clear(); currentStepIdx = 0; buildGraph();
+
+    std::vector<int> dist(numNodes, 1e9);
+    std::vector<bool> visited(numNodes, false);
+    std::vector<std::pair<int,int>> traversedEdges; // 🔥 IMPORTANT
+
+    dist[startNode] = 0;
+    visited[startNode] = true;
+
+    for (int i = 0; i < numNodes - 1; i++) {
+        for (auto &e : edgeList) {
+            int u = e.first, v = e.second;
+
+            if (dist[u] + 1 < dist[v]) {
+                dist[v] = dist[u] + 1;
+                visited[v] = true;
+
+                traversedEdges.push_back({u, v}); // 🔥 TRACK EDGE
+
+                GraphStep s;
+                s.visited = visited;
+                s.traversed_edges = traversedEdges; // 🔥 IMPORTANT
+                s.edge_from = u;
+                s.edge_to = v;
+                s.current_node = v;
+                s.description = "Relax " + std::to_string(u) + " → " + std::to_string(v);
+                steps.push_back(s);
+            }
+        }
+    }
+
+    GraphStep f;
+    f.visited = visited;
+    f.traversed_edges = traversedEdges; // 🔥 FINAL STATE FIX
+    f.description = "Bellman-Ford complete";
+    steps.push_back(f);
+}
+
+std::string BellmanFord::getName() const { return "Bellman-Ford"; }
+std::string BellmanFord::getTheory() const {
+    return
+        "BELLMAN-FORD ALGORITHM\n"
+        "======================\n\n"
+        "WHAT IS IT?\n"
+        "  Bellman-Ford computes the shortest paths from a source node\n"
+        "  to all other nodes in a graph. Unlike Dijkstra, it works even\n"
+        "  when edges have NEGATIVE weights.\n\n"
+        "HOW IT WORKS:\n"
+        "  1. Initialize distances: dist[source] = 0, others = infinity\n"
+        "  2. Repeat V-1 times:\n"
+        "     a. For every edge (u, v):\n"
+        "        - If dist[u] + weight < dist[v]\n"
+        "        - Update dist[v]\n"
+        "  3. (Optional) Check for negative cycles\n\n"
+        "PROPERTIES:\n"
+        "  - Handles negative weights\n"
+        "  - Can detect negative cycles\n"
+        "  - Slower than Dijkstra\n\n"
+        "COMPLEXITY:\n"
+        "  Time:  O(V * E)\n"
+        "  Space: O(V)\n\n"
+        "WHEN TO USE:\n"
+        "  - Graphs with negative weights\n"
+        "  - Currency arbitrage detection\n"
+        "  - Network routing problems\n\n"
+        "KEY INSIGHT:\n"
+        "  Repeated relaxation ensures shortest paths propagate\n"
+        "  through the graph step by step.\n";
+}
+std::string BellmanFord::getComplexity() const { return "O(VE)"; }
+
+void PrimMST::init() {
+    steps.clear(); currentStepIdx = 0; buildGraph();
+
+    std::vector<bool> inMST(numNodes,false);
+    std::vector<std::pair<int,int>> traversedEdges; // 🔥 IMPORTANT
+
+    using P = std::pair<int,std::pair<int,int>>;
+    std::priority_queue<P,std::vector<P>,std::greater<P>> pq;
+
+    pq.push({0,{startNode,-1}});
+
+    while(!pq.empty()){
+        auto top = pq.top(); pq.pop();
+        int node = top.second.first;
+        int parent = top.second.second;
+
+        if(inMST[node]) continue;
+        inMST[node]=true;
+
+        GraphStep s;
+        s.visited = inMST;
+        s.current_node = node;
+
+        if(parent!=-1){
+            traversedEdges.push_back({parent,node}); // 🔥 TRACK EDGE
+
+            s.edge_from=parent;
+            s.edge_to=node;
+            s.description="Add "+std::to_string(parent)+"-"+std::to_string(node);
+        } else {
+            s.description="Start at node "+std::to_string(node);
+        }
+
+        s.traversed_edges = traversedEdges; // 🔥 IMPORTANT
+        steps.push_back(s);
+
+        for(int nbr:adj[node])
+            if(!inMST[nbr]) pq.push({1,{nbr,node}});
+    }
+
+    GraphStep f;
+    f.visited = inMST;
+    f.traversed_edges = traversedEdges; // 🔥 FINAL FIX
+    f.description="Prim MST complete";
+    steps.push_back(f);
+}
+std::string PrimMST::getName() const { return "Prim MST"; }
+std::string PrimMST::getTheory() const {
+    return
+        "PRIM'S MINIMUM SPANNING TREE\n"
+        "============================\n\n"
+        "WHAT IS IT?\n"
+        "  Prim’s algorithm finds a Minimum Spanning Tree (MST)\n"
+        "  by growing a tree from a starting node, always picking\n"
+        "  the smallest edge connecting to a new node.\n\n"
+        "HOW IT WORKS:\n"
+        "  1. Start from any node\n"
+        "  2. Add it to the MST\n"
+        "  3. Repeatedly:\n"
+        "     a. Choose the smallest edge connecting MST to new node\n"
+        "     b. Add that node to MST\n\n"
+        "PROPERTIES:\n"
+        "  - Greedy algorithm\n"
+        "  - Builds MST incrementally\n"
+        "  - Uses Priority Queue\n\n"
+        "COMPLEXITY:\n"
+        "  Time:  O(E log V)\n"
+        "  Space: O(V)\n\n"
+        "WHEN TO USE:\n"
+        "  - Network design (roads, cables)\n"
+        "  - Minimum wiring problems\n\n"
+        "KEY INSIGHT:\n"
+        "  Always expand the tree using the cheapest available edge.\n";
+}
+std::string PrimMST::getComplexity() const { return "O(E log V)"; }
+void KruskalMST::init() {
+    steps.clear(); currentStepIdx = 0; buildGraph();
+
+    std::vector<int> parent(numNodes);
+    std::vector<bool> visited(numNodes,false);
+    std::vector<std::pair<int,int>> traversedEdges; // 🔥 IMPORTANT
+
+    for(int i=0;i<numNodes;i++) parent[i]=i;
+
+    std::function<int(int)> find = [&](int x){
+        while(parent[x] != x) x = parent[x];
+        return x;
+    };
+
+    auto unite = [&](int a,int b){
+        parent[find(a)] = find(b);
+    };
+
+    for(auto &e:edgeList){
+        int u=e.first,v=e.second;
+
+        if(find(u)!=find(v)){
+            unite(u,v);
+            visited[u] = visited[v] = true;
+
+            traversedEdges.push_back({u,v}); // 🔥 TRACK EDGE
+
+            GraphStep s;
+            s.visited = visited;
+            s.traversed_edges = traversedEdges; // 🔥 IMPORTANT
+            s.edge_from=u;
+            s.edge_to=v;
+            s.current_node=v;
+            s.description="Add "+std::to_string(u)+"-"+std::to_string(v);
+            steps.push_back(s);
+        }
+    }
+
+    GraphStep f;
+    f.visited = visited;
+    f.traversed_edges = traversedEdges; // 🔥 FINAL FIX
+    f.description="Kruskal MST complete";
+    steps.push_back(f);
+}
+std::string KruskalMST::getName() const { return "Kruskal MST"; }
+std::string KruskalMST::getTheory() const {
+    return
+        "KRUSKAL'S MINIMUM SPANNING TREE\n"
+        "===============================\n\n"
+        "WHAT IS IT?\n"
+        "  Kruskal’s algorithm finds a Minimum Spanning Tree by\n"
+        "  selecting edges in increasing order of weight while\n"
+        "  avoiding cycles.\n\n"
+        "HOW IT WORKS:\n"
+        "  1. Sort all edges by weight\n"
+        "  2. Initialize disjoint sets (Union-Find)\n"
+        "  3. For each edge:\n"
+        "     a. If it doesn't form a cycle\n"
+        "     b. Add it to MST\n\n"
+        "PROPERTIES:\n"
+        "  - Greedy algorithm\n"
+        "  - Uses Disjoint Set (DSU)\n"
+        "  - Works well for sparse graphs\n\n"
+        "COMPLEXITY:\n"
+        "  Time:  O(E log E)\n"
+        "  Space: O(V)\n\n"
+        "WHEN TO USE:\n"
+        "  - Sparse graphs\n"
+        "  - Clustering problems\n\n"
+        "KEY INSIGHT:\n"
+        "  Always pick the smallest edge that does not create a cycle.\n";
+}
+std::string KruskalMST::getComplexity() const { return "O(E log E)"; }
+
+std::vector<std::string> BellmanFord::getPseudoCode() const {
+    return {
+        "BellmanFord(start):",
+        "  dist[start] = 0",
+        "  repeat V-1 times:",
+        "    for each edge (u,v):",
+        "      if dist[u] + w < dist[v]:",
+        "        dist[v] = dist[u] + w"
+    };
+}
+
+std::vector<std::string> PrimMST::getPseudoCode() const {
+    return {
+        "Prim(start):",
+        "  push(start)",
+        "  while PQ not empty:",
+        "    pick minimum edge",
+        "    if not visited:",
+        "      add to MST"
+    };
+}
+
+std::vector<std::string> KruskalMST::getPseudoCode() const {
+    return {
+        "Kruskal():",
+        "  sort edges",
+        "  for each edge:",
+        "    if no cycle:",
+        "      add to MST"
+    };
 }
