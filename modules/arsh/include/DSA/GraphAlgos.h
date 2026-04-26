@@ -45,7 +45,13 @@ public:
     const std::vector<std::pair<float,float>>& getNodePositions() const { return nodePositions; }
 };
 
-class BFS : public GraphAlgoBase {
+// EXISTING
+class BFS : public GraphAlgoBase { public: void init() override; std::string getTheory() const override; std::string getName() const override; std::vector<std::string> getPseudoCode() const override; std::string getComplexity() const override; };
+class DFS : public GraphAlgoBase { public: void init() override; std::string getTheory() const override; std::string getName() const override; std::vector<std::string> getPseudoCode() const override; std::string getComplexity() const override; };
+class Dijkstra : public GraphAlgoBase { public: void init() override; std::string getTheory() const override; std::string getName() const override; std::vector<std::string> getPseudoCode() const override; std::string getComplexity() const override; };
+
+// NEW
+class BellmanFord : public GraphAlgoBase {
 public:
     void init() override;
     std::string getTheory() const override;
@@ -54,7 +60,7 @@ public:
     std::string getComplexity() const override;
 };
 
-class DFS : public GraphAlgoBase {
+class PrimMST : public GraphAlgoBase {
 public:
     void init() override;
     std::string getTheory() const override;
@@ -63,7 +69,7 @@ public:
     std::string getComplexity() const override;
 };
 
-class Dijkstra : public GraphAlgoBase {
+class KruskalMST : public GraphAlgoBase {
 public:
     void init() override;
     std::string getTheory() const override;

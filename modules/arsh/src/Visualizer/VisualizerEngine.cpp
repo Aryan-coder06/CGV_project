@@ -30,11 +30,17 @@ static std::vector<int> parseCSV(const char* buf) {
 
 static const char* SORT_NAMES[]   = {"Bubble Sort","Selection Sort","Insertion Sort","Merge Sort","Quick Sort","Heap Sort"};
 static const char* SEARCH_NAMES[] = {"Linear Search","Binary Search"};
-static const char* GRAPH_NAMES[]  = {"BFS (Breadth-First)","DFS (Depth-First)", "Dijkstra's Algorithm"};
-
+static const char* GRAPH_NAMES[]  = {
+    "BFS (Breadth-First)",
+    "DFS (Depth-First)",
+    "Dijkstra",
+    "Bellman-Ford",
+    "Prim MST",
+    "Kruskal MST"
+};
+static int graphCount  = 6;
 static int sortCount   = 6;
 static int searchCount = 2;
-static int graphCount  = 3;
 
 std::unique_ptr<IAlgorithm> VisualizerEngine::createAlgorithm(Category cat, int idx) {
     switch (cat) {
@@ -54,13 +60,16 @@ std::unique_ptr<IAlgorithm> VisualizerEngine::createAlgorithm(Category cat, int 
                 case 1: return std::make_unique<BinarySearch>();
                 default: return std::make_unique<LinearSearch>();
             }
-        case Category::GRAPH:
-            switch (idx) {
-                case 0: return std::make_unique<BFS>();
-                case 1: return std::make_unique<DFS>();
-                case 2: return std::make_unique<Dijkstra>();
-                default: return std::make_unique<BFS>();
-            }
+       case Category::GRAPH:
+    switch (idx) {
+        case 0: return std::make_unique<BFS>();
+        case 1: return std::make_unique<DFS>();
+        case 2: return std::make_unique<Dijkstra>();
+        case 3: return std::make_unique<BellmanFord>();
+        case 4: return std::make_unique<PrimMST>();
+        case 5: return std::make_unique<KruskalMST>();
+        default: return std::make_unique<BFS>();
+    }
     }
     return std::make_unique<BubbleSort>();
 }
