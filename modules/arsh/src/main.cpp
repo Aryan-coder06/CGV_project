@@ -1,4 +1,5 @@
 #include "../include/Visualizer/VisualizerEngine.h"
+#include "UI/RetroTheme.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -19,7 +20,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
     GLFWwindow* window = glfwCreateWindow(
-        1280, 720, "CGV Algorithm Visualizer — Section 2", nullptr, nullptr);
+        1440, 860, "DSA Algorithm Visualizer", nullptr, nullptr);
 
     if (!window) {
         glfwTerminate();
@@ -36,28 +37,8 @@ int main() {
     ImGui::CreateContext();
 
     ImGuiIO& io = ImGui::GetIO();
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    io.FontGlobalScale = 1.8f;
-
-    // Dark theme
-    ImGui::StyleColorsDark();
-
-    // Tune colours
-    ImGuiStyle& style = ImGui::GetStyle();
-    style.WindowRounding   = 0.0f;
-    style.FrameRounding    = 3.0f;
-    style.ScrollbarRounding = 3.0f;
-    style.Colors[ImGuiCol_WindowBg]  = ImVec4(0.08f, 0.08f, 0.12f, 1.0f);
-    style.Colors[ImGuiCol_FrameBg]   = ImVec4(0.15f, 0.15f, 0.22f, 1.0f);
-    style.Colors[ImGuiCol_Header]    = ImVec4(0.2f,  0.4f,  0.7f,  1.0f);
-    style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.3f, 0.5f, 0.9f, 1.0f);
-    style.Colors[ImGuiCol_Tab]           = ImVec4(0.12f, 0.12f, 0.18f, 1.0f);
-    style.Colors[ImGuiCol_TabActive]     = ImVec4(0.2f,  0.4f,  0.7f,  1.0f);
-    style.Colors[ImGuiCol_TabHovered]    = ImVec4(0.25f, 0.5f,  0.85f, 1.0f);
-    style.Colors[ImGuiCol_Separator]     = ImVec4(0.3f,  0.3f,  0.4f,  1.0f);
-    style.Colors[ImGuiCol_Button]        = ImVec4(0.2f,  0.4f,  0.6f,  1.0f);
-    style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.3f,  0.5f,  0.8f,  1.0f);
-    style.ScaleAllSizes(1.35f);
+    (void)io;
+    RetroTheme::ApplyRetroTheme(1.95f, 1.26f);
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
@@ -100,7 +81,7 @@ int main() {
         glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
 
         glViewport(0, 0, fbWidth, fbHeight);
-        glClearColor(0.10f, 0.10f, 0.14f, 1.0f);
+        glClearColor(0.03f, 0.04f, 0.08f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         // ---- Draw the pixel grid in the right-hand viewport ----

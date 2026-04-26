@@ -1,4 +1,5 @@
 #include "../../include/Visualizer/VisualizerEngine.h"
+#include "UI/RetroTheme.h"
 #include "imgui.h"
 #include <GLFW/glfw3.h>
 #include <algorithm>
@@ -236,14 +237,23 @@ void VisualizerEngine::renderUI() {
     updatePlayback(deltaTime);
 
     ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
-    ImGui::SetNextWindowSize(ImVec2(640, (float)ImGui::GetIO().DisplaySize.y), ImGuiCond_Always);
+    ImGui::SetNextWindowSize(ImVec2(760, (float)ImGui::GetIO().DisplaySize.y), ImGuiCond_Always);
 
     ImGuiWindowFlags flags =
         ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
         ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar;
 
     ImGui::Begin("##DSAPanel", nullptr, flags);
-    ImGui::SetWindowFontScale(1.08f);
+    ImGui::SetWindowFontScale(1.10f);
+    const ImVec2 panelPos = ImGui::GetWindowPos();
+    const ImVec2 panelSize = ImGui::GetWindowSize();
+    const ImVec2 panelMax(panelPos.x + panelSize.x, panelPos.y + panelSize.y);
+    RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), panelPos,
+                              panelMax,
+                              RetroTheme::NeonCyan(0.92f), elapsedTime, 18.0f, 1.5f);
+    RetroTheme::DrawCornerAccents(ImGui::GetWindowDrawList(), panelPos,
+                                  panelMax,
+                                  RetroTheme::NeonAmber(0.88f), 24.0f, 2.7f);
 
     if (ImGui::IsKeyPressed(ImGuiKey_Space))       { isPlaying = !isPlaying; }
     if (ImGui::IsKeyPressed(ImGuiKey_R))           { currentAlgo->reset(); isPlaying = false; }
@@ -257,6 +267,11 @@ void VisualizerEngine::renderUI() {
     if (ImGui::IsKeyPressed(ImGuiKey_6)) selectAlgorithm(Category::SORT, 5);
 
     float blink = (sinf(elapsedTime * 3.0f) + 1.0f) * 0.5f;
+    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.95f, 0.78f, 0.22f, 1.0f));
+    ImGui::TextUnformatted("DSA CORE");
+    ImGui::PopStyleColor();
+    ImGui::SameLine();
+    ImGui::TextDisabled("sorting, search, graph");
     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.0f, 0.9f, 1.0f, 1.0f));
     ImGui::Text("  DSA VISUALIZER");
     ImGui::SameLine();
@@ -267,7 +282,7 @@ void VisualizerEngine::renderUI() {
     ImGui::Separator();
     ImGui::Spacing();
 
-    float tabW = 186.0f;
+    float tabW = 220.0f;
     bool sortActive   = (currentCategory == Category::SORT);
     bool searchActive = (currentCategory == Category::SEARCH);
     bool graphActive  = (currentCategory == Category::GRAPH);
@@ -280,7 +295,7 @@ void VisualizerEngine::renderUI() {
             ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.08f, 0.10f, 0.16f, 1.0f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.10f, 0.30f, 0.50f, 1.0f));
         }
-        if (ImGui::Button(label, ImVec2(tabW, 42))) {
+        if (ImGui::Button(label, ImVec2(tabW, 50))) {
             selectAlgorithm(cat, 0);
         }
         ImGui::PopStyleColor(2);
@@ -343,7 +358,7 @@ void VisualizerEngine::renderUI() {
             ImGui::Separator();
             ImGui::Spacing();
 
-            float btnW = 105.0f;
+            float btnW = 126.0f;
 
             ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.40f, 0.10f, 0.40f, 1.0f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.60f, 0.20f, 0.60f, 1.0f));
@@ -396,13 +411,13 @@ void VisualizerEngine::renderUI() {
 
             ImGui::Text("Speed");
             ImGui::SameLine();
-            ImGui::SetNextItemWidth(220);
+            ImGui::SetNextItemWidth(270);
             ImGui::SliderFloat("##speed", &speedMultiplier, 0.25f, 5.0f, "%.1fx");
 
             if (currentCategory != Category::GRAPH) {
                 ImGui::Text("Size ");
                 ImGui::SameLine();
-                ImGui::SetNextItemWidth(220);
+                ImGui::SetNextItemWidth(270);
                 int maxSize = (currentCategory == Category::SEARCH) ? 40 : 80;
                 if (ImGui::SliderInt("##size", &arraySize, 10, maxSize)) {
                     currentAlgo->setArraySize(arraySize);
@@ -430,7 +445,7 @@ void VisualizerEngine::renderUI() {
                 if (currentCategory == Category::SEARCH) {
                     ImGui::Text("  Target:");
                     ImGui::SameLine();
-                    ImGui::SetNextItemWidth(150);
+                    ImGui::SetNextItemWidth(220);
                     ImGui::InputInt("##searchTarget", &customSearchTarget);
                     if (customSearchTarget < 1) customSearchTarget = 1;
                 }
@@ -463,7 +478,7 @@ void VisualizerEngine::renderUI() {
             if (currentCategory == Category::GRAPH) {
                 ImGui::Text("  Start Node:");
                 ImGui::SameLine();
-                ImGui::SetNextItemWidth(150);
+                ImGui::SetNextItemWidth(220);
                 if (ImGui::InputInt("##startNode", &graphStartNode)) {
                     if (graphStartNode < 0) graphStartNode = 0;
                     if (graphStartNode > 9) graphStartNode = 9;
@@ -541,7 +556,14 @@ void VisualizerEngine::renderUI() {
             ImGui::PopStyleColor();
             ImGui::Separator();
 
-            ImGui::BeginChild("##StepLog", ImVec2(0, 160), false);
+            ImGui::BeginChild("##StepLog", ImVec2(0, 220), true);
+            const ImVec2 stepLogPos = ImGui::GetWindowPos();
+            const ImVec2 stepLogSize = ImGui::GetWindowSize();
+            const ImVec2 stepLogMax(stepLogPos.x + stepLogSize.x, stepLogPos.y + stepLogSize.y);
+            RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), stepLogPos,
+                                      stepLogMax,
+                                      RetroTheme::NeonPink(0.24f), elapsedTime + 1.0f,
+                                      14.0f, 1.0f);
             for (const auto& cl : state.calcLines) {
                 ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.7f, 0.75f, 0.85f, 1.0f));
                 ImGui::TextWrapped("  %s", cl.c_str());
@@ -558,7 +580,7 @@ void VisualizerEngine::renderUI() {
 }
 
 void VisualizerEngine::renderGrid(int windowWidth, int windowHeight) {
-    const int panelW = 640;
+    const int panelW = 760;
     int canvasW = windowWidth - panelW;
     int canvasH = windowHeight;
     if (canvasW <= 0 || canvasH <= 0 || activeTab != 1) return;
@@ -869,4 +891,3 @@ void VisualizerEngine::renderGraphCanvas(int x, int y, int w, int h) {
 
     glDisable(GL_BLEND);
 }
-

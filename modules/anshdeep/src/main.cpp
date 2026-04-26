@@ -13,10 +13,11 @@
 #include "Canvas.h"
 #include "Algorithms.h"
 #include "Renderer.h"
+#include "UI/RetroTheme.h"
 
 // Window dimensions
-const unsigned int SCR_WIDTH = 1280;
-const unsigned int SCR_HEIGHT = 720;
+const unsigned int SCR_WIDTH = 1440;
+const unsigned int SCR_HEIGHT = 860;
 
 // Application state
 enum class Tool { LINE, CIRCLE, SQUARE, ELLIPSE, FILL_BUCKET, PENCIL, BRUSH, ERASER, MOVE };
@@ -45,6 +46,38 @@ std::vector<int> draggingShapeIndices;
 void processInput(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+}
+
+void handleShortcutToggles(GLFWwindow* window) {
+    static bool aaIncreaseLatch = false;
+    static bool aaDecreaseLatch = false;
+
+    const bool ctrlDown =
+        glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS ||
+        glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS;
+    const bool plusPressed =
+        glfwGetKey(window, GLFW_KEY_EQUAL) == GLFW_PRESS ||
+        glfwGetKey(window, GLFW_KEY_KP_ADD) == GLFW_PRESS;
+    const bool minusPressed =
+        glfwGetKey(window, GLFW_KEY_MINUS) == GLFW_PRESS ||
+        glfwGetKey(window, GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS;
+
+    if (ctrlDown && plusPressed && !aaIncreaseLatch) {
+        currentAATypeInt = (currentAATypeInt + 1) % IM_ARRAYSIZE(aaItems);
+        aaIncreaseLatch = true;
+    }
+    if (!(ctrlDown && plusPressed)) {
+        aaIncreaseLatch = false;
+    }
+
+    if (ctrlDown && minusPressed && !aaDecreaseLatch) {
+        currentAATypeInt =
+            (currentAATypeInt - 1 + IM_ARRAYSIZE(aaItems)) % IM_ARRAYSIZE(aaItems);
+        aaDecreaseLatch = true;
+    }
+    if (!(ctrlDown && minusPressed)) {
+        aaDecreaseLatch = false;
+    }
 }
 
 int main() {
@@ -79,10 +112,7 @@ int main() {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.FontGlobalScale = 1.8f;
-    ImGui::StyleColorsDark();
-    ImGuiStyle& style = ImGui::GetStyle();
-    style.ScaleAllSizes(1.35f);
+    RetroTheme::ApplyRetroTheme(1.90f, 1.24f);
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
@@ -103,6 +133,7 @@ int main() {
     // Main Render Loop
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
+        handleShortcutToggles(window);
 
         int windowW, windowH;
         glfwGetWindowSize(window, &windowW, &windowH);
@@ -291,29 +322,31 @@ int main() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        // Handle Font Scaling via Keyboard Shortcuts
-        if (io.KeyCtrl) {
-            if (ImGui::IsKeyPressed(ImGuiKey_Equal) || ImGui::IsKeyPressed(ImGuiKey_KeypadAdd)) {
-                io.FontGlobalScale = std::min(io.FontGlobalScale + 0.1f, 3.0f);
-            }
-            if (ImGui::IsKeyPressed(ImGuiKey_Minus) || ImGui::IsKeyPressed(ImGuiKey_KeypadSubtract)) {
-                io.FontGlobalScale = std::max(io.FontGlobalScale - 0.1f, 0.5f);
-            }
-            if (ImGui::IsKeyPressed(ImGuiKey_0) || ImGui::IsKeyPressed(ImGuiKey_Keypad0)) {
-                io.FontGlobalScale = 1.0f;
-            }
-        }
-
         // ----------------------------------------------------------
         // MS-Paint Style Floating Toolbar natively docked to Top
         // ----------------------------------------------------------
         ImGui::SetNextWindowPos(ImVec2(0, 0));
-        ImGui::SetNextWindowSize(ImVec2((float)windowW, 140.0f));
+        ImGui::SetNextWindowSize(ImVec2((float)windowW, 430.0f));
         ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoSavedSettings;
         ImGui::Begin("Tools", nullptr, flags);
-        ImGui::SetWindowFontScale(1.1f);
+        ImGui::SetWindowFontScale(1.10f);
+        const ImVec2 toolsPos = ImGui::GetWindowPos();
+        const ImVec2 toolsSize = ImGui::GetWindowSize();
+        const ImVec2 toolsMax(toolsPos.x + toolsSize.x, toolsPos.y + toolsSize.y);
+        RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), toolsPos,
+                                  toolsMax,
+                                  RetroTheme::NeonCyan(0.92f), (float)glfwGetTime(), 16.0f, 1.5f);
+        RetroTheme::DrawCornerAccents(ImGui::GetWindowDrawList(), toolsPos,
+                                      toolsMax,
+                                      RetroTheme::NeonAmber(0.85f), 22.0f, 2.5f);
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.95f, 0.78f, 0.22f, 1.0f));
+        ImGui::TextUnformatted("PAINT LAB // RASTER STUDIO");
+        ImGui::PopStyleColor();
+        ImGui::SameLine();
+        ImGui::TextDisabled("live tools, shape rasterization, fill and AA");
+        ImGui::Separator();
         
-        if (ImGui::Button("Clear", ImVec2(110, 0))) {
+        if (ImGui::Button("Clear", ImVec2(128, 0))) {
             canvas.Clear(GetBGColor());
         }
         
@@ -322,7 +355,7 @@ int main() {
         auto ToolButton = [&](const char* label, Tool tool) {
             bool matches = (currentTool == tool);
             if (matches) ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.3f, 0.3f, 0.8f, 1.0f));
-            if (ImGui::Button(label, ImVec2(120, 0))) {
+            if (ImGui::Button(label, ImVec2(132, 0))) {
                 currentTool = tool;
             }
             if (matches) ImGui::PopStyleColor();
@@ -339,7 +372,7 @@ int main() {
         ToolButton("Line", Tool::LINE);
         ImGui::SameLine();
         ToolButton("Square", Tool::SQUARE);
-        ImGui::SameLine();
+        ImGui::NewLine();
         ToolButton("Circle", Tool::CIRCLE);
         ImGui::SameLine();
         ToolButton("Ellipse", Tool::ELLIPSE);
@@ -347,14 +380,26 @@ int main() {
         ToolButton("Fill", Tool::FILL_BUCKET);
         
         ImGui::Spacing();
-        ImGui::PushItemWidth(200);
-        ImGui::SliderFloat("Font Scale", &io.FontGlobalScale, 0.5f, 3.0f, "%.1f");
+        ImGui::Separator();
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.16f, 0.94f, 0.96f, 1.0f));
+        ImGui::TextUnformatted("STROKE FILTERS");
+        ImGui::PopStyleColor();
         ImGui::SameLine();
-        ImGui::SliderFloat("Thickness", &currentThickness, 1.0f, 50.0f, "%.1f");
-        ImGui::SameLine();
+        ImGui::TextDisabled("thickness + anti-aliasing");
+        ImGui::SetCursorPosX(42.0f);
+        ImGui::PushItemWidth(260);
+        ImGui::SliderFloat("Thickness", &currentThickness, 1.0f, 50.0f, "%.1f px");
+        ImGui::SetCursorPosX(42.0f);
         ImGui::Combo("AA Profile", &currentAATypeInt, aaItems, IM_ARRAYSIZE(aaItems));
+        ImGui::SameLine();
+        ImGui::TextDisabled("Ctrl +/-");
         ImGui::PopItemWidth();
         ImGui::Spacing();
+        ImGui::Separator();
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.95f, 0.78f, 0.22f, 1.0f));
+        ImGui::TextUnformatted("COLOR CONTROLS");
+        ImGui::PopStyleColor();
+        ImGui::SetCursorPosX(42.0f);
         
         // Color Pickers
         ImGuiColorEditFlags colorFlags = ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_NoTooltip | ImGuiColorEditFlags_NoOptions;
@@ -378,7 +423,7 @@ int main() {
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.03f, 0.04f, 0.08f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Upload our CPU canvas to texture and draw the quad

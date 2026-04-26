@@ -2,10 +2,15 @@ cmake_minimum_required(VERSION 3.10)
 project(CGV_Project)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
+
+option(CGV_ENABLE_WARNINGS "Enable compiler warnings" ON)
+option(CGV_ENABLE_IPO "Enable interprocedural optimization in release builds" ON)
 
 set(IMGUI_SOURCES
     third_party/imgui/imgui.cpp
@@ -18,6 +23,7 @@ set(IMGUI_SOURCES
 )
 
 set(COMMON_INCLUDE_DIRS
+    include
     third_party/imgui
     third_party/imgui/backends
     third_party/glfw/include
@@ -65,17 +71,42 @@ set(LAUNCHER_SOURCES
     src/LauncherMain.cpp
 )
 
+function(cgv_configure_target target)
+    target_include_directories(${target} PRIVATE ${COMMON_INCLUDE_DIRS})
+
+    if(CGV_ENABLE_WARNINGS)
+        if(MSVC)
+            target_compile_options(${target} PRIVATE /W4)
+        else()
+            target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic)
+        endif()
+    endif()
+
+    if(CGV_ENABLE_IPO AND CMAKE_BUILD_TYPE STREQUAL "Release")
+        include(CheckIPOSupported)
+        check_ipo_supported(RESULT ipo_supported OUTPUT ipo_error)
+        if(ipo_supported)
+            set_property(TARGET ${target} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+        else()
+            message(STATUS "IPO disabled for ${target}: ${ipo_error}")
+        endif()
+    endif()
+endfunction()
+
 add_executable(CGV_Module ${CGV_MODULE_SOURCES} ${IMGUI_SOURCES})
-target_include_directories(CGV_Module PRIVATE include ${COMMON_INCLUDE_DIRS})
+target_include_directories(CGV_Module PRIVATE include)
+cgv_configure_target(CGV_Module)
 
 add_executable(DSA_Visualizer ${ARSH_MODULE_SOURCES} ${IMGUI_SOURCES})
-target_include_directories(DSA_Visualizer PRIVATE modules/arsh/include ${COMMON_INCLUDE_DIRS})
+target_include_directories(DSA_Visualizer PRIVATE modules/arsh/include)
+cgv_configure_target(DSA_Visualizer)
 
 add_executable(Paint_Module ${PAINT_MODULE_SOURCES} ${IMGUI_SOURCES})
-target_include_directories(Paint_Module PRIVATE modules/anshdeep/src ${COMMON_INCLUDE_DIRS})
+target_include_directories(Paint_Module PRIVATE modules/anshdeep/src)
+cgv_configure_target(Paint_Module)
 
 add_executable(final_visualize ${LAUNCHER_SOURCES} ${IMGUI_SOURCES})
-target_include_directories(final_visualize PRIVATE ${COMMON_INCLUDE_DIRS})
+cgv_configure_target(final_visualize)
 
 if(WIN32)
     find_library(GLFW_LIB

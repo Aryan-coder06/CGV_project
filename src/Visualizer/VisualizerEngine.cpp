@@ -1,4 +1,5 @@
 #include "../../include/Visualizer/VisualizerEngine.h"
+#include "../../include/UI/RetroTheme.h"
 #include "imgui.h"
 #include <GLFW/glfw3.h>
 #include <algorithm>
@@ -70,16 +71,31 @@ VisualizerEngine::VisualizerEngine() {
 
 void VisualizerEngine::renderUI() {
   ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
-  ImGui::SetNextWindowSize(ImVec2(640, ImGui::GetIO().DisplaySize.y),
+  ImGui::SetNextWindowSize(ImVec2(760, ImGui::GetIO().DisplaySize.y),
                            ImGuiCond_Always);
 
   ImGuiWindowFlags flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
                            ImGuiWindowFlags_NoCollapse;
 
   ImGui::Begin("##VisualizerPanel", nullptr, flags);
-  ImGui::SetWindowFontScale(1.08f);
+  ImGui::SetWindowFontScale(1.10f);
+  const ImVec2 panelPos = ImGui::GetWindowPos();
+  const ImVec2 panelSize = ImGui::GetWindowSize();
+  const ImVec2 panelMax(panelPos.x + panelSize.x, panelPos.y + panelSize.y);
+  RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), panelPos,
+                            panelMax,
+                            RetroTheme::NeonCyan(0.92f), (float)glfwGetTime(),
+                            18.0f, 1.5f);
+  RetroTheme::DrawCornerAccents(ImGui::GetWindowDrawList(), panelPos,
+                                panelMax,
+                                RetroTheme::NeonAmber(0.88f), 24.0f, 2.7f);
 
   // ---- Header ----
+  ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.95f, 0.78f, 0.22f, 1.0f));
+  ImGui::TextUnformatted("CGV CORE");
+  ImGui::PopStyleColor();
+  ImGui::SameLine();
+  ImGui::TextDisabled("raster, fill, clipping, transform");
   ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.4f, 0.9f, 1.0f, 1.0f));
   ImGui::TextUnformatted("SECTION 2 — ALGORITHM VISUALIZER");
   ImGui::PopStyleColor();
@@ -199,9 +215,16 @@ void VisualizerEngine::renderVisualizeTab() {
   AlgoState state = currentAlgo->getCurrentState();
 
   ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.10f, 0.11f, 0.16f, 1.0f));
-  ImGui::BeginChild("##UpperBox", ImVec2(0, 380), true,
+  ImGui::BeginChild("##UpperBox", ImVec2(0, 430), true,
                     ImGuiWindowFlags_HorizontalScrollbar);
   ImGui::PopStyleColor();
+  const ImVec2 upperPos = ImGui::GetWindowPos();
+  const ImVec2 upperSize = ImGui::GetWindowSize();
+  const ImVec2 upperMax(upperPos.x + upperSize.x, upperPos.y + upperSize.y);
+  RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), upperPos,
+                            upperMax,
+                            RetroTheme::NeonAmber(0.42f), (float)glfwGetTime() + 0.8f,
+                            14.0f, 1.0f);
 
   // ---- Inputs ----
   bool isCircle     = currentAlgo->isCircleMode();
@@ -541,8 +564,15 @@ void VisualizerEngine::renderVisualizeTab() {
   state = currentAlgo->getCurrentState(); // refresh
 
   ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.08f, 0.10f, 0.15f, 1.0f));
-  ImGui::BeginChild("##StateBox", ImVec2(0, 220), true);
+  ImGui::BeginChild("##StateBox", ImVec2(0, 260), true);
   ImGui::PopStyleColor();
+  const ImVec2 statePos = ImGui::GetWindowPos();
+  const ImVec2 stateSize = ImGui::GetWindowSize();
+  const ImVec2 stateMax(statePos.x + stateSize.x, statePos.y + stateSize.y);
+  RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), statePos,
+                            stateMax,
+                            RetroTheme::NeonCyan(0.36f), (float)glfwGetTime() + 1.2f,
+                            14.0f, 1.0f);
 
   float progress = (state.totalSteps > 0)
                        ? (float)state.currentStep / (float)state.totalSteps
@@ -580,6 +610,13 @@ void VisualizerEngine::renderVisualizeTab() {
   ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(0.08f, 0.10f, 0.15f, 1.0f));
   ImGui::BeginChild("##CalcBox", ImVec2(0, 0), true, ImGuiWindowFlags_HorizontalScrollbar);
   ImGui::PopStyleColor();
+  const ImVec2 calcPos = ImGui::GetWindowPos();
+  const ImVec2 calcSize = ImGui::GetWindowSize();
+  const ImVec2 calcMax(calcPos.x + calcSize.x, calcPos.y + calcSize.y);
+  RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), calcPos,
+                            calcMax,
+                            RetroTheme::NeonPink(0.26f), (float)glfwGetTime() + 1.6f,
+                            14.0f, 1.0f);
 
   if (lastMode == ExecMode::STEP_ONE && state.hasCalculation &&
       !state.calcLines.empty()) {
@@ -641,7 +678,7 @@ void VisualizerEngine::renderCalcPanel(const AlgoState & /*state*/) {
 }
 
 void VisualizerEngine::renderGrid(int windowWidth, int windowHeight) {
-  const int panelW = 640;
+  const int panelW = 760;
   int gridAreaW = windowWidth - panelW;
   int gridAreaH = windowHeight;
   if (gridAreaW <= 0 || gridAreaH <= 0 || activeTab != 1)
