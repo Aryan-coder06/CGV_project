@@ -115,13 +115,28 @@ int main() {
         const ImVec2 cardMax(cardMin.x + cardSize.x, cardMin.y + cardSize.y);
         RetroTheme::DrawNeonFrame(card, cardMin, cardMax, RetroTheme::NeonCyan(0.95f), now, 22.0f, 1.7f);
         RetroTheme::DrawCornerAccents(card, cardMin, cardMax, RetroTheme::NeonAmber(0.90f), 28.0f, 3.0f);
+        RetroTheme::DrawPanelAmbient(card, cardMin, cardMax, now, RetroTheme::NeonCyan(0.9f), 0.9f);
+        card->AddRectFilledMultiColor(
+            ImVec2(cardMin.x + 18.0f, cardMin.y + 18.0f),
+            ImVec2(cardMax.x - 18.0f, cardMin.y + 150.0f),
+            ImGui::ColorConvertFloat4ToU32(ImVec4(0.05f, 0.12f, 0.18f, 0.85f)),
+            ImGui::ColorConvertFloat4ToU32(ImVec4(0.03f, 0.05f, 0.08f, 0.15f)),
+            ImGui::ColorConvertFloat4ToU32(ImVec4(0.03f, 0.05f, 0.08f, 0.05f)),
+            ImGui::ColorConvertFloat4ToU32(ImVec4(0.05f, 0.12f, 0.18f, 0.75f)));
+        for (int i = 0; i < 14; ++i) {
+            const float phase = now * (0.7f + i * 0.03f) + i * 0.6f;
+            const float px = cardMin.x + 70.0f + i * 120.0f + std::sin(phase) * 22.0f;
+            const float py = cardMin.y + 84.0f + std::cos(phase * 1.7f) * 16.0f;
+            card->AddCircleFilled(ImVec2(px, py), 2.0f + (i % 3),
+                                  (i % 2 == 0) ? RetroTheme::NeonCyan(0.20f) : RetroTheme::NeonAmber(0.18f), 12);
+        }
 
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.95f, 0.78f, 0.22f, 1.0f));
         ImGui::SetWindowFontScale(1.20f);
         ImGui::TextUnformatted("FINAL VISUALIZER");
         ImGui::PopStyleColor();
         ImGui::SameLine();
-        ImGui::TextDisabled("retro suite // paint, CGV, DSA");
+        ImGui::TextDisabled("retro suite // paint, CGV, DSA, 3D pipeline");
         ImGui::Spacing();
 
         ImGui::SetWindowFontScale(1.60f);
@@ -135,7 +150,7 @@ int main() {
         ImGui::PopItemWidth();
         ImGui::TextWrapped(
             "Launch the interactive paint module, the computer graphics visualizer, "
-            "or the DSA suite without changing their internal algorithm flows.");
+            "the DSA suite, or the 3D graphics pipeline lab from one clean control surface.");
         ImGui::Spacing();
         ImGui::Separator();
         ImGui::Spacing();
@@ -143,70 +158,114 @@ int main() {
         struct ModuleCard {
             const char* title;
             const char* subtitle;
+            const char* summaryA;
+            const char* summaryB;
             const char* binary;
             ImU32 color;
         };
 
         const ModuleCard cards[] = {
-            {"1) PAINT APP", "Raster drawing, line work, fill, anti-aliasing", "Paint_Module", RetroTheme::NeonAmber(0.95f)},
-            {"2) CGV VISUALIZER", "Lines, circles, fill, clipping, transform, viewport", "CGV_Module", RetroTheme::NeonCyan(0.95f)},
-            {"3) DSA VISUALIZER", "Sorting, searching, graph algorithms with original UI", "DSA_Visualizer", RetroTheme::NeonPink(0.95f)},
+            {"1) PAINT APP",
+             "Raster drawing, line work, fill, anti-aliasing",
+             "Software raster sketching",
+             "Thickness, AA, fill, move, scale",
+             "Paint_Module",
+             RetroTheme::NeonAmber(0.95f)},
+            {"2) CGV VISUALIZER",
+             "Lines, circles, fill, clipping, transform, viewport",
+             "Core computer graphics algorithms",
+             "DDA, Bresenham, clipping, transforms",
+             "CGV_Module",
+             RetroTheme::NeonCyan(0.95f)},
+            {"3) DSA VISUALIZER",
+             "Sorting, searching, graph algorithms with original UI",
+             "Step-by-step algorithm behavior",
+             "Sorting, searching, traversal flow",
+             "DSA_Visualizer",
+             RetroTheme::NeonPink(0.95f)},
+            {"4) 3D PIPELINE LAB",
+             "Model, view, projection, clipping, NDC, viewport",
+             "How 3D becomes screen pixels",
+             "Matrices, camera, projection, depth",
+             "Pipeline3D_Module",
+             RetroTheme::NeonCyan(0.92f)},
         };
 
         const float availableW = ImGui::GetContentRegionAvail().x;
-        const float gap = 22.0f;
-        const float cardW = (availableW - gap * 2.0f) / 3.0f;
+        const float gap = 26.0f;
+        const int columns = 2;
+        const float cardW = (availableW - gap * (columns - 1)) / columns;
         const float cardH = 360.0f;
 
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(20.0f, 20.0f));
-        for (int i = 0; i < 3; ++i) {
+        for (int i = 0; i < 4; ++i) {
             ImGui::PushID(i);
             ImGui::BeginChild("##ModuleCard", ImVec2(cardW, cardH), true, ImGuiWindowFlags_NoScrollbar);
             ImDrawList* moduleDl = ImGui::GetWindowDrawList();
             const ImVec2 min = ImGui::GetWindowPos();
             const ImVec2 size = ImGui::GetWindowSize();
             const ImVec2 max(min.x + size.x, min.y + size.y);
+            const float localTime = now + i * 0.8f;
             RetroTheme::DrawNeonFrame(moduleDl, min, max, cards[i].color, now + i * 0.4f, 16.0f, 1.3f);
+            RetroTheme::DrawPanelAmbient(moduleDl, min, max, localTime, cards[i].color, 0.82f);
             moduleDl->AddRectFilledMultiColor(
                 min, ImVec2(max.x, min.y + 8.0f),
                 cards[i].color,
                 ImGui::ColorConvertFloat4ToU32(ImVec4(0.02f, 0.03f, 0.05f, 0.0f)),
                 ImGui::ColorConvertFloat4ToU32(ImVec4(0.02f, 0.03f, 0.05f, 0.0f)),
                 cards[i].color);
+            const ImVec2 orbCenter(max.x - 56.0f, min.y + 48.0f);
+            moduleDl->AddCircleFilled(orbCenter, 18.0f, cards[i].color, 20);
+            moduleDl->AddCircle(orbCenter, 26.0f + std::sin(localTime * 2.1f) * 4.0f,
+                                ImGui::ColorConvertFloat4ToU32(ImVec4(1, 1, 1, 0.16f)), 28, 1.2f);
+            moduleDl->AddCircle(orbCenter, 38.0f + std::cos(localTime * 1.6f) * 5.0f,
+                                ImGui::ColorConvertFloat4ToU32(ImVec4(0.16f, 0.94f, 0.96f, 0.10f)), 28, 1.0f);
+            for (int bar = 0; bar < 6; ++bar) {
+                const float amp = 10.0f + std::sin(localTime * 3.0f + bar * 0.7f) * 8.0f;
+                const float bx0 = min.x + 24.0f + bar * 12.0f;
+                const float by1 = max.y - 80.0f;
+                moduleDl->AddRectFilled(ImVec2(bx0, by1 - amp), ImVec2(bx0 + 7.0f, by1),
+                                        ImGui::ColorConvertFloat4ToU32(ImVec4(0.22f, 0.70f, 0.90f, 0.35f)), 3.0f);
+            }
 
-            ImGui::SetWindowFontScale(1.18f);
+            ImGui::SetWindowFontScale(1.12f);
             ImGui::PushStyleColor(ImGuiCol_Text, ImGui::ColorConvertU32ToFloat4(cards[i].color));
             ImGui::TextUnformatted(cards[i].title);
             ImGui::PopStyleColor();
             ImGui::SetWindowFontScale(1.0f);
             ImGui::Spacing();
+            ImGui::BeginChild("##CardSummary", ImVec2(0.0f, 60.0f), false, ImGuiWindowFlags_NoScrollbar);
             ImGui::TextWrapped("%s", cards[i].subtitle);
-            ImGui::Dummy(ImVec2(0.0f, 24.0f));
-            ImGui::SetCursorPosY(cardH - 88.0f);
-            if (ImGui::Button("LAUNCH MODULE", ImVec2(-1.0f, 56.0f))) {
+            ImGui::EndChild();
+
+            ImGui::BeginChild("##Facts", ImVec2(0.0f, 92.0f), false, ImGuiWindowFlags_NoScrollbar);
+            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.82f, 0.84f, 0.90f, 1.0f));
+            ImGui::BulletText("%s", cards[i].summaryA);
+            ImGui::BulletText("%s", cards[i].summaryB);
+            ImGui::PopStyleColor();
+            ImGui::EndChild();
+            ImGui::SetCursorPosY(cardH - 108.0f);
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.18f, 0.36f, 0.52f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.24f, 0.48f, 0.66f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.20f, 0.58f, 0.78f, 1.0f));
+            if (ImGui::Button("OPEN STUDIO", ImVec2(-1.0f, 56.0f))) {
                 launchBinary(cards[i].binary, status);
             }
+            ImGui::PopStyleColor(3);
+            ImGui::SetCursorPosY(cardH - 42.0f);
+            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.58f, 0.62f, 0.72f, 1.0f));
+            ImGui::TextUnformatted("click to launch");
+            ImGui::PopStyleColor();
             ImGui::EndChild();
-            if (i < 2) {
+            if (i % columns != columns - 1) {
                 ImGui::SameLine(0.0f, gap);
+            } else if (i < 3) {
+                ImGui::Spacing();
             }
             ImGui::PopID();
         }
         ImGui::PopStyleVar();
 
-        ImGui::Spacing();
-        ImGui::Separator();
-        ImGui::Spacing();
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.16f, 0.94f, 0.96f, 1.0f));
-        ImGui::TextUnformatted("SYSTEM STATUS");
-        ImGui::PopStyleColor();
-        ImGui::SameLine();
-        ImGui::TextDisabled("%s", status.empty() ? "ready" : "module dispatch updated");
-        if (!status.empty()) {
-            ImGui::TextWrapped("%s", status.c_str());
-        } else {
-            ImGui::TextWrapped("No module launched yet. All executables are expected in build-local/.");
-        }
         ImGui::EndChild();
         ImGui::End();
 

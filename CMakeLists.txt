@@ -67,6 +67,10 @@ set(PAINT_MODULE_SOURCES
     modules/anshdeep/src/Renderer.cpp
 )
 
+set(PIPELINE3D_MODULE_SOURCES
+    modules/pipeline3d/src/main.cpp
+)
+
 set(LAUNCHER_SOURCES
     src/LauncherMain.cpp
 )
@@ -105,6 +109,9 @@ add_executable(Paint_Module ${PAINT_MODULE_SOURCES} ${IMGUI_SOURCES})
 target_include_directories(Paint_Module PRIVATE modules/anshdeep/src)
 cgv_configure_target(Paint_Module)
 
+add_executable(Pipeline3D_Module ${PIPELINE3D_MODULE_SOURCES} ${IMGUI_SOURCES})
+cgv_configure_target(Pipeline3D_Module)
+
 add_executable(final_visualize ${LAUNCHER_SOURCES} ${IMGUI_SOURCES})
 cgv_configure_target(final_visualize)
 
@@ -127,6 +134,7 @@ if(WIN32)
     target_link_libraries(CGV_Module ${GLFW_LIB} opengl32)
     target_link_libraries(DSA_Visualizer ${GLFW_LIB} opengl32)
     target_link_libraries(Paint_Module ${GLFW_LIB} opengl32)
+    target_link_libraries(Pipeline3D_Module ${GLFW_LIB} opengl32)
     target_link_libraries(final_visualize ${GLFW_LIB} opengl32)
 elseif(APPLE)
     find_package(glfw3 REQUIRED)
@@ -134,10 +142,12 @@ elseif(APPLE)
     target_link_libraries(CGV_Module glfw OpenGL::GL)
     target_link_libraries(DSA_Visualizer glfw OpenGL::GL)
     target_link_libraries(Paint_Module glfw OpenGL::GL)
+    target_link_libraries(Pipeline3D_Module glfw OpenGL::GL)
     target_link_libraries(final_visualize glfw OpenGL::GL)
 else()
     target_link_libraries(CGV_Module glfw GLEW GL m dl pthread)
     target_link_libraries(DSA_Visualizer glfw GLEW GL m dl pthread)
     target_link_libraries(Paint_Module glfw GLEW GL m dl pthread)
+    target_link_libraries(Pipeline3D_Module glfw GLEW GL m dl pthread)
     target_link_libraries(final_visualize glfw GLEW GL m dl pthread)
 endif()

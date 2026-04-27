@@ -20,7 +20,7 @@ const unsigned int SCR_WIDTH = 1440;
 const unsigned int SCR_HEIGHT = 860;
 
 // Application state
-enum class Tool { LINE, CIRCLE, SQUARE, ELLIPSE, FILL_BUCKET, PENCIL, BRUSH, ERASER, MOVE };
+enum class Tool { LINE, CIRCLE, SQUARE, ELLIPSE, FILL_BUCKET, PENCIL, BRUSH, ERASER, MOVE, SCALE };
 Tool currentTool = Tool::PENCIL;
 float currentColor[4] = {1.0f, 1.0f, 1.0f, 1.0f}; // RGBA Draw color
 float backgroundColor[4] = {0.0f, 0.0f, 0.0f, 1.0f}; // RGBA Back color
@@ -42,6 +42,42 @@ int startMouseX = -1;
 int startMouseY = -1;
 int selectedShapeIdx = -1;
 std::vector<int> draggingShapeIndices;
+
+void ScalePoint(int& x, int& y, float cx, float cy, float factor) {
+    x = static_cast<int>(std::lround(cx + (x - cx) * factor));
+    y = static_cast<int>(std::lround(cy + (y - cy) * factor));
+}
+
+void ScaleShapeFromSource(Shape& dst, const Shape& src, float cx, float cy, float factor) {
+    dst = src;
+    ScalePoint(dst.x0, dst.y0, cx, cy, factor);
+    ScalePoint(dst.x1, dst.y1, cx, cy, factor);
+    for (auto& p : dst.points) {
+        ScalePoint(p.first, p.second, cx, cy, factor);
+    }
+    dst.thickness = std::max(1.0f, src.thickness * factor);
+}
+
+bool ComputeGroupBounds(const std::vector<Shape>& shapes,
+                        const std::vector<int>& indices,
+                        int& minX, int& minY, int& maxX, int& maxY) {
+    if (indices.empty()) {
+        return false;
+    }
+    minX = 999999;
+    minY = 999999;
+    maxX = -999999;
+    maxY = -999999;
+    for (int idx : indices) {
+        int bx0, by0, bx1, by1;
+        shapes[idx].GetBoundingBox(bx0, by0, bx1, by1);
+        minX = std::min(minX, bx0);
+        minY = std::min(minY, by0);
+        maxX = std::max(maxX, bx1);
+        maxY = std::max(maxY, by1);
+    }
+    return minX <= maxX && minY <= maxY;
+}
 
 void processInput(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -185,7 +221,7 @@ int main() {
                             }
                             canvas.Redraw();
                         }
-                    } else if (currentTool == Tool::MOVE) {
+                    } else if (currentTool == Tool::MOVE || currentTool == Tool::SCALE) {
                         selectedShapeIdx = Algorithms::FindShapeAt(canvas, mouseX, mouseY);
                         draggingShapeIndices.clear();
                         if (selectedShapeIdx != -1) {
@@ -242,6 +278,31 @@ int main() {
                             }
                             if (minX <= maxX && minY <= maxY) {
                                 Algorithms::DrawDashedBox(canvas, minX - 2, minY - 2, maxX + 2, maxY + 2, Color(255, 255, 0));
+                            }
+                        }
+                    } else if (currentTool == Tool::SCALE) {
+                        if (!draggingShapeIndices.empty()) {
+                            canvas = *backupCanvas;
+                            auto& scaledShapes = canvas.GetShapes();
+                            auto& sourceShapes = backupCanvas->GetShapes();
+                            int minX, minY, maxX, maxY;
+                            if (ComputeGroupBounds(sourceShapes, draggingShapeIndices, minX, minY, maxX, maxY)) {
+                                const float cx = 0.5f * (minX + maxX);
+                                const float cy = 0.5f * (minY + maxY);
+                                const float startDx = startMouseX - cx;
+                                const float startDy = startMouseY - cy;
+                                const float currDx = mouseX - cx;
+                                const float currDy = mouseY - cy;
+                                const float startDist = std::max(18.0f, std::sqrt(startDx * startDx + startDy * startDy));
+                                const float currDist = std::max(10.0f, std::sqrt(currDx * currDx + currDy * currDy));
+                                const float factor = std::clamp(currDist / startDist, 0.20f, 5.00f);
+                                for (int idx : draggingShapeIndices) {
+                                    ScaleShapeFromSource(scaledShapes[idx], sourceShapes[idx], cx, cy, factor);
+                                }
+                                canvas.Redraw();
+                                if (ComputeGroupBounds(scaledShapes, draggingShapeIndices, minX, minY, maxX, maxY)) {
+                                    Algorithms::DrawDashedBox(canvas, minX - 2, minY - 2, maxX + 2, maxY + 2, Color(255, 215, 0));
+                                }
                             }
                         }
                     } else if (currentTool == Tool::CIRCLE) {
@@ -305,7 +366,7 @@ int main() {
                         }
                     }
                     isDrawing = false;
-                    if (currentTool == Tool::MOVE) {
+                    if (currentTool == Tool::MOVE || currentTool == Tool::SCALE) {
                         canvas.Redraw(); // Final redraw to remove selection highlight
                     }
                     selectedShapeIdx = -1;
@@ -339,11 +400,18 @@ int main() {
         RetroTheme::DrawCornerAccents(ImGui::GetWindowDrawList(), toolsPos,
                                       toolsMax,
                                       RetroTheme::NeonAmber(0.85f), 22.0f, 2.5f);
+        RetroTheme::DrawPanelAmbient(ImGui::GetWindowDrawList(), toolsPos, toolsMax,
+                                     (float)glfwGetTime(), RetroTheme::NeonCyan(0.88f), 0.85f);
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.95f, 0.78f, 0.22f, 1.0f));
         ImGui::TextUnformatted("PAINT LAB // RASTER STUDIO");
         ImGui::PopStyleColor();
         ImGui::SameLine();
         ImGui::TextDisabled("live tools, shape rasterization, fill and AA");
+        ImGui::SameLine();
+        ImGui::SetCursorPosX(std::max(0.0f, ImGui::GetWindowWidth() - 240.0f));
+        ImGui::PushItemWidth(120.0f);
+        ImGui::SliderFloat("Scale##FontScale", &io.FontGlobalScale, 0.5f, 3.0f, "%.1f");
+        ImGui::PopItemWidth();
         ImGui::Separator();
         
         if (ImGui::Button("Clear", ImVec2(128, 0))) {
@@ -362,6 +430,8 @@ int main() {
         };
 
         ToolButton("Move", Tool::MOVE);
+        ImGui::SameLine();
+        ToolButton("Scale", Tool::SCALE);
         ImGui::SameLine();
         ToolButton("Pencil", Tool::PENCIL);
         ImGui::SameLine();

@@ -97,6 +97,23 @@ inline void DrawBackdrop(float timeSeconds) {
         dl->AddLine(ImVec2(0.0f, y), ImVec2(display.x, y),
                     ImGui::ColorConvertFloat4ToU32(ImVec4(1.0f, 0.78f, 0.22f, 0.04f)));
     }
+
+    for (int i = 0; i < 36; ++i) {
+        const float phase = timeSeconds * (0.25f + 0.015f * i) + i * 0.7f;
+        const float x = std::fmod(display.x * (0.08f + 0.023f * i) + phase * 28.0f, display.x + 120.0f) - 60.0f;
+        const float y = display.y * (0.12f + 0.022f * (i % 14)) + std::sin(phase * 1.3f) * (12.0f + (i % 6) * 4.0f);
+        const float radius = 1.4f + (i % 4) * 0.9f + (std::sin(phase * 2.1f) + 1.0f) * 0.4f;
+        const ImU32 color = (i % 3 == 0) ? NeonAmber(0.18f) : ((i % 3 == 1) ? NeonCyan(0.16f) : NeonPink(0.12f));
+        dl->AddCircleFilled(ImVec2(x, y), radius, color, 12);
+    }
+
+    for (int i = 0; i < 10; ++i) {
+        const float phase = timeSeconds * (0.35f + i * 0.03f) + i;
+        const float x = display.x * (0.10f + 0.085f * i) + std::sin(phase) * 24.0f;
+        const float y = display.y * (0.70f + 0.02f * (i % 3)) + std::cos(phase * 1.4f) * 18.0f;
+        const float r = 18.0f + std::sin(phase * 1.6f) * 4.0f;
+        dl->AddCircle(ImVec2(x, y), r, ImGui::ColorConvertFloat4ToU32(ImVec4(0.16f, 0.94f, 0.96f, 0.08f)), 32, 1.0f);
+    }
 }
 
 inline void DrawNeonFrame(ImDrawList* dl, const ImVec2& min, const ImVec2& max,
@@ -139,6 +156,45 @@ inline void DrawCornerAccents(ImDrawList* dl, const ImVec2& min, const ImVec2& m
     dl->AddLine(ImVec2(min.x, max.y), ImVec2(min.x + len, max.y), color, thickness);
     dl->AddLine(ImVec2(max.x - len, max.y), max, color, thickness);
     dl->AddLine(ImVec2(max.x, max.y - len), max, color, thickness);
+}
+
+inline void DrawPanelAmbient(ImDrawList* dl, const ImVec2& min, const ImVec2& max,
+                             float timeSeconds, ImU32 accent, float alphaScale = 1.0f) {
+    const float w = max.x - min.x;
+    const float h = max.y - min.y;
+    const ImVec4 accentF = ImGui::ColorConvertU32ToFloat4(accent);
+
+    dl->AddRectFilledMultiColor(
+        min, max,
+        ImGui::ColorConvertFloat4ToU32(ImVec4(accentF.x, accentF.y, accentF.z, 0.06f * alphaScale)),
+        ImGui::ColorConvertFloat4ToU32(ImVec4(0.02f, 0.03f, 0.05f, 0.00f)),
+        ImGui::ColorConvertFloat4ToU32(ImVec4(0.02f, 0.03f, 0.05f, 0.00f)),
+        ImGui::ColorConvertFloat4ToU32(ImVec4(accentF.x, accentF.y, accentF.z, 0.04f * alphaScale)));
+
+    for (int i = 0; i < 12; ++i) {
+        const float phase = timeSeconds * (0.55f + 0.04f * i) + i * 0.8f;
+        const float x = min.x + std::fmod(w * (0.12f + 0.071f * i) + phase * 22.0f, w + 80.0f);
+        const float y = min.y + h * (0.14f + 0.061f * (i % 7)) + std::sin(phase) * (6.0f + i);
+        dl->AddCircleFilled(ImVec2(x, y), 1.2f + (i % 3), ImGui::ColorConvertFloat4ToU32(ImVec4(accentF.x, accentF.y, accentF.z, 0.18f * alphaScale)), 10);
+    }
+
+    for (int i = 0; i < 6; ++i) {
+        const float phase = timeSeconds * (0.8f + i * 0.08f) + i;
+        const float cx = min.x + w * (0.18f + 0.13f * i);
+        const float cy = min.y + h * (0.18f + 0.10f * (i % 3));
+        const float rx = 18.0f + 8.0f * i + std::sin(phase) * 3.0f;
+        const float ry = rx * 0.48f;
+        dl->AddEllipse(ImVec2(cx, cy), ImVec2(rx, ry),
+                       ImGui::ColorConvertFloat4ToU32(ImVec4(accentF.x, accentF.y, accentF.z, 0.12f * alphaScale)),
+                       32, 0.0f, 1.0f);
+    }
+
+    for (int i = 0; i < 8; ++i) {
+        const float phase = timeSeconds * 0.9f + i;
+        const float y = min.y + 18.0f + i * 14.0f + std::sin(phase) * 2.5f;
+        dl->AddLine(ImVec2(min.x + 12.0f, y), ImVec2(max.x - 12.0f, y),
+                    ImGui::ColorConvertFloat4ToU32(ImVec4(accentF.x, accentF.y, accentF.z, 0.03f * alphaScale)));
+    }
 }
 
 }  // namespace RetroTheme

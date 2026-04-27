@@ -82,6 +82,8 @@ void VisualizerEngine::renderUI() {
   const ImVec2 panelPos = ImGui::GetWindowPos();
   const ImVec2 panelSize = ImGui::GetWindowSize();
   const ImVec2 panelMax(panelPos.x + panelSize.x, panelPos.y + panelSize.y);
+  RetroTheme::DrawPanelAmbient(ImGui::GetWindowDrawList(), panelPos, panelMax,
+                               (float)glfwGetTime(), RetroTheme::NeonCyan(0.90f), 0.85f);
   RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), panelPos,
                             panelMax,
                             RetroTheme::NeonCyan(0.92f), (float)glfwGetTime(),
@@ -221,6 +223,8 @@ void VisualizerEngine::renderVisualizeTab() {
   const ImVec2 upperPos = ImGui::GetWindowPos();
   const ImVec2 upperSize = ImGui::GetWindowSize();
   const ImVec2 upperMax(upperPos.x + upperSize.x, upperPos.y + upperSize.y);
+  RetroTheme::DrawPanelAmbient(ImGui::GetWindowDrawList(), upperPos, upperMax,
+                               (float)glfwGetTime() + 0.3f, RetroTheme::NeonAmber(0.82f), 0.75f);
   RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), upperPos,
                             upperMax,
                             RetroTheme::NeonAmber(0.42f), (float)glfwGetTime() + 0.8f,
@@ -569,6 +573,8 @@ void VisualizerEngine::renderVisualizeTab() {
   const ImVec2 statePos = ImGui::GetWindowPos();
   const ImVec2 stateSize = ImGui::GetWindowSize();
   const ImVec2 stateMax(statePos.x + stateSize.x, statePos.y + stateSize.y);
+  RetroTheme::DrawPanelAmbient(ImGui::GetWindowDrawList(), statePos, stateMax,
+                               (float)glfwGetTime() + 0.6f, RetroTheme::NeonCyan(0.84f), 0.70f);
   RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), statePos,
                             stateMax,
                             RetroTheme::NeonCyan(0.36f), (float)glfwGetTime() + 1.2f,
@@ -613,6 +619,8 @@ void VisualizerEngine::renderVisualizeTab() {
   const ImVec2 calcPos = ImGui::GetWindowPos();
   const ImVec2 calcSize = ImGui::GetWindowSize();
   const ImVec2 calcMax(calcPos.x + calcSize.x, calcPos.y + calcSize.y);
+  RetroTheme::DrawPanelAmbient(ImGui::GetWindowDrawList(), calcPos, calcMax,
+                               (float)glfwGetTime() + 0.9f, RetroTheme::NeonPink(0.78f), 0.66f);
   RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), calcPos,
                             calcMax,
                             RetroTheme::NeonPink(0.26f), (float)glfwGetTime() + 1.6f,

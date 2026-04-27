@@ -257,6 +257,8 @@ void VisualizerEngine::renderUI() {
     const ImVec2 panelPos = ImGui::GetWindowPos();
     const ImVec2 panelSize = ImGui::GetWindowSize();
     const ImVec2 panelMax(panelPos.x + panelSize.x, panelPos.y + panelSize.y);
+    RetroTheme::DrawPanelAmbient(ImGui::GetWindowDrawList(), panelPos, panelMax,
+                                 elapsedTime, RetroTheme::NeonCyan(0.88f), 0.84f);
     RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), panelPos,
                               panelMax,
                               RetroTheme::NeonCyan(0.92f), elapsedTime, 18.0f, 1.5f);
@@ -569,6 +571,8 @@ void VisualizerEngine::renderUI() {
             const ImVec2 stepLogPos = ImGui::GetWindowPos();
             const ImVec2 stepLogSize = ImGui::GetWindowSize();
             const ImVec2 stepLogMax(stepLogPos.x + stepLogSize.x, stepLogPos.y + stepLogSize.y);
+            RetroTheme::DrawPanelAmbient(ImGui::GetWindowDrawList(), stepLogPos, stepLogMax,
+                                         elapsedTime + 0.7f, RetroTheme::NeonPink(0.82f), 0.75f);
             RetroTheme::DrawNeonFrame(ImGui::GetWindowDrawList(), stepLogPos,
                                       stepLogMax,
                                       RetroTheme::NeonPink(0.24f), elapsedTime + 1.0f,
