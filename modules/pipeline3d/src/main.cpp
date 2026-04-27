@@ -83,6 +83,18 @@ struct ShapeData {
     std::vector<std::array<int, 2>> edges;
 };
 
+struct RenderStageData {
+    std::vector<Vec3> vertices;
+    std::vector<std::array<int, 2>> edges;
+};
+
+bool IsInsideClipVolume(const Vec4& clip) {
+    const float w = std::fabs(clip.w);
+    return std::fabs(clip.x) <= w &&
+           std::fabs(clip.y) <= w &&
+           std::fabs(clip.z) <= w;
+}
+
 Mat4 Identity() {
     Mat4 out {};
     out.m[0] = out.m[5] = out.m[10] = out.m[15] = 1.0f;
@@ -326,6 +338,83 @@ std::array<ShapeData, 2> BuildShapes() {
     return {cube, pyramid};
 }
 
+Vec3 ToVec3(const Vec4& v) {
+    return {v.x, v.y, v.z};
+}
+
+std::vector<Vec3> ComputeFaceNormals(const ShapeData& shape,
+                                     const std::vector<Vec3>& verts) {
+    std::vector<Vec3> normals;
+    normals.reserve(shape.faces.size());
+    for (const auto& face : shape.faces) {
+        const Vec3 a = verts[face[0]];
+        const Vec3 b = verts[face[1]];
+        const Vec3 c = verts[face[2]];
+        normals.push_back(Normalize(Cross(Sub(b, a), Sub(c, a))));
+    }
+    return normals;
+}
+
+RenderStageData BuildObjectStage(const ShapeData& shape) {
+    RenderStageData out;
+    out.vertices = shape.vertices;
+    out.edges = shape.edges;
+    return out;
+}
+
+RenderStageData BuildWorldStage(const ShapeData& shape,
+                                const std::vector<Vec4>& worldPoints) {
+    RenderStageData out;
+    out.edges = shape.edges;
+    out.vertices.reserve(worldPoints.size());
+    for (const Vec4& v : worldPoints) {
+        out.vertices.push_back(ToVec3(v));
+    }
+    return out;
+}
+
+RenderStageData BuildViewStage(const ShapeData& shape,
+                               const std::vector<Vec4>& viewPoints) {
+    RenderStageData out;
+    out.edges = shape.edges;
+    out.vertices.reserve(viewPoints.size());
+    for (const Vec4& v : viewPoints) {
+        out.vertices.push_back(ToVec3(v));
+    }
+    return out;
+}
+
+RenderStageData BuildClipStage(const ShapeData& shape,
+                               const std::vector<Vec4>& clipPoints) {
+    RenderStageData out;
+    out.edges = shape.edges;
+    out.vertices.reserve(clipPoints.size());
+    for (const Vec4& v : clipPoints) {
+        const float safeW = std::max(0.001f, std::fabs(v.w));
+        out.vertices.push_back({v.x / safeW, v.y / safeW, v.z / safeW});
+    }
+    return out;
+}
+
+RenderStageData BuildScreenStage(const ShapeData& shape,
+                                 const std::vector<Vec4>& screenPoints,
+                                 float width,
+                                 float height) {
+    RenderStageData out;
+    out.edges = shape.edges;
+    out.vertices.reserve(screenPoints.size());
+    const float invW = width > 0.0f ? 2.0f / width : 0.0f;
+    const float invH = height > 0.0f ? 2.0f / height : 0.0f;
+    for (const Vec4& v : screenPoints) {
+        out.vertices.push_back({
+            -1.0f + v.x * invW,
+            1.0f - v.y * invH,
+            std::clamp(v.z, -1.0f, 1.0f)
+        });
+    }
+    return out;
+}
+
 void PushLine(std::vector<VertexPC>& verts, const Vec3& a, const Vec3& b,
               float r, float g, float bl) {
     verts.push_back({a.x, a.y, a.z, r, g, bl});
@@ -337,10 +426,6 @@ void PushTriangle(std::vector<VertexPC>& verts, const Vec3& a, const Vec3& b, co
     verts.push_back({a.x, a.y, a.z, r, g, bl});
     verts.push_back({b.x, b.y, b.z, r, g, bl});
     verts.push_back({c.x, c.y, c.z, r, g, bl});
-}
-
-Vec3 ToVec3(const Vec4& v) {
-    return {v.x, v.y, v.z};
 }
 
 void DrawMatrixBlock(const char* title, const Mat4& mat, ImU32 accent) {
@@ -510,16 +595,6 @@ int main() {
         Vec3 eyeForOverlay {};
 
         const float now = (float)glfwGetTime();
-        if (state.autoSpin) {
-            state.rotateDeg.y += 0.22f;
-        }
-        if (state.animateCamera) {
-            state.cameraYawDeg = 28.0f + std::sin(now * 0.45f) * 22.0f;
-        }
-        if (state.pulseScale) {
-            const float pulse = 1.0f + std::sin(now * 1.4f) * 0.08f;
-            state.scale = {pulse, pulse, pulse};
-        }
 
         glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
         glClearColor(0.015f, 0.020f, 0.045f, 1.0f);
@@ -579,26 +654,14 @@ int main() {
         ImGui::TextUnformatted("MODEL TRANSFORM");
         ImGui::PopStyleColor();
         ImGui::SliderFloat3("Translate", &state.translate.x, -3.5f, 3.5f, "%.2f");
-        if (!state.pulseScale) {
-            ImGui::SliderFloat3("Scale", &state.scale.x, 0.35f, 2.40f, "%.2f");
-        } else {
-            ImGui::BeginDisabled();
-            ImGui::SliderFloat3("Scale", &state.scale.x, 0.35f, 2.40f, "%.2f");
-            ImGui::EndDisabled();
-        }
+        ImGui::SliderFloat3("Scale", &state.scale.x, 0.35f, 2.40f, "%.2f");
         ImGui::SliderFloat3("Rotate", &state.rotateDeg.x, -180.0f, 180.0f, "%.0f deg");
 
         ImGui::Spacing();
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.16f, 0.94f, 0.96f, 1.0f));
         ImGui::TextUnformatted("CAMERA + PROJECTION");
         ImGui::PopStyleColor();
-        if (!state.animateCamera) {
-            ImGui::SliderFloat("Yaw", &state.cameraYawDeg, -180.0f, 180.0f, "%.0f deg");
-        } else {
-            ImGui::BeginDisabled();
-            ImGui::SliderFloat("Yaw", &state.cameraYawDeg, -180.0f, 180.0f, "%.0f deg");
-            ImGui::EndDisabled();
-        }
+        ImGui::SliderFloat("Yaw", &state.cameraYawDeg, -180.0f, 180.0f, "%.0f deg");
         ImGui::SliderFloat("Pitch", &state.cameraPitchDeg, -70.0f, 70.0f, "%.0f deg");
         ImGui::SliderFloat("Distance", &state.cameraDistance, 3.0f, 12.0f, "%.2f");
         ImGui::SliderFloat("FOV", &state.fovDeg, 28.0f, 100.0f, "%.0f deg");
@@ -622,9 +685,23 @@ int main() {
         ImGui::SameLine();
         ImGui::Checkbox("Camera ray", &state.showCameraRay);
 
+        const float orbitOffset = state.animateCamera ? std::sin(now * 0.45f) * 22.0f : 0.0f;
+        const float spinOffset = state.autoSpin ? now * 30.0f : 0.0f;
+        const float pulse = state.pulseScale ? (1.0f + std::sin(now * 1.4f) * 0.08f) : 1.0f;
+        const Vec3 effectiveScale {
+            state.scale.x * pulse,
+            state.scale.y * pulse,
+            state.scale.z * pulse
+        };
+        const Vec3 effectiveRotateDeg {
+            state.rotateDeg.x,
+            state.rotateDeg.y + spinOffset,
+            state.rotateDeg.z
+        };
+
         const ShapeData& shape = shapes[state.activeShape];
         const Vec3 target {0.0f, 0.0f, 0.0f};
-        const float yaw = state.cameraYawDeg * kPi / 180.0f;
+        const float yaw = (state.cameraYawDeg + orbitOffset) * kPi / 180.0f;
         const float pitch = state.cameraPitchDeg * kPi / 180.0f;
         const Vec3 eye {
             std::cos(yaw) * std::cos(pitch) * state.cameraDistance,
@@ -632,10 +709,10 @@ int main() {
             std::sin(yaw) * std::cos(pitch) * state.cameraDistance
         };
         Mat4 model = Multiply(Translate(state.translate),
-                              Multiply(RotateZ(state.rotateDeg.z * kPi / 180.0f),
-                                       Multiply(RotateY(state.rotateDeg.y * kPi / 180.0f),
-                                                Multiply(RotateX(state.rotateDeg.x * kPi / 180.0f),
-                                                         Scale(state.scale)))));
+                              Multiply(RotateZ(effectiveRotateDeg.z * kPi / 180.0f),
+                                       Multiply(RotateY(effectiveRotateDeg.y * kPi / 180.0f),
+                                                Multiply(RotateX(effectiveRotateDeg.x * kPi / 180.0f),
+                                                         Scale(effectiveScale)))));
         Mat4 view = LookAt(eye, target, {0.0f, 1.0f, 0.0f});
         const float viewportW = display.x - sidebarW - pad * 3.0f;
         const float viewportH = display.y - headerH - pad * 2.0f;
@@ -647,11 +724,13 @@ int main() {
         std::vector<Vec4> viewPoints;
         std::vector<Vec4> clipPoints;
         std::vector<Vec4> screenPoints;
+        std::vector<bool> insideClip;
         objectPoints.reserve(shape.vertices.size());
         worldPoints.reserve(shape.vertices.size());
         viewPoints.reserve(shape.vertices.size());
         clipPoints.reserve(shape.vertices.size());
         screenPoints.reserve(shape.vertices.size());
+        insideClip.reserve(shape.vertices.size());
 
         for (const Vec3& v : shape.vertices) {
             const Vec4 object {v.x, v.y, v.z, 1.0f};
@@ -671,6 +750,7 @@ int main() {
             viewPoints.push_back(cam);
             clipPoints.push_back(clip);
             screenPoints.push_back(screen);
+            insideClip.push_back(IsInsideClipVolume(clip));
         }
 
         ImGui::Spacing();
@@ -693,6 +773,7 @@ int main() {
                           screenPoints[state.selectedVertex].x,
                           screenPoints[state.selectedVertex].y,
                           screenPoints[state.selectedVertex].z);
+        ImGui::BulletText("Clip Test: %s", insideClip[state.selectedVertex] ? "inside clip volume" : "outside clip volume");
         ImGui::Spacing();
         DrawMatrixBlock("Model Matrix", model, RetroTheme::NeonAmber(0.9f));
         ImGui::Spacing();
@@ -763,47 +844,157 @@ int main() {
             PushLine(lineVerts, eye, target, 0.98f, 0.76f, 0.18f);
         }
 
-        std::vector<Vec3> worldVerts;
-        worldVerts.reserve(worldPoints.size());
-        for (const Vec4& v : worldPoints) {
-            worldVerts.push_back(ToVec3(v));
+        RenderStageData objectStage = BuildObjectStage(shape);
+        RenderStageData worldStage = BuildWorldStage(shape, worldPoints);
+        RenderStageData viewStage = BuildViewStage(shape, viewPoints);
+        RenderStageData clipStage = BuildClipStage(shape, clipPoints);
+        RenderStageData screenStage = BuildScreenStage(shape, screenPoints, viewportW, viewportH);
+
+        const RenderStageData* focusedStage = &worldStage;
+        Mat4 stageMVP = vp;
+        bool stageUsesSolidFaces = state.showSolid;
+        bool stageUses3DGrid = state.showGrid;
+        bool stageUsesAxes = state.showAxes;
+        bool stageUsesCameraRay = state.showCameraRay;
+
+        if (state.stageFocus == StageObject) {
+            focusedStage = &objectStage;
+            const Vec3 debugEye {4.4f, 3.0f, 4.6f};
+            stageMVP = Multiply(proj, LookAt(debugEye, {0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}));
+            stageUsesCameraRay = false;
+        } else if (state.stageFocus == StageWorld) {
+            focusedStage = &worldStage;
+            const Vec3 debugEye {5.0f, 3.2f, 5.4f};
+            stageMVP = Multiply(proj, LookAt(debugEye, {0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}));
+        } else if (state.stageFocus == StageView) {
+            focusedStage = &viewStage;
+            const Vec3 debugEye {3.2f, 2.2f, 5.6f};
+            stageMVP = Multiply(proj, LookAt(debugEye, {0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}));
+            stageUsesCameraRay = false;
+        } else if (state.stageFocus == StageClip) {
+            focusedStage = &clipStage;
+            stageMVP = Identity();
+            stageUses3DGrid = false;
+        } else if (state.stageFocus == StageScreen) {
+            focusedStage = &screenStage;
+            stageMVP = Identity();
+            stageUses3DGrid = false;
         }
 
-        if (state.showSolid) {
+        if (stageUses3DGrid) {
+            for (int i = -10; i <= 10; ++i) {
+                const float z = (float)i;
+                PushLine(lineVerts, {-10.0f, -1.2f, z}, {10.0f, -1.2f, z}, 0.18f, 0.34f, 0.46f);
+                PushLine(lineVerts, {(float)i, -1.2f, -10.0f}, {(float)i, -1.2f, 10.0f}, 0.18f, 0.34f, 0.46f);
+            }
+        } else if (state.stageFocus == StageClip) {
+            const float cube = 1.0f;
+            const std::array<Vec3, 8> clipBox = {{
+                {-cube, -cube, -cube}, { cube, -cube, -cube}, { cube,  cube, -cube}, {-cube,  cube, -cube},
+                {-cube, -cube,  cube}, { cube, -cube,  cube}, { cube,  cube,  cube}, {-cube,  cube,  cube}
+            }};
+            const std::array<std::array<int, 2>, 12> clipEdges = {{
+                {{0,1}}, {{1,2}}, {{2,3}}, {{3,0}},
+                {{4,5}}, {{5,6}}, {{6,7}}, {{7,4}},
+                {{0,4}}, {{1,5}}, {{2,6}}, {{3,7}}
+            }};
+            for (const auto& edge : clipEdges) {
+                PushLine(lineVerts, clipBox[edge[0]], clipBox[edge[1]], 0.34f, 0.82f, 1.0f);
+            }
+            if (state.showGrid) {
+                for (int i = -1; i <= 1; ++i) {
+                    const float t = i * 0.5f;
+                    PushLine(lineVerts, {-1.0f, t, -1.0f}, {1.0f, t, -1.0f}, 0.20f, 0.45f, 0.66f);
+                    PushLine(lineVerts, {-1.0f, t,  1.0f}, {1.0f, t,  1.0f}, 0.20f, 0.45f, 0.66f);
+                    PushLine(lineVerts, {t, -1.0f, -1.0f}, {t, 1.0f, -1.0f}, 0.20f, 0.45f, 0.66f);
+                    PushLine(lineVerts, {t, -1.0f,  1.0f}, {t, 1.0f,  1.0f}, 0.20f, 0.45f, 0.66f);
+                    PushLine(lineVerts, {-1.0f, -1.0f, t}, {-1.0f, 1.0f, t}, 0.20f, 0.45f, 0.66f);
+                    PushLine(lineVerts, { 1.0f, -1.0f, t}, { 1.0f, 1.0f, t}, 0.20f, 0.45f, 0.66f);
+                }
+            }
+        } else if (state.stageFocus == StageScreen) {
+            PushLine(lineVerts, {-1.0f, -1.0f, 0.0f}, {1.0f, -1.0f, 0.0f}, 0.34f, 0.82f, 1.0f);
+            PushLine(lineVerts, {1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 0.0f}, 0.34f, 0.82f, 1.0f);
+            PushLine(lineVerts, {1.0f, 1.0f, 0.0f}, {-1.0f, 1.0f, 0.0f}, 0.34f, 0.82f, 1.0f);
+            PushLine(lineVerts, {-1.0f, 1.0f, 0.0f}, {-1.0f, -1.0f, 0.0f}, 0.34f, 0.82f, 1.0f);
+            if (state.showAxes) {
+                PushLine(lineVerts, {-1.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, 0.22f, 0.48f, 0.72f);
+                PushLine(lineVerts, {0.0f, -1.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, 0.22f, 0.48f, 0.72f);
+            }
+            if (state.showGrid) {
+                for (int i = -4; i <= 4; ++i) {
+                    const float t = i / 4.0f;
+                    PushLine(lineVerts, {-1.0f, t, 0.0f}, {1.0f, t, 0.0f}, 0.18f, 0.34f, 0.46f);
+                    PushLine(lineVerts, {t, -1.0f, 0.0f}, {t, 1.0f, 0.0f}, 0.18f, 0.34f, 0.46f);
+                }
+            }
+        }
+
+        const std::vector<Vec3>& focusedVerts = focusedStage->vertices;
+
+        if (stageUsesAxes && state.stageFocus != StageScreen) {
+            PushLine(lineVerts, {0.0f, 0.0f, 0.0f}, {2.6f, 0.0f, 0.0f}, 1.0f, 0.24f, 0.28f);
+            PushLine(lineVerts, {0.0f, 0.0f, 0.0f}, {0.0f, 2.6f, 0.0f}, 0.28f, 1.0f, 0.45f);
+            PushLine(lineVerts, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 2.6f}, 0.28f, 0.56f, 1.0f);
+        }
+        if (stageUsesCameraRay) {
+            if (state.stageFocus == StageView) {
+                PushLine(lineVerts, {0.0f, 0.0f, 0.0f}, focusedVerts[state.selectedVertex], 0.98f, 0.76f, 0.18f);
+            } else if (state.stageFocus == StageClip || state.stageFocus == StageScreen) {
+                PushLine(lineVerts, {0.0f, 0.0f, 0.0f}, focusedVerts[state.selectedVertex], 0.98f, 0.76f, 0.18f);
+            } else {
+                PushLine(lineVerts, eye, target, 0.98f, 0.76f, 0.18f);
+            }
+        }
+
+        if (stageUsesSolidFaces) {
+            const auto faceNormals = ComputeFaceNormals(shape, focusedVerts);
             for (size_t i = 0; i < shape.faces.size(); ++i) {
                 const auto& f = shape.faces[i];
-                const float tint = 0.70f + 0.12f * (float)(i % 4);
-                PushTriangle(triVerts, worldVerts[f[0]], worldVerts[f[1]], worldVerts[f[2]],
-                             std::min(1.0f, 0.24f + tint * 0.50f),
-                             std::min(1.0f, 0.36f + tint * 0.48f),
-                             std::min(1.0f, 0.56f + tint * 0.34f));
+                const Vec3& n = faceNormals[i];
+                const float light = std::clamp(0.35f + Dot(n, Normalize(Vec3{0.4f, 0.8f, 0.3f})) * 0.55f, 0.18f, 1.0f);
+                const bool clippedFace =
+                    !insideClip[f[0]] || !insideClip[f[1]] || !insideClip[f[2]];
+                const float tint = (state.stageFocus == StageClip && clippedFace) ? 0.55f : 1.0f;
+                PushTriangle(triVerts, focusedVerts[f[0]], focusedVerts[f[1]], focusedVerts[f[2]],
+                             std::min(1.0f, (0.22f + light * 0.62f) * tint),
+                             std::min(1.0f, (0.34f + light * 0.54f) * tint),
+                             std::min(1.0f, (0.52f + light * 0.42f) * tint));
             }
         }
         if (state.showWireframe) {
-            for (const auto& edge : shape.edges) {
+            for (const auto& edge : focusedStage->edges) {
                 const bool active = edge[0] == state.selectedVertex || edge[1] == state.selectedVertex;
-                PushLine(lineVerts, worldVerts[edge[0]], worldVerts[edge[1]],
+                PushLine(lineVerts, focusedVerts[edge[0]], focusedVerts[edge[1]],
                          1.0f,
                          active ? 0.90f : 0.98f,
                          active ? 0.16f : 1.0f);
             }
         }
-        for (size_t i = 0; i < worldVerts.size(); ++i) {
-            const bool active = (int)i == state.selectedVertex;
-            pointVerts.push_back({
-                worldVerts[i].x, worldVerts[i].y, worldVerts[i].z,
-                active ? 1.0f : 0.95f,
-                active ? 0.88f : 0.97f,
-                active ? 0.14f : 1.0f
-            });
+        for (size_t i = 0; i < focusedVerts.size(); ++i) {
+                const bool active = (int)i == state.selectedVertex;
+                const bool clipped = state.stageFocus == StageClip && !insideClip[(int)i];
+                pointVerts.push_back({
+                    focusedVerts[i].x, focusedVerts[i].y, focusedVerts[i].z,
+                    clipped ? 1.0f : (active ? 1.0f : 0.95f),
+                    clipped ? 0.32f : (active ? 0.88f : 0.97f),
+                    clipped ? 0.32f : (active ? 0.14f : 1.0f)
+                });
         }
 
         ImDrawList* overlay = ImGui::GetWindowDrawList();
         const ImVec2 contentStart = canvasMin;
         const ImVec2 contentEnd(canvasMin.x + canvasAvail.x, canvasMin.y + canvasAvail.y);
         overlay->AddRect(contentStart, contentEnd, RetroTheme::NeonCyan(0.22f), 12.0f, 0, 1.0f);
+        const char* overlayTitle[] = {
+            "scene: object coordinates",
+            "scene: world-transformed object",
+            "scene: camera/view coordinates",
+            "scene: clip volume after perspective divide",
+            "scene: final screen-space mapping"
+        };
         overlay->AddText(ImVec2(contentStart.x + 18.0f, contentStart.y + 18.0f),
-                         RetroTheme::NeonAmber(0.95f), "scene: world + camera + projection");
+                         RetroTheme::NeonAmber(0.95f), overlayTitle[state.stageFocus]);
         overlay->AddText(ImVec2(contentStart.x + 18.0f, contentStart.y + 46.0f),
                          IM_COL32(220, 228, 240, 220),
                          ("eye " + FormatVec3(eye)).c_str());
@@ -830,7 +1021,7 @@ int main() {
 
         glUseProgram(program);
         glBindVertexArray(vao);
-        glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, vp.m);
+        glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, stageMVP.m);
 
         if (!triVerts.empty()) {
             glBindBuffer(GL_ARRAY_BUFFER, vbo);
