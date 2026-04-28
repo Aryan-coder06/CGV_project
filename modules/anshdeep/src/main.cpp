@@ -200,32 +200,24 @@ int main() {
                     }
                     
                     if (currentTool == Tool::FILL_BUCKET) {
-                        int hitIdx = Algorithms::FindShapeAt(canvas, mouseX, mouseY);
-                        if (hitIdx != -1) {
-                            int targetGroup = canvas.GetShapes()[hitIdx].groupId;
-                            for (auto& hitShape : canvas.GetShapes()) {
-                                if (hitShape.groupId == targetGroup) {
-                                    if (hitShape.type == ShapeType::CIRCLE || hitShape.type == ShapeType::SQUARE || hitShape.type == ShapeType::ELLIPSE) {
-                                        hitShape.isFilled = true;
-                                        hitShape.fillColor = GetCurrentColor();
-                                    } else {
-                                        hitShape.color = GetCurrentColor();
-                                    }
-                                }
+                        std::vector<std::pair<int, int>> fillPoints;
+                        Algorithms::FloodFill(canvas, mouseX, mouseY, GetCurrentColor(), &fillPoints);
+                        
+                        if (!fillPoints.empty()) {
+                            Shape fillShape;
+                            fillShape.type = ShapeType::FILL;
+                            fillShape.color = GetCurrentColor();
+                            fillShape.points = std::move(fillPoints);
+                            
+                            // Associate with existing group if we clicked inside a shape
+                            int hitIdx = Algorithms::FindShapeAt(canvas, mouseX, mouseY);
+                            if (hitIdx != -1) {
+                                fillShape.groupId = canvas.GetShapes()[hitIdx].groupId;
                             }
-                            canvas.Redraw();
-                        } else {
-                            std::vector<std::pair<int, int>> fillPoints;
-                            Algorithms::FloodFill(canvas, mouseX, mouseY, GetCurrentColor(), &fillPoints);
-                            if (!fillPoints.empty()) {
-                                Shape fillShape;
-                                fillShape.type = ShapeType::FILL;
-                                fillShape.color = GetCurrentColor();
-                                fillShape.points = std::move(fillPoints);
-                                canvas.AddShape(fillShape);
-                            }
-                            canvas.Redraw();
+                            
+                            canvas.AddShape(fillShape);
                         }
+                        canvas.Redraw();
                     } else if (currentTool == Tool::MOVE || currentTool == Tool::SCALE) {
                         selectedShapeIdx = Algorithms::FindShapeAt(canvas, mouseX, mouseY);
                         draggingShapeIndices.clear();
