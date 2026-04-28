@@ -32,6 +32,7 @@ public:
     static void DrawCircleSDF(Canvas& canvas, int xc, int yc, int radius, const Color& color, bool isFilled, const Color& fillColor, float thickness, AAType aaType);
     static void DrawEllipseSDF(Canvas& canvas, int xc, int yc, int rx, int ry, const Color& color, bool isFilled, const Color& fillColor, float thickness, AAType aaType);
     static void DrawSquareSDF(Canvas& canvas, int x0, int y0, int x1, int y1, const Color& color, bool isFilled, const Color& fillColor, float thickness, AAType aaType);
+    static void DrawBezierSDF(Canvas& canvas, int x0, int y0, int x1, int y1, int cx, int cy, const Color& color, float thickness, AAType aaType);
 
     // Hit testing for shapes
     static int FindShapeAt(Canvas& canvas, int x, int y);

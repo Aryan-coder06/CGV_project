@@ -349,6 +349,31 @@ int Algorithms::FindShapeAt(Canvas& canvas, int x, int y) {
             // Ellipse area check: (x-xc)^2/rx^2 + (y-yc)^2/ry^2 <= 1
             float val = std::pow(x - s.x0, 2) / std::pow(rx, 2) + std::pow(y - s.y0, 2) / std::pow(ry, 2);
             if (val <= 1.1f) return i; // Allow slight margin
+        } else if (s.type == ShapeType::BEZIER) {
+            if (s.points.empty()) continue;
+            int cx = s.points[0].first;
+            int cy = s.points[0].second;
+            auto getBezierPoint = [&](float t) {
+                float px = (1.0f - t) * (1.0f - t) * s.x0 + 2.0f * (1.0f - t) * t * cx + t * t * s.x1;
+                float py = (1.0f - t) * (1.0f - t) * s.y0 + 2.0f * (1.0f - t) * t * cy + t * t * s.y1;
+                return std::make_pair(px, py);
+            };
+            int segments = 20;
+            auto prev = getBezierPoint(0.0f);
+            for (int j = 1; j <= segments; ++j) {
+                float t = j / static_cast<float>(segments);
+                auto curr = getBezierPoint(t);
+                float dx = curr.first - prev.first;
+                float dy = curr.second - prev.second;
+                float l2 = dx*dx + dy*dy;
+                if (l2 > 0) {
+                    float tt = ((x - prev.first) * dx + (y - prev.second) * dy) / l2;
+                    tt = std::max(0.0f, std::min(1.0f, tt));
+                    float dist = std::sqrt(std::pow(x - (prev.first + tt * dx), 2) + std::pow(y - (prev.second + tt * dy), 2));
+                    if (dist < 8.0f) return i;
+                }
+                prev = curr;
+            }
         } else if (s.type == ShapeType::PENCIL || s.type == ShapeType::BRUSH) {
             if (s.points.empty()) continue;
             for (size_t j = 0; j < s.points.size() - 1; ++j) {
@@ -534,6 +559,25 @@ void Algorithms::DrawSquareSDF(Canvas& canvas, int x0, int y0, int x1, int y1, c
                 if (alpha > 0.0f) SetPixelAntiAliased(canvas, x, y, color, alpha);
             }
         }
+    }
+}
+
+void Algorithms::DrawBezierSDF(Canvas& canvas, int x0, int y0, int x1, int y1, int cx, int cy, const Color& color, float thickness, AAType aaType) {
+    auto getBezierPoint = [&](float t) {
+        float x = (1.0f - t) * (1.0f - t) * x0 + 2.0f * (1.0f - t) * t * cx + t * t * x1;
+        float y = (1.0f - t) * (1.0f - t) * y0 + 2.0f * (1.0f - t) * t * cy + t * t * y1;
+        return std::make_pair(x, y);
+    };
+
+    int segments = 50;
+    auto prev = getBezierPoint(0.0f);
+    for (int i = 1; i <= segments; ++i) {
+        float t = i / static_cast<float>(segments);
+        auto curr = getBezierPoint(t);
+        DrawLineSDF(canvas, static_cast<int>(prev.first), static_cast<int>(prev.second), 
+                           static_cast<int>(curr.first), static_cast<int>(curr.second), 
+                           color, thickness, aaType);
+        prev = curr;
     }
 }
 

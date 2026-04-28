@@ -20,7 +20,8 @@ const unsigned int SCR_WIDTH = 1440;
 const unsigned int SCR_HEIGHT = 860;
 
 // Application state
-enum class Tool { LINE, CIRCLE, SQUARE, ELLIPSE, FILL_BUCKET, PENCIL, BRUSH, ERASER, MOVE, SCALE };
+enum class Tool { LINE, CIRCLE, SQUARE, ELLIPSE, FILL_BUCKET, PENCIL, BRUSH, ERASER, MOVE, SCALE, BEZIER };
+// enum class Tool { LINE, CIRCLE, SQUARE, ELLIPSE, FILL_BUCKET, PENCIL, BRUSH, ERASER, MOVE,  };
 Tool currentTool = Tool::PENCIL;
 float currentColor[4] = {1.0f, 1.0f, 1.0f, 1.0f}; // RGBA Draw color
 float backgroundColor[4] = {0.0f, 0.0f, 0.0f, 1.0f}; // RGBA Back color
@@ -42,6 +43,8 @@ int startMouseX = -1;
 int startMouseY = -1;
 int selectedShapeIdx = -1;
 std::vector<int> draggingShapeIndices;
+int bezierStage = 0; // 0: Start-End, 1: Control Point
+int bezierX0, bezierY0, bezierX1, bezierY1;
 
 void ScalePoint(int& x, int& y, float cx, float cy, float factor) {
     x = static_cast<int>(std::lround(cx + (x - cx) * factor));
@@ -192,7 +195,9 @@ int main() {
                     startMouseY = mouseY;
                     
                     // Take snapshot for preview-based drawing
-                    backupCanvas = std::make_unique<Canvas>(canvas);
+                    if (!(currentTool == Tool::BEZIER && bezierStage == 1)) {
+                        backupCanvas = std::make_unique<Canvas>(canvas);
+                    }
                     
                     if (currentTool == Tool::FILL_BUCKET) {
                         int hitIdx = Algorithms::FindShapeAt(canvas, mouseX, mouseY);
@@ -256,7 +261,7 @@ int main() {
                                 shape.y0 += dy;
                                 shape.x1 += dx;
                                 shape.y1 += dy;
-                                if (shape.type == ShapeType::PENCIL || shape.type == ShapeType::BRUSH || shape.type == ShapeType::FILL || shape.type == ShapeType::ERASER) {
+                                if (shape.type == ShapeType::PENCIL || shape.type == ShapeType::BRUSH || shape.type == ShapeType::FILL || shape.type == ShapeType::ERASER || shape.type == ShapeType::BEZIER) {
                                     for (auto& p : shape.points) {
                                         p.first += dx;
                                         p.second += dy;
@@ -331,6 +336,15 @@ int main() {
                     } else if (currentTool == Tool::LINE) {
                         canvas = *backupCanvas;
                         Algorithms::DrawLineSDF(canvas, startMouseX, startMouseY, mouseX, mouseY, GetCurrentColor(), currentThickness, static_cast<AAType>(currentAATypeInt));
+                    } else if (currentTool == Tool::BEZIER) {
+                        if (backupCanvas) {
+                            canvas = *backupCanvas;
+                            if (bezierStage == 0) {
+                                Algorithms::DrawLineSDF(canvas, startMouseX, startMouseY, mouseX, mouseY, GetCurrentColor(), currentThickness, static_cast<AAType>(currentAATypeInt));
+                            } else {
+                                Algorithms::DrawBezierSDF(canvas, bezierX0, bezierY0, bezierX1, bezierY1, mouseX, mouseY, GetCurrentColor(), currentThickness, static_cast<AAType>(currentAATypeInt));
+                            }
+                        }
                     }
                     lastMouseX = mouseX;
                     lastMouseY = mouseY;
@@ -359,6 +373,28 @@ int main() {
                             s.aaType = static_cast<AAType>(currentAATypeInt);
                             canvas.AddShape(s);
                             canvas.Redraw();
+                        } else if (currentTool == Tool::BEZIER) {
+                            if (bezierStage == 0) {
+                                bezierX0 = startMouseX;
+                                bezierY0 = startMouseY;
+                                bezierX1 = mouseX;
+                                bezierY1 = mouseY;
+                                bezierStage = 1;
+                            } else {
+                                Shape s;
+                                s.type = ShapeType::BEZIER;
+                                s.x0 = bezierX0;
+                                s.y0 = bezierY0;
+                                s.x1 = bezierX1;
+                                s.y1 = bezierY1;
+                                s.points.push_back({mouseX, mouseY}); // Control Point P1
+                                s.color = GetCurrentColor();
+                                s.thickness = currentThickness;
+                                s.aaType = static_cast<AAType>(currentAATypeInt);
+                                canvas.AddShape(s);
+                                canvas.Redraw();
+                                bezierStage = 0;
+                            }
                         } else if (currentTool == Tool::PENCIL || currentTool == Tool::BRUSH || currentTool == Tool::ERASER) {
                             canvas.AddShape(tempFreehandShape);
                             tempFreehandShape = Shape();
@@ -370,12 +406,15 @@ int main() {
                         canvas.Redraw(); // Final redraw to remove selection highlight
                     }
                     selectedShapeIdx = -1;
-                    backupCanvas.reset(); // Free backup once finalized click
+                    if (!(currentTool == Tool::BEZIER && bezierStage == 1)) {
+                        backupCanvas.reset(); // Free backup once finalized click
+                    }
                 }
             }
         } else {
             // Also cancel drawing if they dragged onto the toolbar
             isDrawing = false;
+            if (currentTool == Tool::BEZIER) bezierStage = 0;
         }
 
         // Start ImGui frame
@@ -425,6 +464,7 @@ int main() {
             if (matches) ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.3f, 0.3f, 0.8f, 1.0f));
             if (ImGui::Button(label, ImVec2(132, 0))) {
                 currentTool = tool;
+                bezierStage = 0;
             }
             if (matches) ImGui::PopStyleColor();
         };
@@ -446,6 +486,8 @@ int main() {
         ToolButton("Circle", Tool::CIRCLE);
         ImGui::SameLine();
         ToolButton("Ellipse", Tool::ELLIPSE);
+        ImGui::SameLine();
+        ToolButton("Bezier", Tool::BEZIER);
         ImGui::SameLine();
         ToolButton("Fill", Tool::FILL_BUCKET);
         

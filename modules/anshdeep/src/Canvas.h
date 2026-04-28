@@ -26,7 +26,7 @@ struct Color {
 
 enum class AAType { NONE, EDGE_LINEAR, CONICAL, GAUSSIAN };
 
-enum class ShapeType { LINE, CIRCLE, SQUARE, ELLIPSE, PENCIL, BRUSH, FILL, ERASER };
+enum class ShapeType { LINE, CIRCLE, SQUARE, ELLIPSE, PENCIL, BRUSH, FILL, ERASER, BEZIER };
 
 struct Shape {
     ShapeType type;
@@ -77,6 +77,11 @@ struct Shape {
             minY = std::min(y0, ry1);
             maxX = std::max(x0, rx1);
             maxY = std::max(y0, ry1);
+        } else if (type == ShapeType::BEZIER) {
+            minX = std::min({x0, x1, (int)points[0].first});
+            minY = std::min({y0, y1, (int)points[0].second});
+            maxX = std::max({x0, x1, (int)points[0].first});
+            maxY = std::max({y0, y1, (int)points[0].second});
         } else {
             minX = std::min(x0, x1);
             minY = std::min(y0, y1);

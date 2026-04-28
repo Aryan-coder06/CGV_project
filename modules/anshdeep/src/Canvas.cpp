@@ -103,6 +103,12 @@ void Canvas::Redraw() {
                 }
                 break;
             }
+            case ShapeType::BEZIER: {
+                if (shape.points.size() > 0) {
+                    Algorithms::DrawBezierSDF(*this, shape.x0, shape.y0, shape.x1, shape.y1, shape.points[0].first, shape.points[0].second, shape.color, shape.thickness, shape.aaType);
+                }
+                break;
+            }
         }
     }
     currentDrawingShape = -1;
