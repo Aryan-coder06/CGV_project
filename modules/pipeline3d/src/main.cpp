@@ -1012,7 +1012,7 @@ int main() {
         const int vpW = std::max(1, (int)(viewportCanvasAvail.x * scaleX));
         const int vpH = std::max(1, (int)(viewportCanvasAvail.y * scaleY));
         const int vpY = std::max(0, fbHeight - (int)((viewportCanvasMin.y + viewportCanvasAvail.y) * scaleY));
-
+        
         glEnable(GL_SCISSOR_TEST);
         glViewport(vpX, vpY, vpW, vpH);
         glScissor(vpX, vpY, vpW, vpH);
